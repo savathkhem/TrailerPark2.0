@@ -1,12 +1,12 @@
 import React from "react";
 import "./Card.css";
 
-const Card = () => (
+const Card = (props) => (
 <div className="poster-container">
     <div className="card">
         <div className="card-image waves-effect waves-block waves-light">
             {/* <img className="modal-trigger movie-poster" data-title = "${title}" src="${posterPath}" href="#modal1"> */}
-            <img src={require('./../../image/Avengers_Infinity_war_poster.jpg')} />  
+            <img src={props.src}/>  
             {/* <a href="http://www.google.com" style="position:absolute;right:5px;bottom:5px" className="star-btn btn-floating yellow darken-1"><i className="material-icons">star_border</i></a> */}
         </div>
         {/* <div className="card-content">
