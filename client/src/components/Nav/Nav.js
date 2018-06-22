@@ -1,10 +1,11 @@
 import React from "react";
+import Logo from "../Logo";
 
 const Nav = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a className="navbar-brand" href="/">
-      React Reading List
-    </a>
+  <nav class="nav-extended grey darken-3">
+    <div class="nav-wrapper">
+    <Logo />
+    </div>
   </nav>
 );
 
