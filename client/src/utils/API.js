@@ -2,12 +2,15 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getBooks: function() {
-    return axios.get("/api/books");
+  getMovies: function() {
+    return axios.get("/api/movies/in-theaters");
   },
   // Gets the book with the given id
-  getBook: function(id) {
-    return axios.get("/api/books/" + id);
+  getTopMovies: function(id) {
+    return axios.get("/api/movies/top-movies");
+  },
+  getTopTv: function(id) {
+    return axios.get("/api/movies/top-tv");
   },
   // Deletes the book with the given id
   deleteBook: function(id) {
