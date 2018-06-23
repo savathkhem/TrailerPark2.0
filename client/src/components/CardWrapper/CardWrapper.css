@@ -1,0 +1,6 @@
+.poster-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: -webkit-fill-available;
+}
