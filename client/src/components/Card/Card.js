@@ -11,7 +11,7 @@ const Card = (props) => (
             <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
                     <div id="modal-btn-container">
-                        <a id="modal-btn" className="waves-effect waves-light btn modal-trigger" href="#modal1">"title goes here"</a>
+                        <a id="modal-btn" className="waves-effect waves-light btn modal-trigger" href="#modal1">{props.title}</a>
                         <i id="more-vert-btn" className="material-icons right">more_vert</i>
                     </div>
                 </span>

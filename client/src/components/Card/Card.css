@@ -1,3 +1,146 @@
 .card {
     width: 185px;
+    background-color: none;
 }
+
+#btn-area {
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+
+.container {
+    width: 85%;
+}
+.card .card-content {
+    padding: 0px;
+}
+
+#modal-btn-container {
+    width: 100%;
+    margin: 0;
+    background:#FF1177;
+}
+
+#modal-btn {
+    width: 80%;
+    font: 1em;
+    padding:0;
+    padding-left:3px;
+    text-align: left;
+}
+
+#more-vert-btn {
+    margin-left: 0px;
+    background:#FF1177
+}
+
+#videos-display {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: -webkit-fill-available;
+}
+
+.poster-container{
+    width:20%;
+    margin: 10px;
+}
+
+.modal {
+    background-color: unset;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.stream-icon {
+    margin: 3px;
+    float: left;
+    width: 30%;
+}
+
+.btn-floating {
+    background-color: #FF1177;
+  }
+  
+  .btn .btn-large {
+    background-color: #FF1177;
+  }
+
+  .btn:active{
+    background-color: #FF1177
+  }
+
+  .btn-search {
+    border:0;
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding:0;
+    background-color: #FF1177;
+    border-radius: 50%;
+    -webkit-transition: .3s;
+    transition: .3s;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.star-btn {
+    visibility:hidden;
+}
+
+.star-btn {
+    position:absolute;
+    right:5px;
+    bottom:5px
+}
+
+p:hover .star-btn{
+    visibility: visible;
+}
+
+.card-image:hover .star-btn{
+    visibility: visible;
+}
+
+.poster-container {
+    min-width: 165px;
+    min-height: 275px;
+    margin:15px;
+}
+
+.fixed-action-btn {
+    height: 20px;
+}
+
+.btn:focus, .btn-large:focus, .btn-small:focus,
+.btn-floating:focus {
+  background-color: #FF1177;
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover {
+    background-color: #fff;
+    color: #FF1177;
+  }
+
+.btn-floating:hover i {
+    background-color: #fff;
+    color: #FF1177;
+}
+
+  .btn {
+    background-color: #FF1177;
+  
+    /* -webkit-animation: neon1 .25s ease-in-out infinite alternate;
+    -moz-animation: neon1 .25s ease-in-out infinite alternate;
+    animation: neon1 .25s ease-in-out infinite alternate; */
+  }

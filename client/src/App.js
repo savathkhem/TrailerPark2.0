@@ -63,7 +63,7 @@ class App extends Component {
           <Wrapper>
             <CardWrapper>
               {this.state.movies.map((movie) => (
-                <Card key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} onClick={()=>this.clickPoster(movie.title)}/>
+                <Card key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title={movie.title} onClick={()=>this.clickPoster(movie.title)}/>
               ))}
             </CardWrapper>
           </Wrapper>
