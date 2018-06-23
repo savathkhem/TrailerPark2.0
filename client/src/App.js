@@ -43,28 +43,29 @@ class App extends Component {
   closeModal = () => this.setState({ modal: false });
 
   render() {
-    let toggleModal 
+    let toggleModal;
     if (this.state.modal === true){
-      toggleModal = "show"
+      toggleModal = "show";
     }
     else {
-      toggleModal = "modal"
+      toggleModal = "modal";
     }
     return (
       <Router>
         <div>
-          <Modal modal = {toggleModal} onClick = {this.closeModal}>
+          <Modal modal= {toggleModal} onClick= {this.closeModal}>
             {this.state.youTubes.map((video) => (
-              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+              <iFrame src= { "https://www.youtube.com/embed/" + video.id.videoId } />
             ))}
           </Modal>
           <Nav />
           <hr />
           <Wrapper>
             <CardWrapper>
-              {this.state.movies.map((movie) => (
+              {/* {this.state.movies.map((movie) => (
                 <Card key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title={movie.title} onClick={()=>this.clickPoster(movie.title)}/>
-              ))}
+              ))} */}
+              <Home />
             </CardWrapper>
           </Wrapper>
         </div>

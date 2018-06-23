@@ -5,8 +5,8 @@ import NavBar from "../NavBar";
 const Nav = () => (
   <nav className="nav-extended grey darken-3">
     <div className="nav-wrapper">
-    <Logo />
-    <NavBar />
+      <Logo />
+      <NavBar />
     </div>
   </nav>
 );
