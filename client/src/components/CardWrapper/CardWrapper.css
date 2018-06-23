@@ -1,9 +1,4 @@
-.poster-container{
-    width:20%;
-    margin: 10px;
-}
-
-.videos-display {
+.poster-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;

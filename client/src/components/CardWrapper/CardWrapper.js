@@ -2,7 +2,7 @@ import React from "react";
 import "./CardWrapper.css";
 
 const CardWrapper = (props) => (
-<div className="videos-display">
+<div className="poster-container">
         {props.children}
 </div>
 );
