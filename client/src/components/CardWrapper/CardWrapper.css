@@ -1,8 +1,9 @@
-.card {
-    width: 185px;
+.poster-container{
+    width:20%;
+    margin: 10px;
 }
 
-#videos-display {
+.videos-display {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
