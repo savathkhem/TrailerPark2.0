@@ -6,7 +6,7 @@ const Card = (props) => (
     <div className="card">
         <div className="card-image waves-effect waves-block waves-light">
             {/* <img className="modal-trigger movie-poster" data-title = "${title}" src="${posterPath}" href="#modal1"> */}
-            <img src={props.src}/>  
+            <img src={props.src} onClick={props.onClick} alt={props.title}/>  
             {/* <a href="http://www.google.com" style="position:absolute;right:5px;bottom:5px" className="star-btn btn-floating yellow darken-1"><i className="material-icons">star_border</i></a> */}
         </div>
         {/* <div className="card-content">
