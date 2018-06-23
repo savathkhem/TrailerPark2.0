@@ -3,6 +3,9 @@ const axios = require ("axios");
 const topTvURL = "https://api.themoviedb.org/3/tv/popular?api_key=0c9ebd7d6e76fc10f179166f9acd0665&language=en-US&page=";
 const moviesURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=0c9ebd7d6e76fc10f179166f9acd0665&language=en-US&page=";
 const topMoviesUrl = "https://api.themoviedb.org/3/discover/movie?api_key=0c9ebd7d6e76fc10f179166f9acd0665&language=en-US&region=us&vote_count.gte=5000&sort_by=vote_average.desc&include_adult=false&include_video=false&page=";
+const baseYoutubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
+const youtubeParams = "+official+trailer&maxResults=3&key=";
+const youtubeKey = "AIzaSyB8eX15uJ924kVkzv1xhbgLKle9vKBj5mg";
 
 // Matches with "/api/movies"
 router.get("/in-theaters", (req, res) => {
@@ -29,6 +32,18 @@ router.get("/top-tv", (req, res) => {
       .get(topTvURL)
       .then((response) => res.json(response.data.response.docs))
       .catch(err => res.status(422).json(err));
+});
+
+
+router.get("/trailers/:title", (req, res) => {
+  let title = req.params.title
+  let requestUrl = baseYoutubeUrl+title+youtubeParams+youtubeKey;
+  console.log(requestUrl);
+
+  axios
+    .get(requestUrl)
+    .then((response) => res.json(response.data.items))
+    .catch(err => res.status(422).json(err));
 });
 
 
