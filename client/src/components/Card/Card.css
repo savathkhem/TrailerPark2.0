@@ -1,6 +1,9 @@
 .card {
     width: 185px;
-    background-color: none;
+}
+
+.card .card-reveal {
+    padding: 10px;
 }
 
 #btn-area {
@@ -39,7 +42,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    width: -webkit-fill-available;
+    width: stretch;
 }
 
 .poster-container{

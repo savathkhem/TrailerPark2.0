@@ -3,8 +3,9 @@
     font-family: Monoton;
     -webkit-animation: none;
     -moz-animation: none;
-    font-size: 5em;
-    margin: 20px 0 20px 0;
+    font-size: xx-large;
+    padding-left: 20px;
+    margin: 0px;
   }
   
   a {
@@ -70,10 +71,4 @@
     p {
       font-size: inherit;
     }
-  }
-  
-  #logo {
-    padding-left: 20px;
-    margin-bottom: 5px;
-    margin-top: 25px;
   }
