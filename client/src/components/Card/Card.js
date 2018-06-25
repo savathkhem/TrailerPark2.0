@@ -17,8 +17,8 @@ const Card = (props) => (
                 </span>
             </div>
             <div id = "titlegoeshere" className="card-reveal">
-                <span className="card-title grey-text text-darken-4">title goes here<i className="material-icons right">close</i></span>
-                <p>overview goes here</p>
+                <span className="card-title grey-text text-darken-4">{props.title}<i className="material-icons right">close</i></span>
+                <p>{props.overview}</p>
                 <br />
                 <a id="maps" className="btn modal-trigger waves-effect waves-light" href="#modal1">Theaters Nearby</a>
             </div>
