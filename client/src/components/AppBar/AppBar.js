@@ -14,6 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Logo from "../Logo";
 import "./AppBar.css"
+import DrawerLeft from "../DrawerLeft"
 
 const styles = {
   root: {
@@ -61,11 +62,12 @@ class MenuAppBar extends React.Component {
             label={auth ? 'Logout' : 'Login'}
           />
         </FormGroup>
-        <AppBar position="static" style={{backgroundColor: "#424242"}} >
+        <AppBar position="fixed" style={{backgroundColor: "#424242"}} >
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            {/* <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
+            <DrawerLeft />
             <Typography variant="title" color="inherit" className={classes.flex}>
               <Logo />
             </Typography>

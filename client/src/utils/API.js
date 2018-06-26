@@ -1,11 +1,9 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
   getMovies: function() {
     return axios.get("/api/movies/in-theaters");
   },
-  // Gets the book with the given id
   getTopMovies: function(id) {
     return axios.get("/api/movies/top-movies");
   },

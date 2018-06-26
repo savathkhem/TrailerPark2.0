@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, CardM, Row, Col } from 'react-materialize';
 import "./Card.css";
 
 const Card = (props) => (
@@ -9,7 +10,7 @@ const Card = (props) => (
             <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
                     <div id="modal-btn-container">
-                        <a id="modal-btn" className="waves-effect waves-light btn modal-trigger" onClick={props.onClick}>{props.title}</a>
+                        <Button id="modal-btn" className="waves-effect waves-light btn modal-trigger" onClick={props.onClick}{...props.title} />
                         <i id="more-vert-btn" className="material-icons right">more_vert</i>
                     </div>
                 </span>
