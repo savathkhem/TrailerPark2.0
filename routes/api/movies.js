@@ -1,18 +1,24 @@
 const router = require("express").Router();
 const axios = require ("axios");
-const topTvURL = "https://api.themoviedb.org/3/tv/popular?api_key=0c9ebd7d6e76fc10f179166f9acd0665&language=en-US&page=";
-const moviesURL = "https://api.themoviedb.org/3/movie/now_playing?api_key=0c9ebd7d6e76fc10f179166f9acd0665&language=en-US&page=";
-const topMoviesUrl = "https://api.themoviedb.org/3/discover/movie?api_key=0c9ebd7d6e76fc10f179166f9acd0665&language=en-US&region=us&vote_count.gte=5000&sort_by=vote_average.desc&include_adult=false&include_video=false&page=";
+require("dotenv").config();
+const topTvURL = "https://api.themoviedb.org/3/tv/popular?api_key=&language=en-US&page=";
+const moviesURL = "https://api.themoviedb.org/3/movie/now_playing?&language=en-US&page=&api_key=";
+const topMoviesUrl = "https://api.themoviedb.org/3/discover/movie?&language=en-US&region=us&vote_count.gte=5000&sort_by=vote_average.desc&include_adult=false&include_video=false&page=&api_key=";
 const baseYoutubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
 const youtubeParams = "+official+trailer&maxResults=3&key=";
-const youtubeKey = "AIzaSyB8eX15uJ924kVkzv1xhbgLKle9vKBj5mg";
 
+//API Keys
+const youtubeKey = process.env.YOUTUBE_API_KEY;
+const tmdbKey = process.env.TMDB_KEY;
+
+console.log(process.env.YOUTUBE_API_KEY);
+console.log(process.env.TMDB_KEY)
 // Matches with "/api/movies"
 router.get("/in-theaters", (req, res) => {
 
-  console.log(moviesURL)
+  console.log(moviesURL+tmdbKey)
   axios
-      .get(moviesURL)
+      .get(moviesURL+tmdbKey)
       .then((response) => res.json(response.data.results))
       .catch(err => res.status(422).json(err));
 });

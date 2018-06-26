@@ -1,48 +1,15 @@
 import React, { Component } from "react";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./components/Nav";
-import Card from "./components/Card";
-import Wrapper from "./components/Wrapper";
-import CardWrapper from "./components/CardWrapper";
-import API from "./utils/API";
-import Modal from "./components/Modal";
-import iFrame from "./components/iFrame";
-
-const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
+import AppBar from "./components/AppBar";
+// import DrawerLeft from "./components/DrawerLeft";
+import Home from "./pages/Home";
+import "./App.css"
 
 class App extends Component {
-  state = {
-    movies: [],
-    modal: false,
-    youTubes: [],
-  }
-
-  componentDidMount() {
-    API.getMovies()
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .then(res => this.setState({ movies: res.data }))
-      .catch(err => console.log(err));
-  }
-
-  clickPoster(title) {
-    API.getTrailers(title)
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .then((res) => this.setState({youTubes: res.data}))
-      .then(() => this.openModal())
-      .catch((err) => console.log (err));
-  }
-
-  openModal = () => this.setState({ modal: true });
-
-  closeModal = () => this.setState({ modal: false });
 
   render() {
+<<<<<<< HEAD
     let toggleModal;
     if (this.state.modal === true){
       toggleModal = "show";
@@ -68,6 +35,16 @@ class App extends Component {
               <Home />
             </CardWrapper>
           </Wrapper>
+=======
+    const path = <Route exact path="/" component={Home}/>;
+    return (
+      <Router>
+        <div>
+        <CssBaseline />
+          <AppBar />
+          {/* <DrawerLeft /> */}
+          <Route exact path="/" component={Home}/>
+>>>>>>> 522099514ca8ccf18af25708eb336840ad2d901d
         </div>
       </Router>
     )
