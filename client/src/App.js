@@ -9,7 +9,7 @@ import "./App.css"
 class App extends Component {
 
   render() {
-    const path = <Route exact path="/" component={Home}/>;
+    
     return (
       <Router>
         <div>
