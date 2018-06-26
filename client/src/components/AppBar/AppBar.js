@@ -67,7 +67,7 @@ const styles = theme => ({
     display: 'none',
   },
   drawerPaper: {
-    position: 'relative',
+    // position: 'relative',
     width: drawerWidth,
   },
   drawerHeader: {
