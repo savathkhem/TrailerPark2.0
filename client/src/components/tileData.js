@@ -1,67 +1,33 @@
 // This file is shared across the demos.
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import StarIcon from '@material-ui/icons/Star';
-import SendIcon from '@material-ui/icons/Send';
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ReportIcon from '@material-ui/icons/Report';
-import SearchBar from "./SearchBar"
+import SearchBar from "./SearchBar";
 
-export const mailFolderListItems = (
+export const pageOptions = (
   <div>
     <ListItem button>
-    <SearchBar />
-      <ListItemIcon>
-        <InboxIcon />
-      </ListItemIcon>
-      <ListItemText primary="Inbox" />
+      <SearchBar />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <StarIcon />
-      </ListItemIcon>
-      <ListItemText primary="Starred" />
+    <ListItem component={Link} to="/" button>
+      <ListItemText primary="Home"/>
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <SendIcon />
-      </ListItemIcon>
-      <ListItemText primary="Send mail" />
+    <ListItem component={Link} to="/in-theaters" button>
+      <ListItemText primary="In Theaters" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DraftsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Drafts" />
+    <ListItem component={Link} to="/top-movies" button>
+      <ListItemText primary="Top Movies" />
     </ListItem>
-  </div>
-);
-
-export const otherMailFolderListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <MailIcon />
-      </ListItemIcon>
-      <ListItemText primary="All mail" />
+    <ListItem component={Link} to="/top-tv" button>
+      <ListItemText primary="Top TV-Shows" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <DeleteIcon />
-      </ListItemIcon>
-      <ListItemText primary="Trash" />
+    <ListItem component={Link} to="/upcoming" button>
+      <ListItemText primary="Upcoming Movies" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ReportIcon />
-      </ListItemIcon>
-      <ListItemText primary="Spam" />
+    <ListItem component={Link} to="/all-netflix" button>
+      <ListItemText primary="All Netflix" />
     </ListItem>
   </div>
 );
