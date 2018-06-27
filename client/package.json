@@ -15,7 +15,6 @@
     "nodemon": "^1.17.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-materialize": "^2.3.1",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.14"
   },
