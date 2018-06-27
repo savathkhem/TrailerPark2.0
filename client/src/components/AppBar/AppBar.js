@@ -16,8 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-// import SearchBar from "../SearchBar"
-import { mailFolderListItems, otherMailFolderListItems } from './../tileData';
+import { pageOptions, otherMailFolderListItems } from './../tileData';
 import Logo from "../Logo";
 
 const drawerWidth = 240;
@@ -39,7 +38,7 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    position: 'absolute',
+    position: 'relative',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -161,10 +160,7 @@ class PersistentDrawer extends React.Component {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <Divider />
-        <List>{mailFolderListItems}</List>
-        <Divider />
-        <List>{otherMailFolderListItems}</List>
+        <List>{pageOptions}</List>
       </Drawer>
     );
 
