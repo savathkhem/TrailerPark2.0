@@ -87,6 +87,9 @@ render(props) {
     return (
       <div>
         <Card className={classes.card}>
+        <CardHeader
+            subheader={this.props.title}
+          />
           <CardMedia
             className={classes.media}
             image={this.props.src}
@@ -94,6 +97,7 @@ render(props) {
             title={this.props.title}   
           />
           <CardActions className={classes.actions} disableActionSpacing>
+          
             {/* <IconButton aria-label="Add to favorites">
               <FavoriteIcon />
             </IconButton>
