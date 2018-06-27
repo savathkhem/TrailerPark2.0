@@ -1,4 +1,5 @@
 import axios from "axios";
+import Shows from "./shows.js";
 
 export default {
   getMovies: () => {
@@ -14,12 +15,15 @@ export default {
     let search = query.replace(/\s/g, "+").toLowerCase();
     console.log(search);
     // var queryTitle = parsedTitle.toLowerCase();
-    return axios.get("/api/movies/trailers/"+ search);
+    return axios.get("/api/movies/trailers/" + search);
   },
   getUpcoming: () => {
     return axios.get("api/movies/upcoming");
   },
-  // getNetflix: () => {
-
-  // }
+  getNetflix: () => {
+    let title = Shows.forEach(() => {
+      title = Shows.title;
+    });
+    return axios.get("api/search/" + title);
+  }
 };

@@ -59,8 +59,8 @@ class TopTV extends Component {
             <CardWrapper>
               {this.state.movies.map((movie) => (
                 <Card 
-                key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.title)}
+                key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
+                onClick={()=>this.clickPoster(movie.name)}
                 
                 />
               ))}

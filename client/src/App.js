@@ -8,10 +8,10 @@ import TopTV from "./pages/TopTV";
 import Theaters from "./pages/InTheaters";
 import Upcoming from "./pages/Upcoming";
 import TopMovie from "./pages/TopMovie";
+import AllNetflix from "./pages/AllNetflix";
 import "./App.css";
 
 class App extends Component {
-
   render() {
     return (
       <Router>
@@ -24,6 +24,7 @@ class App extends Component {
           <Route exact path="/top-tv" component={TopTV} />
           <Route exact path="/upcoming" component={Upcoming} />
           <Route exact path="/top-movies" component={TopMovie} />
+          <Route exact path="/all-netflix" component={AllNetflix} />
         </div>
       </Router>
     )

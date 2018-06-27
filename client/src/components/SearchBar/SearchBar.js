@@ -9,8 +9,8 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
     width: 200,
   },
   menu: {
@@ -20,18 +20,18 @@ const styles = theme => ({
 
 
 class TextFields extends React.Component {
-  state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
-  };
+  // state = {
+  //   name: 'Cat in the Hat',
+  //   age: '',
+  //   multiline: 'Controlled',
+  //   currency: 'EUR',
+  // };
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  // handleChange = name => event => {
+  //   this.setState({
+  //     [name]: event.target.value,
+  //   });
+  // };
 
   render() {
     const { classes } = this.props;
