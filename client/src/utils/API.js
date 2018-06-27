@@ -1,27 +1,25 @@
 import axios from "axios";
 
 export default {
-  getMovies: function() {
+  getMovies: () => {
     return axios.get("/api/movies/in-theaters");
   },
-  getTopMovies: function(id) {
+  getTopMovies: (id) => {
     return axios.get("/api/movies/top-movies");
   },
-  getTopTv: function(id) {
+  getTopTv: (id) => {
     return axios.get("/api/movies/top-tv");
   },
-  getTrailers: function(query) {
+  getTrailers: (query) => {
     let search = query.replace(/\s/g, "+").toLowerCase();
-    console.log(search)
+    console.log(search);
     // var queryTitle = parsedTitle.toLowerCase();
     return axios.get("/api/movies/trailers/"+ search);
   },
-  // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  getUpcoming: () => {
+    return axios.get("api/movies/upcoming");
   },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
-  }
+  // getNetflix: () => {
+
+  // }
 };
