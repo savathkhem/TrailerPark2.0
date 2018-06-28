@@ -8,7 +8,7 @@ import iFrame from "../components/iFrame";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
-class Home extends Component {
+class TopTV extends Component {
   state = {
     movies: [],
     modal: false,
@@ -16,7 +16,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    API.getMovies()
+    API.getTopTv()
       .then((res) => {
         console.log(res);
         return res;
@@ -59,8 +59,8 @@ class Home extends Component {
             <CardWrapper>
               {this.state.movies.map((movie) => (
                 <Card 
-                key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.title)}
+                key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
+                onClick={()=>this.clickPoster(movie.name)}
                 
                 />
               ))}
@@ -71,4 +71,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default TopTV;

@@ -8,7 +8,7 @@ import iFrame from "../components/iFrame";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
-class Home extends Component {
+class Theaters extends Component {
   state = {
     movies: [],
     modal: false,
@@ -71,4 +71,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Theaters;
