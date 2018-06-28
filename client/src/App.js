@@ -3,12 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AppBar from "./components/AppBar";
 // import DrawerLeft from "./components/DrawerLeft";
-import Home from "./pages/Home";
-import TopTV from "./pages/TopTV";
-import Theaters from "./pages/InTheaters";
-import Upcoming from "./pages/Upcoming";
-import TopMovie from "./pages/TopMovie";
-import AllNetflix from "./pages/AllNetflix";
+import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./Pages/";
 import "./App.css";
 
 class App extends Component {
@@ -20,7 +15,7 @@ class App extends Component {
           <AppBar />
           {/* <DrawerLeft /> */}
           <Route exact path="/" component={Home} />
-          <Route exact path="/in-theaters" component={Theaters} />
+          <Route exact path="/in-theaters" component={InTheaters} />
           <Route exact path="/top-tv" component={TopTV} />
           <Route exact path="/upcoming" component={Upcoming} />
           <Route exact path="/top-movies" component={TopMovie} />
