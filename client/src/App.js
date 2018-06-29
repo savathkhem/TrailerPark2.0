@@ -8,15 +8,39 @@ import TopTV from "./pages/TopTV";
 import Theaters from "./pages/InTheaters";
 import Upcoming from "./pages/Upcoming";
 import TopMovie from "./pages/TopMovie";
-import AllNetflix from "./pages/AllNetflix";
+import API from "./utils/API";
 import "./App.css";
 
 class App extends Component {
+  
+  state = {
+    search: "",
+    movies: []
+  }
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    API.getSearch(this.state.search)
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .then(res => this.setState({ movies: res.data }))
+      .catch(err => console.log(err));
+  }
+    
   render() {
     return (
       <Router>
         <div>
-        <CssBaseline />
+          <CssBaseline />
           <AppBar />
           {/* <DrawerLeft /> */}
           <Route exact path="/" component={Home} />
@@ -24,7 +48,6 @@ class App extends Component {
           <Route exact path="/top-tv" component={TopTV} />
           <Route exact path="/upcoming" component={Upcoming} />
           <Route exact path="/top-movies" component={TopMovie} />
-          <Route exact path="/all-netflix" component={AllNetflix} />
         </div>
       </Router>
     )

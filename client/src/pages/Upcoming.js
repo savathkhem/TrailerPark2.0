@@ -31,7 +31,7 @@ class Upcoming extends Component {
         console.log(res);
         return res;
       })
-      .then((res) => this.setState({youTubes: res.data}))
+      .then((res) => this.setState({ youTubes: res.data }))
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }

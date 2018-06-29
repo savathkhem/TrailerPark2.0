@@ -19,6 +19,8 @@ const styles = theme => ({
 });
 
 
+
+
 class TextFields extends React.Component {
   // state = {
   //   name: 'Cat in the Hat',
@@ -44,6 +46,8 @@ class TextFields extends React.Component {
           type="search"
           className={classes.textField}
           margin="normal"
+          onChange={classes.onChange}
+          onSubmit={classes.onSubmit}
         />
       </form>
     );

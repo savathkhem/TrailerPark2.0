@@ -11,12 +11,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 // import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { pageOptions, otherMailFolderListItems } from './../tileData';
+import { pageOptions } from "./../tileData";
 import Logo from "../Logo";
 
 const drawerWidth = 240;
