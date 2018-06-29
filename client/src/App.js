@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AppBar from "./components/AppBar";
+import { AppBar } from "./components/Layout";
 // import DrawerLeft from "./components/DrawerLeft";
 import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./Pages/";
 import "./App.css";
