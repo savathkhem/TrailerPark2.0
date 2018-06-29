@@ -194,7 +194,7 @@ class PersistentDrawer extends React.Component {
             <Typography variant="title" color="inherit" className={classes.flex}>
             <Logo />
             </Typography>
-            {auth && (
+            
               <div>
                 <IconButton
                   aria-owns={openlogin ? 'menu-appbar' : null}
@@ -222,7 +222,6 @@ class PersistentDrawer extends React.Component {
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
                 </Menu>
               </div>
-            )}
           </Toolbar>
         </AppBar>
           {before}
