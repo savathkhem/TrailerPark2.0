@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AppBar } from "./components/Layout";
 // import DrawerLeft from "./components/DrawerLeft";
-import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./Pages/";
+import Home from "./pages/Home";
+import "./App.css"
+import firebase from "./firebaseConfig";
+import withFirebaseAuth from "react-auth-firebase";
 import "./App.css";
 
 class App extends Component {
@@ -56,12 +56,11 @@ class App extends Component {
       return <p>Loading..</p>;
     }
 
-    // if (user) {
-    //   return <Home user={user} error={error} signOut={signOut} />;
-    // }
+    if (user) {
+      return <Home user={user} error={error} signOut={signOut} />;
+    }
 
     return (
-      <Router>
         <div>
           <div>
             <form onSubmit={e => e.preventDefault()}>
@@ -119,17 +118,7 @@ class App extends Component {
             <button onClick={signInWithGithub}>Signin with Github</button> <br />
             <button onClick={signInWithTwitter}>Signin with Twitter</button> <br />
           </div>
-          {/* <DrawerLeft /> */}
-          <CssBaseline/>
-          <AppBar />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/in-theaters" component={InTheaters} />
-          <Route exact path="/top-tv" component={TopTV} />
-          <Route exact path="/upcoming" component={Upcoming} />
-          <Route exact path="/top-movies" component={TopMovie} />
-          <Route exact path="/all-netflix" component={AllNetflix} />
         </div>
-      </Router>
     )
   }
 }
@@ -174,4 +163,4 @@ const authConfig = {
 };
 
 // export default App;
-export default withFirebaseAuth(App, firebase, authConfig);
+export default withFirebaseAuth(firebase, authConfig);
