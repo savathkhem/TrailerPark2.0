@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AppBar } from "./components/Layout";
 // import DrawerLeft from "./components/DrawerLeft";
 import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./Pages/";
+import firebase from "./firebaseConfig";
+import withFirebaseAuth from "react-auth-firebase";
 import "./App.css";
 
 class App extends Component {
