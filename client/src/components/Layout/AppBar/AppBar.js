@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, AppBar, Toolbar, List, MenuItem, Typography, Menu, IconButton } from '@material-ui/core/';
+import { Drawer, AppBar, Toolbar, List, MenuItem, Typography, Menu, IconButton, Avatar } from '@material-ui/core/';
 import { AccountCircle } from '@material-ui/icons/';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
