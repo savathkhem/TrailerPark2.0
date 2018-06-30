@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AppBar } from "./components/Layout";
 import Login from "./components/Login";
 // import DrawerLeft from "./components/DrawerLeft";
-import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./pages/";
+import { Home, TopTV, InTheaters, Upcoming, TopMovie, } from "./pages/";
 import "./App.css";
 import firebase, { auth, provider } from "./firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
+
 
 class App extends Component {
   state = {
@@ -36,23 +37,23 @@ class App extends Component {
     });
   }
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  }
+  // handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    API.getSearch(this.state.search)
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .then(res => this.setState({ movies: res.data }))
-      .catch(err => console.log(err));
-  }
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   API.getSearch(this.state.search)
+  //     .then((res) => {
+  //       console.log(res);
+  //       return res;
+  //     })
+  //     .then(res => this.setState({ movies: res.data }))
+  //     .catch(err => console.log(err));
+  // }
     
   render() {
     if (this.state.currentUser) {
@@ -68,7 +69,6 @@ class App extends Component {
             <Route exact path="/top-tv" component={TopTV} />
             <Route exact path="/upcoming" component={Upcoming} />
             <Route exact path="/top-movies" component={TopMovie} />
-            <Route exact path="/all-netflix" component={AllNetflix} />
           </div>
         </Router>
       )
