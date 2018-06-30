@@ -171,7 +171,6 @@ class PersistentDrawer extends React.Component {
             [classes.appBarShift]: open,
             [classes[`appBarShift-${anchor}`]]: open,
           })}
-          position="fixed"
           style={{backgroundColor: "#424242"}}
         >
           <Toolbar disableGutters={!open}>
