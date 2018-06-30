@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 // import DrawerLeft from "./components/DrawerLeft";
-import Home from "./pages/Home";
-import "./App.css"
-import firebase from "./firebaseConfig";
+import firebase, { auth, provider } from "../../firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
-import "./App.css";
 
-class App extends Component {
+class Login extends Component {
   state = {
     email: `test@test.com`,
     password: `password`,
@@ -54,10 +51,6 @@ class App extends Component {
 
     if (loading) {
       return <p>Loading..</p>;
-    }
-
-    if (user) {
-      return <Home user={user} error={error} signOut={signOut} />;
     }
 
     return (
@@ -162,5 +155,5 @@ const authConfig = {
   }
 };
 
-// export default App;
-export default withFirebaseAuth(firebase, authConfig);
+// export default Login;
+export default withFirebaseAuth(Login, firebase, authConfig);

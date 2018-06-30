@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, AppBar, Toolbar, List, MenuItem, Typography, Menu, IconButton } from '@material-ui/core/';
+import { Drawer, AppBar, Toolbar, List, MenuItem, Typography, Menu, IconButton, Avatar } from '@material-ui/core/';
 import { AccountCircle } from '@material-ui/icons/';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -192,8 +192,10 @@ class PersistentDrawer extends React.Component {
                   onClick={this.handleMenu}
                   color="inherit"
                 >
+                <h4>{this.props.name}</h4>
                   <AccountCircle/>
                 </IconButton>
+                <Avatar><img src={this.props.src} alt={this.props.alt}/></Avatar>
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
