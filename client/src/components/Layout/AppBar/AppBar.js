@@ -2,6 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+<<<<<<< HEAD:client/src/components/AppBar/AppBar.js
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
+// import TextField from '@material-ui/core/TextField';
+import Menu from '@material-ui/core/Menu';
+// import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { pageOptions } from "./../tileData";
+import Logo from "../Logo";
+=======
 import { Drawer, AppBar, Toolbar, List, MenuItem, Typography, Menu, IconButton } from '@material-ui/core/';
 import { AccountCircle } from '@material-ui/icons/';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -9,6 +26,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { pageOptions } from './../../tileData';
 import Logo from "../../Logo";
+>>>>>>> 128360b1fd7e4d5eff1e95cd5a23ed50a41fd363:client/src/components/Layout/AppBar/AppBar.js
 
 const drawerWidth = 240;
 
