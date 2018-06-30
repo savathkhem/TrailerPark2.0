@@ -15,33 +15,33 @@ const styles = theme => ({
     width: '250px',
     paddingTop: '100%',
     backgroundSize: 'unset',
-},
-actions: {
-  display: 'flex',
-  padding: '0',
-},
-expand: {
-  transform: 'rotate(0deg)',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-  marginLeft: 'auto',
-},
-expandOpen: {
-  transform: 'rotate(180deg)',
-},
+  },
+  actions: {
+    display: 'flex',
+    padding: '0',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+    marginLeft: 'auto',
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
 });
 
 class PosterCard extends React.Component {
-state = { expanded: false };
+  state = { expanded: false };
 
-handleExpandClick = () => {
-  this.setState(state => ({ expanded: !state.expanded }));
-};
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
 
-render() {
+  render() {
     const { classes } = this.props;
- 
+
     return (
       <div>
         <Card className={classes.card}>
@@ -55,7 +55,6 @@ render() {
             title={this.props.title}   
           />
           <CardActions className={classes.actions} disableActionSpacing>
-
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
@@ -67,7 +66,6 @@ render() {
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>
-           
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph variant="body2">
@@ -78,7 +76,6 @@ render() {
               </Typography>
             </CardContent>
           </Collapse>
- 
         </Card>
       </div>
     );

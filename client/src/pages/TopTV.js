@@ -48,25 +48,26 @@ class TopTV extends Component {
     else {
       toggleModal = "modal";
     }
+
     return (
-        <div>
-          <Modal modal = {toggleModal} onClick = {this.closeModal}>
-            {this.state.youTubes.map((video) => (
-              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+      <div>
+        <Modal modal = {toggleModal} onClick = {this.closeModal}>
+          {this.state.youTubes.map((video) => (
+            <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+          ))}
+        </Modal>
+        <Wrapper>
+          <CardWrapper>
+            {this.state.movies.map((movie) => (
+              <Card 
+              key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
+              onClick={()=>this.clickPoster(movie.name)}
+              
+              />
             ))}
-          </Modal>
-          <Wrapper>
-            <CardWrapper>
-              {this.state.movies.map((movie) => (
-                <Card 
-                key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.name)}
-                
-                />
-              ))}
-            </CardWrapper>
-          </Wrapper>
-        </div>
+          </CardWrapper>
+        </Wrapper>
+      </div>
     )
   }
 }
