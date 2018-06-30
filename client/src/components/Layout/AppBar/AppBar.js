@@ -9,6 +9,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { pageOptions } from './../../tileData';
 import Logo from "../../Logo";
+>>>>>>> 128360b1fd7e4d5eff1e95cd5a23ed50a41fd363:client/src/components/Layout/AppBar/AppBar.js
 
 const drawerWidth = 240;
 
@@ -171,7 +172,6 @@ class PersistentDrawer extends React.Component {
             [classes.appBarShift]: open,
             [classes[`appBarShift-${anchor}`]]: open,
           })}
-          position="fixed"
           style={{backgroundColor: "#424242"}}
         >
           <Toolbar disableGutters={!open}>

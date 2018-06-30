@@ -14,6 +14,8 @@ class App extends Component {
     email: `test@test.com`,
     password: `password`,
     loading: true, authenticated: false, user: null,
+    search: "",
+    movies: []
   };
 
   componentWillMount() {
@@ -34,6 +36,24 @@ class App extends Component {
     });
   }
 
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    API.getSearch(this.state.search)
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .then(res => this.setState({ movies: res.data }))
+      .catch(err => console.log(err));
+  }
+    
   render() {
     if (this.state.currentUser) {
       return (
