@@ -3,9 +3,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AppBar } from "./components/Layout";
 // import DrawerLeft from "./components/DrawerLeft";
-import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./Pages/";
+import { Home, TopTV, InTheaters, Upcoming, TopMovie, AllNetflix } from "./pages/";
 import firebase from "./firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
+// import API from "utils/API";
 import "./App.css";
 
 class App extends Component {
@@ -35,23 +36,23 @@ class App extends Component {
     });
   }
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  }
+  // handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // }
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    API.getSearch(this.state.search)
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .then(res => this.setState({ movies: res.data }))
-      .catch(err => console.log(err));
-  }
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   API.getSearch(this.state.search)
+  //     .then((res) => {
+  //       console.log(res);
+  //       return res;
+  //     })
+  //     .then(res => this.setState({ movies: res.data }))
+  //     .catch(err => console.log(err));
+  // }
     
   render() {
     const {
