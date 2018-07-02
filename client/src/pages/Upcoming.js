@@ -5,6 +5,7 @@ import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
 import iFrame from "../components/iFrame";
+import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
@@ -52,9 +53,11 @@ class Upcoming extends Component {
     return (
       <div>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
+        <Carousel>
           {this.state.youTubes.map((video) => (
             <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
           ))}
+        </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>

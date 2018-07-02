@@ -1,6 +1,5 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
 import "./Modal.css";
 
 const styles = theme => ({
@@ -17,8 +16,8 @@ const Modal = (props, classes)=> (
         </div>
         <span className="close" >
           {/* &times; */}
-            <Button variant="fab" color="primary" aria-label="add" className={classes.button} onClick={props.onClick}>
-              <AddIcon />
+            <Button variant="fab" color="secondary" aria-label="add" className={classes.button} onClick={props.onClick}>
+              X
             </Button>
         </span>
       </div>
