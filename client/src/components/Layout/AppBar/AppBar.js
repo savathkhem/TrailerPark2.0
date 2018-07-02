@@ -7,7 +7,7 @@ import { AccountCircle } from '@material-ui/icons/';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { pageOptions } from './../../tileData';
+import PageOptions from './../../tileData';
 import Logo from "../../Logo";
 
 const drawerWidth = 240;
@@ -151,7 +151,7 @@ class PersistentDrawer extends React.Component {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <List>{pageOptions}</List>
+        <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit}/></List>
       </Drawer>
     );
 

@@ -17,7 +17,6 @@ console.log(process.env.YOUTUBE_API_KEY);
 console.log(process.env.TMDB_KEY);
 // Matches with "/api/movies"
 router.get("/in-theaters", (req, res) => {
-
   console.log(moviesURL + tmdbKey);
   axios
     .get(moviesURL + tmdbKey)
@@ -25,8 +24,8 @@ router.get("/in-theaters", (req, res) => {
     .catch(err => res.status(422).json(err));
 });
 
+//This route gets our top movies
 router.get("/top-movies", (req, res) => {
-
   console.log(topMoviesUrl);
   axios
     .get(topMoviesUrl + tmdbKey)
@@ -34,8 +33,8 @@ router.get("/top-movies", (req, res) => {
     .catch(err => res.status(422).json(err));
 });
 
+//This route gets our tv shows
 router.get("/top-tv", (req, res) => {
-
   console.log(topTvURL);
   axios
     .get(topTvURL + tmdbKey)
@@ -43,10 +42,12 @@ router.get("/top-tv", (req, res) => {
     .catch(err => res.status(422).json(err));
 });
 
-
+//Youtube route for grabbing trailers.
 router.get("/trailers/:title", (req, res) => {
-
+  
+  //saves our movie title from frontend
   let title = req.params.title;
+  //builds our url for API request
   let requestUrl = baseYoutubeUrl + title + youtubeParams + youtubeKey;
 
   console.log(requestUrl);
@@ -56,12 +57,21 @@ router.get("/trailers/:title", (req, res) => {
     .catch(err => res.status(422).json(err));
 });
 
-
+//This route gets upcoming movies
 router.get("/upcoming", (req, res) => {
-  
   console.log(upcomingUrl);
   axios
     .get(upcomingUrl + tmdbKey)
+    .then((response) => res.json(response.data.results))
+    .catch(err => res.status(422).json(err));
+});
+
+//This route searches for content
+router.get("/search/:title", (req, res)=> {
+  let title = "&query=" + req.params.title;
+  let requestUrl = searchUrl+tmdbKey+title
+    axios
+    .get(requestUrl)
     .then((response) => res.json(response.data.results))
     .catch(err => res.status(422).json(err));
 });

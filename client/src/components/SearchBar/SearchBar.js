@@ -39,15 +39,17 @@ class TextFields extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="on">
+      <form className={classes.container} noValidate autoComplete="on"
+      onSubmit={this.props.handleSubmit}>
         <TextField
           id="search"
           label="Search field"
           type="search"
+          name="search"
           className={classes.textField}
           margin="normal"
-          onChange={classes.onChange}
-          onSubmit={classes.onSubmit}
+          onChange={this.props.onChange}
+
         />
       </form>
     );
