@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Redirect, BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { AppBar } from "./components/Layout";
 import Login from "./components/Login";
 // import DrawerLeft from "./components/DrawerLeft";
 import { Home, TopTV, InTheaters, Upcoming, TopMovie, } from "./pages/";
+import API from "./utils/API";
 import "./App.css";
 import firebase, { auth, provider } from "./firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
+import Search from "./pages/Search";
 
 
 class App extends Component {
@@ -15,8 +17,8 @@ class App extends Component {
     email: `test@test.com`,
     password: `password`,
     loading: true, authenticated: false, user: null,
-    search: "",
-    movies: []
+    searchRedirect: false,
+    searchArr: []
   };
 
   componentWillMount() {
@@ -34,26 +36,33 @@ class App extends Component {
           loading: false
         });
       }
+    })
+  }
+
+  componentDidUpdate() {
+    if (this.state.searchRedirect===true) {
+      this.setState({searchRedirect: false})
+    }
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
     });
   }
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // }
-
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   API.getSearch(this.state.search)
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res;
-  //     })
-  //     .then(res => this.setState({ movies: res.data }))
-  //     .catch(err => console.log(err));
-  // }
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    API.getSearch(this.state.search)
+      .then((res) => {
+        console.log(res);
+        return res;
+      })
+      .then(res => this.setState({ searchArr: res.data }))
+      .then(this.setState({searchRedirect: true}))
+      .catch(err => console.log(err));
+  }
     
   render() {
     if (this.state.currentUser) {
@@ -62,13 +71,21 @@ class App extends Component {
           <div>
             {/* <DrawerLeft /> */}
             <CssBaseline />
-            <AppBar src={this.state.currentUser.photoURL} alt={this.state.currentUser.displayName} name={this.state.currentUser.displayName}/>
+            <AppBar 
+            src={this.state.currentUser.photoURL}
+             alt={this.state.currentUser.displayName} 
+             name={this.state.currentUser.displayName}
+             onChange={this.handleInputChange}
+             handleSubmit={this.handleFormSubmit}
+            />
+            {this.state.searchRedirect && <Redirect push to="/search"/>}
             <Route exact path="/login" component={Login} />
             <Route exact path="/" component={Home} />
             <Route exact path="/in-theaters" component={InTheaters} />
             <Route exact path="/top-tv" component={TopTV} />
             <Route exact path="/upcoming" component={Upcoming} />
             <Route exact path="/top-movies" component={TopMovie} />
+            <Route exact path="/search" render={()=><Search movies={this.state.searchArr}/>}/>
           </div>
         </Router>
       )
