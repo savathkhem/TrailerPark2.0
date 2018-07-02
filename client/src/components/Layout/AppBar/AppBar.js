@@ -212,6 +212,8 @@ class PersistentDrawer extends React.Component {
                 >
                   <MenuItem onClick={this.handleClose}>Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+
                 </Menu>
             </div>)}
           </Toolbar>
