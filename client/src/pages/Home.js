@@ -5,6 +5,7 @@ import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
 import iFrame from "../components/iFrame";
+import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
@@ -48,25 +49,28 @@ class Home extends Component {
     else {
       toggleModal = "modal";
     }
+    
     return (
-        <div>
-          <Modal modal = {toggleModal} onClick = {this.closeModal}>
+      <div>
+        <Modal modal = {toggleModal} onClick = {this.closeModal}>
+          <Carousel>
             {this.state.youTubes.map((video) => (
               <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
-          </Modal>
-          <Wrapper>
-            <CardWrapper>
-              {this.state.movies.map((movie) => (
-                <Card 
-                key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.title)}
-                
-                />
-              ))}
-            </CardWrapper>
-          </Wrapper>
-        </div>
+          </Carousel>
+        </Modal>
+        <Wrapper>
+          <CardWrapper>
+            {this.state.movies.map((movie) => (
+              <Card 
+              key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+              onClick={()=>this.clickPoster(movie.title)}
+              
+              />
+            ))}
+          </CardWrapper>
+        </Wrapper>
+      </div>
     )
   }
 }

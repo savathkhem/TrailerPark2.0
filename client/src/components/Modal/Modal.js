@@ -1,19 +1,28 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core/';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import "./Modal.css";
 
-const Modal = (props)=> (
-    <div id="myModal" className= {props.modal || "modal"} onClick={props.onClick}>
-      {/* <Paper>     */}
-        <div className="modal-content">
-          <span className="close" >&times;</span>
-          {props.children}
+const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
+
+const Modal = (props, classes)=> (
+  <div id="myModal" className= {props.modal || "modal"}>
+      <div className="modal-content">
+        <div>
+        {props.children}
         </div>
-      {/* </Paper> */}
-    
-    </div>
+        <span className="close" >
+          {/* &times; */}
+            <Button variant="fab" color="primary" aria-label="add" className={classes.button} onClick={props.onClick}>
+              <AddIcon />
+            </Button>
+        </span>
+      </div>
+  </div>
 );
 
 export default Modal; 
