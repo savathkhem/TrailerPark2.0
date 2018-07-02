@@ -27,6 +27,7 @@
     "firebase": "^5.1.0",
     "if-env": "^1.0.4",
     "mongoose": "^5.0.17",
+    "npm": "^6.1.0",
     "react-auth-firebase": "^1.2.1",
     "react-responsive-carousel": "^3.1.41"
   }
