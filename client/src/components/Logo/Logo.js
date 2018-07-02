@@ -2,9 +2,9 @@ import React from "react";
 import "./Logo.css";
 
 const Logo = () => (
-    <div>
+  <div>
     <p id="logo"><a href="">Trailer Park</a></p>
-    </div>
+  </div>
 );
 
 export default Logo;

@@ -54,64 +54,64 @@ class Login extends Component {
     }
 
     return (
+      <div>
         <div>
-          <div>
-            <form onSubmit={e => e.preventDefault()}>
-              <input
-                type="text"
-                placeholder="Email"
-                onChange={e => this.setState({ email: e.target.value })}
-              />{" "}
-              <br />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={e => this.setState({ password: e.target.value })}
-              />
-              <br />
-              {!user && (
-                <button
-                  type="submit"
-                  onClick={() => signInWithEmail(email, password)}
-                >
-                  SignIn
-            </button>
-              )}
-            </form>
-            <form onSubmit={e => e.preventDefault()}>
-              <input
-                type="text"
-                placeholder="Email"
-                onChange={e =>
-                  this.setState({
-                    email: e.target.value
-                  })
-                }
-                value={email}
-              />{" "}
-              <br />
-              <input
-                type="password"
-                placeholder="Password"
-                onChange={e => this.setState({ password: e.target.value })}
-                value={password}
-              />{" "}
-              <br />
+          <form onSubmit={e => e.preventDefault()}>
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={e => this.setState({ email: e.target.value })}
+            />{" "}
+            <br />
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={e => this.setState({ password: e.target.value })}
+            />
+            <br />
+            {!user && (
               <button
                 type="submit"
-                onClick={() => signUpWithEmail(email, password)}
+                onClick={() => signInWithEmail(email, password)}
               >
-                SignUp
-          </button>
-            </form>
+                SignIn
+              </button>
+            )}
+          </form>
+          <form onSubmit={e => e.preventDefault()}>
+            <input
+              type="text"
+              placeholder="Email"
+              onChange={e =>
+                this.setState({
+                  email: e.target.value
+                })
+              }
+              value={email}
+            />{" "}
             <br />
-            <button onClick={signInWithGoogle}>Signin with Google</button> <br />
-            <button onClick={signInWithFacebook}>Signin with Facebook</button>{" "}
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={e => this.setState({ password: e.target.value })}
+              value={password}
+            />{" "}
             <br />
-            <button onClick={signInWithGithub}>Signin with Github</button> <br />
-            <button onClick={signInWithTwitter}>Signin with Twitter</button> <br />
-          </div>
+            <button
+              type="submit"
+              onClick={() => signUpWithEmail(email, password)}
+            >
+              SignUp
+            </button>
+          </form>
+          <br />
+          <button onClick={signInWithGoogle}>Signin with Google</button> <br />
+          <button onClick={signInWithFacebook}>Signin with Facebook</button>{" "}
+          <br />
+          <button onClick={signInWithGithub}>Signin with Github</button> <br />
+          <button onClick={signInWithTwitter}>Signin with Twitter</button> <br />
         </div>
+      </div>
     )
   }
 }
