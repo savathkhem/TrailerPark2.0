@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Fragment } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import "./Carousel.css";
 
 const YTCarousel = (props)=> (
-<Carousel showThumbs={false}>
-{props.children}
-</Carousel>
+<Fragment>
+    <Carousel showThumbs={false}>
+        {props.children}
+    </Carousel>
+</Fragment>
 );
 
 export default YTCarousel; 
