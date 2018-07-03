@@ -89,10 +89,10 @@ class PosterCard extends React.Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph variant="body2" className={classes.primaryText}>
+              <Typography paragraph variant="subheading" className={classes.primaryText}>
               {this.props.title}:
               </Typography>
-              <Typography paragraph className={classes.primaryText}>
+              <Typography paragraph variant="body2" className={classes.primaryText}>
                 {this.props.overview}
               </Typography>
             </CardContent>
