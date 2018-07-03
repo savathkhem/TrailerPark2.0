@@ -6,7 +6,6 @@ import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconBu
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareIcon from '@material-ui/icons/Share'
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import "./Card.css";
 
  
 const styles = theme => ({
@@ -40,7 +39,7 @@ const styles = theme => ({
   primaryText: {
     // background: theme.palette.background.default,
     // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    color: '#FF1177',
+    color: '#fafafa',
   },
   header: {
     marginBottom: '0px',
