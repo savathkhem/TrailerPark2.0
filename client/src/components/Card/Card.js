@@ -4,14 +4,18 @@ import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Drawer, Paper } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ShareIcon from '@material-ui/icons/Share'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import "./Card.css";
+
  
 const styles = theme => ({
   card: {
     width: '218px',
     margin: '5px',
     backgroundSize: 'unset',
-    // backgroundColor: '#424242',
+    backgroundColor: '#424242',
+    paddingTop: '8px'
   },
   media: {
     width: '200px',
@@ -33,6 +37,15 @@ const styles = theme => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
+  primaryText: {
+    // background: theme.palette.background.default,
+    // padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    color: '#FF1177',
+  },
+  header: {
+    marginBottom: '0px',
+    marginTop: '8px',
+  }
 });
 
 class PosterCard extends React.Component {
@@ -48,33 +61,39 @@ class PosterCard extends React.Component {
     return (
       <div>
         <Paper className={classes.card}>
-        <CardHeader 
-            subheader={this.props.title}
-          />
+        {/* <CardHeader className={classes.header}
+          subheader={this.props.title}
+        /> */}
           <img
             className={classes.media}
             src={this.props.src}
             onClick={this.props.onClick}
             title={this.props.title}   
           />
-          <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            >
+        <CardActions className={classes.actions} disableActionSpacing>
+          <IconButton aria-label="Add to favorites">
+            <FavoriteIcon />
+          </IconButton>
+          <IconButton aria-label="Share">
+            <ShareIcon />
+          </IconButton>
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          >
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph variant="body2">
-                Summary:
+              <Typography paragraph variant="body2" className={classes.primaryText}>
+              {this.props.title}:
               </Typography>
-              <Typography paragraph>
+              <Typography paragraph className={classes.primaryText}>
                 {this.props.overview}
               </Typography>
             </CardContent>
