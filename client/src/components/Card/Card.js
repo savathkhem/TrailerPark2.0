@@ -14,7 +14,8 @@ const styles = theme => ({
     margin: '5px',
     backgroundSize: 'unset',
     backgroundColor: '#424242',
-    paddingTop: '8px'
+    paddingTop: '8px',
+    borderRadius:5,
   },
   media: {
     width: '200px',
