@@ -2,19 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography } from '@material-ui/core/';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Drawer, Paper } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import "./Card.css";
  
 const styles = theme => ({
   card: {
-    width: '250px',
+    width: '218px',
     margin: '5px',
     backgroundSize: 'unset',
+    // backgroundColor: '#424242',
   },
   media: {
-    width: '250px',
-    paddingTop: '100%',
+    width: '200px',
+    // paddingTop: '100%',
     backgroundSize: 'unset',
+    marginLeft: '8px',
   },
   actions: {
     display: 'flex',
@@ -44,13 +47,13 @@ class PosterCard extends React.Component {
 
     return (
       <div>
-        <Card className={classes.card}>
-        <CardHeader
+        <Paper className={classes.card}>
+        <CardHeader 
             subheader={this.props.title}
           />
-          <CardMedia
+          <img
             className={classes.media}
-            image={this.props.src}
+            src={this.props.src}
             onClick={this.props.onClick}
             title={this.props.title}   
           />
@@ -76,7 +79,7 @@ class PosterCard extends React.Component {
               </Typography>
             </CardContent>
           </Collapse>
-        </Card>
+        </Paper>
       </div>
     );
   }
