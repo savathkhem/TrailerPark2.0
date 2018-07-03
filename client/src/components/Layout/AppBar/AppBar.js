@@ -48,6 +48,19 @@ const styles = theme => ({
   'appBarShift-right': {
     marginRight: drawerWidth,
   },
+  avatar: {
+    margin: 10,
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60,
+  },
+  avatarButton: {
+    height: 'inherit',
+    marginLeft: 12,
+    marginRight: 20,
+    float: 'right',
+  },
   menuButton: {
     marginLeft: 12,
     marginRight: 20,
@@ -167,6 +180,7 @@ class PersistentDrawer extends React.Component {
     return (
       <div>
         <AppBar
+          position="fixed"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
             [classes[`appBarShift-${anchor}`]]: open,
@@ -187,15 +201,17 @@ class PersistentDrawer extends React.Component {
             {auth && (
               <div>
                 <IconButton
+                  className={classes.avatarButton}
                   aria-owns={openlogin ? 'menu-appbar' : null}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                <h4>{this.props.name}</h4>
-                  <AccountCircle/>
+                {/* <h4>{this.props.name}</h4> */}
+                <Avatar alt={this.props.name} className={(classes.avatar, classes.bigAvatar)}><img className={classes.bigAvatar} src={this.props.src} alt={this.props.alt}/></Avatar>
+                  {/* <AccountCircle/> */}
                 </IconButton>
-                <Avatar><img src={this.props.src} alt={this.props.alt}/></Avatar>
+                {/* <Avatar><img src={this.props.src} alt={this.props.alt}/></Avatar> */}
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -210,8 +226,8 @@ class PersistentDrawer extends React.Component {
                   open={openlogin}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose}>{this.props.name}'s Profile</MenuItem>
+                  <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                   <MenuItem onClick={this.handleClose}>Logout</MenuItem>
 
                 </Menu>
@@ -219,6 +235,19 @@ class PersistentDrawer extends React.Component {
           </Toolbar>
         </AppBar>
           {before}
+
+          {/* <main
+            className={classNames(classes.content, classes[`content-${anchor}`], {
+              [classes.contentShift]: open,
+              [classes[`contentShift-${anchor}`]]: open,
+            })}
+          >
+            <div className={classes.drawerHeader} />
+            <MainContent/>
+          </main> */}
+
+
+          
           {after}
       </div>
     );
