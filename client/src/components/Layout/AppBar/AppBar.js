@@ -55,8 +55,13 @@ const styles = theme => ({
     width: 60,
     height: 60,
   },
-  menuButton: {
+  avatarButton: {
     height: 'inherit',
+    marginLeft: 12,
+    marginRight: 20,
+    float: 'right',
+  },
+  menuButton: {
     marginLeft: 12,
     marginRight: 20,
     float: 'right',
@@ -175,6 +180,7 @@ class PersistentDrawer extends React.Component {
     return (
       <div>
         <AppBar
+          position="fixed"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
             [classes[`appBarShift-${anchor}`]]: open,
@@ -195,7 +201,7 @@ class PersistentDrawer extends React.Component {
             {auth && (
               <div>
                 <IconButton
-                  className={classes.menuButton}
+                  className={classes.avatarButton}
                   aria-owns={openlogin ? 'menu-appbar' : null}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
