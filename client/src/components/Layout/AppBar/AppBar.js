@@ -56,6 +56,7 @@ const styles = theme => ({
     height: 60,
   },
   menuButton: {
+    height: 'inherit',
     marginLeft: 12,
     marginRight: 20,
     float: 'right',
@@ -194,6 +195,7 @@ class PersistentDrawer extends React.Component {
             {auth && (
               <div>
                 <IconButton
+                  className={classes.menuButton}
                   aria-owns={openlogin ? 'menu-appbar' : null}
                   aria-haspopup="true"
                   onClick={this.handleMenu}
