@@ -11,6 +11,7 @@ import firebase, { auth, provider } from "./firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
 import Search from "./pages/Search";
 
+const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
 class App extends Component {
   state = {
@@ -39,6 +40,21 @@ class App extends Component {
     })
   }
 
+  checkPosterPaths(arr) {
+    let newArr = arr
+    newArr.map( (movie) => {
+      if (movie.poster_path === null){
+        movie.poster_path = "./images/placeholder.jpg";
+      }
+      else{
+        movie.poster_path = tmdbImgUrl + movie.poster_path;
+      }
+    }
+    )
+    arr = newArr
+    return arr
+  };
+
   componentDidUpdate() {
     if (this.state.searchRedirect===true) {
       this.setState({searchRedirect: false})
@@ -57,9 +73,11 @@ class App extends Component {
     API.getSearch(this.state.search)
       .then((res) => {
         console.log(res);
+        this.checkPosterPaths(res.data)
         return res;
       })
       .then(res => this.setState({ searchArr: res.data }))
+      // .then(res => this.checkPosterPaths())
       .then(this.setState({searchRedirect: true}))
       .catch(err => console.log(err));
   }
