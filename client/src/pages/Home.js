@@ -39,7 +39,7 @@ class Home extends Component {
   }
 
   checkPosterPaths(arr) {
-    let newArr = arr
+    let newArr = arr;
     newArr.map( (movie) => {
       if (movie.poster_path === null){
         movie.poster_path = "../../public/images/placeholder.jpg";
@@ -49,8 +49,8 @@ class Home extends Component {
       }
     }
     )
-    arr = newArr
-    return arr
+    arr = newArr;
+    return arr;
   };
 
   openModal = () => this.setState({ modal: true });
