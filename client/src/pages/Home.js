@@ -32,7 +32,7 @@ class Home extends Component {
         console.log(res);
         return res;
       })
-      .then((res) => this.setState({youTubes: res.data}))
+      .then((res) => this.setState({ youTubes: res.data }))
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }
@@ -40,6 +40,10 @@ class Home extends Component {
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
+
+  googleMaps() {
+    
+  }
 
   render() {
     let toggleModal;
@@ -52,10 +56,10 @@ class Home extends Component {
     
     return (
       <div>
-        <Modal modal = {toggleModal} onClick = {this.closeModal}>
+        <Modal modal= {toggleModal} onClick= {this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (
-              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+              <iFrame src= {"https://www.youtube.com/embed/" + video.id.videoId}/>
             ))}
           </Carousel>
         </Modal>
@@ -63,9 +67,8 @@ class Home extends Component {
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
-              key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.title)}
-              
+              key= {movie.id} src= {tmdbImgUrl + movie.poster_path} alt= {movie.title} title=  {movie.title} overview= {movie.overview}
+              onClick= {() => this.clickPoster(movie.title)}
               />
             ))}
           </CardWrapper>

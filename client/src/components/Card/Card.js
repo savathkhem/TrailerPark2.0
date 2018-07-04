@@ -96,6 +96,7 @@ class PosterCard extends React.Component {
               <Typography paragraph variant="body2" className={classes.primaryText}>
                 {this.props.overview}
               </Typography>
+              <button onClick={this.props.googleMaps}>Theaters Nearby</button>
             </CardContent>
           </Collapse>
         </Paper>
