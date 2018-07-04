@@ -20,11 +20,27 @@ class TopTV extends Component {
     API.getTopTv()
       .then((res) => {
         console.log(res);
+        this.checkPosterPaths(res.data)
         return res;
       })
       .then(res => this.setState({ movies: res.data }))
       .catch(err => console.log(err));
   }
+
+  checkPosterPaths(arr) {
+    let newArr = arr;
+    newArr.map( (movie) => {
+      if (movie.poster_path === null){
+        movie.poster_path = "../../public/images/placeholder.jpg";
+      }
+      else{
+        movie.poster_path = tmdbImgUrl + movie.poster_path;
+      }
+    }
+    )
+    arr = newArr;
+    return arr;
+  };
 
   clickPoster(title) {
     API.getTrailers(title)
@@ -63,7 +79,7 @@ class TopTV extends Component {
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
-              key={movie.id} src={tmdbImgUrl + movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
+              key={movie.id} src={movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
               onClick={()=>this.clickPoster(movie.name)}
               
               />
