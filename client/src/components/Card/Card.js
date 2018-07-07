@@ -5,8 +5,10 @@ import classnames from 'classnames';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Drawer, Paper } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareIcon from '@material-ui/icons/Share'
+import ChatIcon from '@material-ui/icons/Chat'
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import DrawerBtn from '../DrawerLeft';
+import MessageDrawer from './../MessageDrawer';
+
 
  
 const styles = theme => ({
@@ -75,9 +77,13 @@ class PosterCard extends React.Component {
           <IconButton aria-label="Add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <IconButton aria-label="Share">
+          <MessageDrawer />
+          {/* <IconButton aria-label="Message/Rating">
+            <ChatIcon />
+          </IconButton> */}
+          {/* <IconButton aria-label="Share">
             <ShareIcon />
-          </IconButton>
+          </IconButton> */}
           {/* <DrawerBtn /> */}
           <IconButton
             className={classnames(classes.expand, {
