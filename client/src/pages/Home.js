@@ -8,7 +8,6 @@ import iFrame from "../components/iFrame";
 import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
-const googleMapsUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
 
 const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me"
 
@@ -52,7 +51,7 @@ class Home extends Component {
   createYouTubeUrl (arr) {
     let newArr = arr;
     newArr.map( (video) => {
-      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId
+      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
     })
   }
 
@@ -87,6 +86,7 @@ class Home extends Component {
     else {
       toggleModal = "modal";
     }
+    
     let toggleMapModal;
     if (this.state.mapModal === true){
       toggleMapModal = "show";

@@ -9,6 +9,8 @@ import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
+const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me"
+
 class Upcoming extends Component {
   state = {
     movies: [],
@@ -27,6 +29,18 @@ class Upcoming extends Component {
       .catch(err => console.log(err));
   }
 
+  clickPoster(title) {
+    API.getTrailers(title)
+      .then((res) => {
+        console.log(res);
+        this.createYouTubeUrl(res.data);
+        return res;
+      })
+      .then((res) => this.setState({ youTubes: res.data }))
+      .then(() => this.openModal())
+      .catch((err) => console.log (err));
+  }
+
   checkPosterPaths(arr) {
     let newArr = arr;
     newArr.map( (movie) => {
@@ -42,20 +56,24 @@ class Upcoming extends Component {
     return arr;
   };
 
-  clickPoster(title) {
-    API.getTrailers(title)
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .then((res) => this.setState({ youTubes: res.data }))
-      .then(() => this.openModal())
-      .catch((err) => console.log (err));
+  googleMaps() {
+    this.openMapModal()
+  }
+
+  createYouTubeUrl (arr) {
+    let newArr = arr;
+    newArr.map( (video) => {
+      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
+    })
   }
 
   openModal = () => this.setState({ modal: true });
 
+  openMapModal = () => this.setState({ mapModal: true });
+
   closeModal = () => this.setState({ modal: false });
+
+  closeMapModal = () => this.setState({ mapModal: false });
 
   render() {
     let toggleModal;
@@ -66,12 +84,23 @@ class Upcoming extends Component {
       toggleModal = "modal";
     }
 
+    let toggleMapModal;
+    if (this.state.mapModal === true){
+      toggleMapModal = "show";
+    }
+    else {
+      toggleMapModal = "modal";
+    }
+
     return (
       <div>
+        <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
+          <iFrame src= {googleMapUrl}/>
+        </Modal>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
         <Carousel>
           {this.state.youTubes.map((video) => (
-            <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+            <iFrame src= {video.id.videoId}/>
           ))}
         </Carousel>
         </Modal>
@@ -80,8 +109,7 @@ class Upcoming extends Component {
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.title)}
-              
+              onClick={()=>this.clickPoster(movie.title)}  googleMaps = {()=> this.googleMaps()}
               />
             ))}
           </CardWrapper>
