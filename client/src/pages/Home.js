@@ -58,11 +58,6 @@ class Home extends Component {
 
   closeModal = () => this.setState({ modal: false });
 
-  googleMaps() {
-    this.setState({ youTubes: googleMapsUrl });
-    this.openModal();
-  }
-
   render() {
     let toggleModal;
     if (this.state.modal === true){
