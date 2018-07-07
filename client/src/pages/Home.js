@@ -8,6 +8,7 @@ import iFrame from "../components/iFrame";
 import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
+const googleMapsUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
 
 class Home extends Component {
   state = {
@@ -58,7 +59,8 @@ class Home extends Component {
   closeModal = () => this.setState({ modal: false });
 
   googleMaps() {
-    
+    this.setState({ youTubes: googleMapsUrl });
+    this.openModal();
   }
 
   render() {
