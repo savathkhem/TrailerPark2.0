@@ -2,14 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, AppBar, Toolbar, List, MenuItem, Typography, Menu, IconButton, Avatar } from '@material-ui/core/';
-import { AccountCircle } from '@material-ui/icons/';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import PageOptions from './../../tileData';
+import { AppBar, Toolbar, MenuItem, Typography, Menu, IconButton, Avatar } from '@material-ui/core/';
 import Logo from "../../Logo";
 import firebase, { auth, provider } from "../../../firebaseConfig";
+import DrawerLeft from "./../../DrawerLeft"
 
 const drawerWidth = 240;
 
@@ -110,7 +106,7 @@ const styles = theme => ({
   },
 });
 
-class PersistentDrawer extends React.Component {
+class NavBar extends React.Component {
   state = {
     open: false,
     anchor: 'left',
@@ -128,15 +124,6 @@ class PersistentDrawer extends React.Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null });
-  };
-  
-
-  handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleDrawerClose = () => {
-    this.setState({ open: false });
   };
 
   handleChangeAnchor = event => {
@@ -161,33 +148,6 @@ class PersistentDrawer extends React.Component {
     const { auth, anchorEl } = this.state;
     const openlogin = Boolean(anchorEl);
 
-    const drawer = (
-      <Drawer
-        variant="persistent"
-        anchor={anchor}
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit}/></List>
-      </Drawer>
-    );
-
-    let before = null;
-    let after = null;
-
-    if (anchor === 'left') {
-      before = drawer;
-    } else {
-      after = drawer;
-    }
-
     return (
       <div>
         <AppBar
@@ -199,13 +159,17 @@ class PersistentDrawer extends React.Component {
           style={{backgroundColor: "#424242"}}
         >
           <Toolbar disableGutters={!open}>
-            <IconButton
+
+            {/* <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={this.handleDrawerOpen}
               className={classNames(classes.menuButton, open && classes.hide)}>
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
+            <DrawerLeft />
+
+
             <Typography variant="title" color="inherit" className={classes.flex}>
             <Logo />
             </Typography>
@@ -245,29 +209,14 @@ class PersistentDrawer extends React.Component {
             </div>)}
           </Toolbar>
         </AppBar>
-          {before}
-
-          {/* <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
-              [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
-            })}
-          >
-            <div className={classes.drawerHeader} />
-            <MainContent/>
-          </main> */}
-
-
-          
-          {after}
       </div>
     );
   }
 }
 
-PersistentDrawer.propTypes = {
+NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+export default withStyles(styles, { withTheme: true })(NavBar);

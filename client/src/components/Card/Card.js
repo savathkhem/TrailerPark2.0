@@ -6,6 +6,7 @@ import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconBu
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ShareIcon from '@material-ui/icons/Share'
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DrawerBtn from '../DrawerLeft';
 
  
 const styles = theme => ({
@@ -77,6 +78,7 @@ class PosterCard extends React.Component {
           <IconButton aria-label="Share">
             <ShareIcon />
           </IconButton>
+          {/* <DrawerBtn /> */}
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
