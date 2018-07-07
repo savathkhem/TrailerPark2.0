@@ -167,7 +167,7 @@ class NavBar extends React.Component {
               className={classNames(classes.menuButton, open && classes.hide)}>
               <MenuIcon />
             </IconButton> */}
-            <DrawerLeft />
+            <DrawerLeft onChange={this.props.onChange} handleSubmit={this.props.handleSubmit}/>
 
 
             <Typography variant="title" color="inherit" className={classes.flex}>
