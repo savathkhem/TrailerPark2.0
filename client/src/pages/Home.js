@@ -20,6 +20,7 @@ class Home extends Component {
     API.getMovies()
       .then((res) => {
         console.log(res);
+        this.checkPosterPaths(res.data)
         return res;
       })
       .then(res => this.setState({ movies: res.data }))
@@ -37,6 +38,21 @@ class Home extends Component {
       .catch((err) => console.log (err));
   }
 
+  checkPosterPaths(arr) {
+    let newArr = arr;
+    newArr.map( (movie) => {
+      if (movie.poster_path === null){
+        movie.poster_path = "../../public/images/placeholder.jpg";
+      }
+      else{
+        movie.poster_path = tmdbImgUrl + movie.poster_path;
+      }
+    }
+    )
+    arr = newArr;
+    return arr;
+  };
+
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
@@ -53,7 +69,6 @@ class Home extends Component {
     else {
       toggleModal = "modal";
     }
-    
     return (
       <div>
         <Modal modal= {toggleModal} onClick= {this.closeModal}>
@@ -67,8 +82,8 @@ class Home extends Component {
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
-              key= {movie.id} src= {tmdbImgUrl + movie.poster_path} alt= {movie.title} title=  {movie.title} overview= {movie.overview}
-              onClick= {() => this.clickPoster(movie.title)}
+              key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+              onClick={()=>this.clickPoster(movie.title)}
               />
             ))}
           </CardWrapper>

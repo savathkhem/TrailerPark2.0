@@ -9,6 +9,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import PageOptions from './../../tileData';
 import Logo from "../../Logo";
+import firebase, { auth, provider } from "../../../firebaseConfig";
 
 const drawerWidth = 240;
 
@@ -144,6 +145,16 @@ class PersistentDrawer extends React.Component {
     });
   };
 
+  logOut = ()=> firebase.auth().signOut()
+  .then((success)=> {
+    // Sign-out successful.
+    console.log("User signed out")
+  })
+  .catch((error)=> {
+    // An error happened
+    console.log(error)
+  });
+
   render() {
     const { classes, theme } = this.props;
     const { anchor, open } = this.state;
@@ -228,7 +239,7 @@ class PersistentDrawer extends React.Component {
                 >
                   <MenuItem onClick={this.handleClose}>{this.props.name}'s Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>Settings</MenuItem>
-                  <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={this.logOut}>Logout</MenuItem>
 
                 </Menu>
             </div>)}
