@@ -72,9 +72,12 @@ class Home extends Component {
 
   openModal = () => this.setState({ modal: true });
 
-  openMapModal = () => this.setState({ mapModal: true });
+  closeModal = (event) => { 
+    event.stopPropagation();
+    this.setState({ modal: false })
+  }
 
-  closeModal = () => this.setState({ modal: false });
+  openMapModal = () => this.setState({ mapModal: true });
 
   closeMapModal = () => this.setState({ mapModal: false });
 
