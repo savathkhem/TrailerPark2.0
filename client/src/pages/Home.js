@@ -94,6 +94,7 @@ class Home extends Component {
     else {
       toggleMapModal = "modal";
     }
+
     return (
       <div>
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
