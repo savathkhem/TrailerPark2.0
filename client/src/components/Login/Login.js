@@ -1,12 +1,40 @@
 import React, { Component } from "react";
 // import DrawerLeft from "./components/DrawerLeft";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
 import firebase, { auth, provider } from "../../firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
+import Logo from "../Logo";
+import "./Login.css";
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 100,
+  },
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  }
+});
 
 class Login extends Component {
   state = {
-    email: `test@test.com`,
-    password: `password`,
+    email: ``,
+    password: ``,
     loading: true, authenticated: false, user: null,
   };
 
@@ -54,63 +82,77 @@ class Login extends Component {
     }
 
     return (
-      <div>
-        <div>
+      <div className="login">
+        <Logo />
+        <br />
+        <Paper style={{ width: 700, marginLeft: 'auto', marginRight: 'auto' }} elevation={2}>
+          <br />
           <form onSubmit={e => e.preventDefault()}>
-            <input
-              type="text"
-              placeholder="Email"
+            <h2> Sign In! </h2>
+            <TextField
+              id="email"
+              label="Email"
               onChange={e => this.setState({ email: e.target.value })}
-            />{" "}
-            <br />
-            <input
-              type="password"
-              placeholder="Password"
+              // margin="normal"
+            />{"  "}
+            <TextField
+              id="password"
+              label="Password"
               onChange={e => this.setState({ password: e.target.value })}
+              // margin="normal"
             />
             <br />
+            <br />
             {!user && (
-              <button
+              <Button
                 type="submit"
+                variant="contained"
                 onClick={() => signInWithEmail(email, password)}
               >
-                SignIn
-              </button>
+                Sign In
+              </Button>
             )}
           </form>
+          <br />
+          <br />
           <form onSubmit={e => e.preventDefault()}>
-            <input
-              type="text"
-              placeholder="Email"
+            <h2> Sign Up! </h2>
+            <TextField
+              id="email"
+              label="Email"
               onChange={e =>
                 this.setState({
                   email: e.target.value
                 })
               }
               value={email}
+              // margin="normal"
             />{" "}
-            <br />
-            <input
-              type="password"
-              placeholder="Password"
+            <TextField
+              id="password"
+              label="Password"
               onChange={e => this.setState({ password: e.target.value })}
               value={password}
+              // margin="normal"
             />{" "}
             <br />
-            <button
+            <br />
+            <Button
               type="submit"
+              variant="contained"
               onClick={() => signUpWithEmail(email, password)}
             >
-              SignUp
-            </button>
+              Sign Up
+            </Button>
           </form>
           <br />
-          <button onClick={signInWithGoogle}>Signin with Google</button> <br />
-          <button onClick={signInWithFacebook}>Signin with Facebook</button>{" "}
           <br />
-          <button onClick={signInWithGithub}>Signin with Github</button> <br />
-          <button onClick={signInWithTwitter}>Signin with Twitter</button> <br />
-        </div>
+          <Button variant="contained" onClick={signInWithGoogle}>Sign in with Google &nbsp;<i className="fab fa-google"></i></Button><br /><br />
+          <Button variant="contained" onClick={signInWithFacebook}>Sign in with Facebook &nbsp;<i className="fab fa-facebook"></i></Button>{" "}<br /><br />
+          <Button variant="contained" onClick={signInWithGithub}>Sign in with Github &nbsp;<i className="fab fa-github-square"></i></Button><br /><br />
+          <Button variant="contained" onClick={signInWithTwitter}>Sign in with Twitter &nbsp;<i className="fab fa-twitter-square"></i></Button><br /><br />
+        </Paper>
+        <br />
       </div>
     )
   }
