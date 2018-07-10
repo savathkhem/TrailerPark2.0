@@ -27,12 +27,9 @@
 
 /* The Close Button */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    float: left;
     position: relative;
-    right:-60px;
+    left:0px;
     top:-640px;
 }
 

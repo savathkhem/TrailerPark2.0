@@ -15,7 +15,7 @@ const Modal = (props, classes)=> (
         {props.children} 
         </div>
         <span className="close" >
-            <Button variant="fab" color="secondary" aria-label="add" className={classes.button} onClick={props.onClick}>
+            <Button variant="fab" mini color="secondary" aria-label="add" className={classes.button} onClick={props.onClick}>
               X
             </Button>
         </span>
