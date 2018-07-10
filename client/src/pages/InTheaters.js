@@ -69,12 +69,12 @@ class Theaters extends Component {
 
     return (
       <div>
-        <Modal modal = {toggleModal} onClick = {this.closeModal}>
-        <Carousel>
-          {this.state.youTubes.map((video) => (
-            <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
-          ))}
-        </Carousel>
+        <Modal modal = {toggleModal} onClick={this.closeModal}>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+            ))}
+          </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>
