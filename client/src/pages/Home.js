@@ -39,7 +39,7 @@ class Home extends Component {
         this.createYouTubeUrl(res.data)
         return res;
       })
-      .then((res) => this.setState({youTubes: res.data}))
+      .then((res) => this.setState({ youTubes: res.data }))
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }
@@ -51,7 +51,7 @@ class Home extends Component {
   createYouTubeUrl (arr) {
     let newArr = arr;
     newArr.map( (video) => {
-      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId
+      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
     })
   }
 
@@ -86,6 +86,7 @@ class Home extends Component {
     else {
       toggleModal = "modal";
     }
+    
     let toggleMapModal;
     if (this.state.mapModal === true){
       toggleMapModal = "show";
@@ -93,6 +94,7 @@ class Home extends Component {
     else {
       toggleMapModal = "modal";
     }
+
     return (
       <div>
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>

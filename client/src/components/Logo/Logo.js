@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Logo.css";
 
 const Logo = () => (
   <div>
-    <p id="logo"><a href="">Trailer Park</a></p>
+    <p id="logo"><Link to="/">Trailer Park</Link></p>
   </div>
 );
 
