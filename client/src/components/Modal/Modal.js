@@ -12,11 +12,10 @@ const Modal = (props, classes)=> (
   <div id="myModal" className= {props.modal || "modal"}>
       <div className="modal-content">
         <div>
-        {props.children}
+        {props.children} 
         </div>
         <span className="close" >
-          {/* &times; */}
-            <Button variant="fab" color="secondary" aria-label="add" className={classes.button} onClick={props.onClick}>
+            <Button variant="fab" mini color="secondary" aria-label="add" className={classes.button} onClick={props.onClick}>
               X
             </Button>
         </span>
