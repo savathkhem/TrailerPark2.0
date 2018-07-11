@@ -23,6 +23,7 @@
     margin-top: 45px;
     padding: 20px;
     width: 70%; /* Could be more or less, depending on screen size */
+    z-index: 122;
 }
 
 /* The Close Button */

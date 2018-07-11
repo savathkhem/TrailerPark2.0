@@ -4,7 +4,7 @@ import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
-import iFrame from "../components/iFrame";
+import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
 
@@ -72,7 +72,7 @@ class TopMovie extends Component {
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
         <Carousel>
           {this.state.youTubes.map((video) => (
-            <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+            <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
           ))}
         </Carousel>
         </Modal>

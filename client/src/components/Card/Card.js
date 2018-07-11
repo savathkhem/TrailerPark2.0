@@ -77,7 +77,9 @@ class PosterCard extends React.Component {
           <IconButton aria-label="Add to favorites">
             <FavoriteIcon />
           </IconButton>
-          <MessageDrawer />
+          <MessageDrawer title={this.props.title} submitComment={this.props.submitComment} 
+          onCommentChange={this.props.onCommentChange} id={this.props.id}
+          />
           {/* <IconButton aria-label="Message/Rating">
             <ChatIcon />
           </IconButton> */}

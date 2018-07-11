@@ -4,7 +4,7 @@ import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
-import iFrame from "../components/iFrame";
+import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
 
@@ -76,6 +76,8 @@ class Theaters extends Component {
 
   closeModal = () => this.setState({ modal: false });
 
+  openMapModal = () => this.setState({ mapModal: true });
+  
   closeMapModal = () => this.setState({ mapModal: false });
 
   render() {
@@ -98,12 +100,12 @@ class Theaters extends Component {
     return (
       <div>
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
-          <iFrame src= {googleMapUrl}/>
+          <Iframe src= {googleMapUrl}/>
         </Modal>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
         <Carousel>
           {this.state.youTubes.map((video) => (
-            <iFrame src= {video.id.videoId}/>
+            <Iframe src= {video.id.videoId}/>
           ))}
         </Carousel>
         </Modal>

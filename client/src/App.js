@@ -15,8 +15,6 @@ const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
 class App extends Component {
   state = {
-    email: `test@test.com`,
-    password: `password`,
     loading: true, authenticated: false, user: null,
     searchRedirect: false,
     searchArr: []
@@ -98,6 +96,7 @@ class App extends Component {
             />
             {this.state.searchRedirect && <Redirect push to="/search"/>}
             <Route exact path="/login" component={Login} />
+            <Route exact path="/" render={()=><Home userName={this.state.currentUser.displayName}/>}/>
             <Route exact path="/" component={Home} />
             <Route exact path="/in-theaters" component={InTheaters} />
             <Route exact path="/top-tv" component={TopTV} />
