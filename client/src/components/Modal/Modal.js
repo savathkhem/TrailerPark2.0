@@ -19,6 +19,9 @@ const Modal = (props, classes)=> (
               X
             </Button>
         </span>
+        <div>
+        {props.children}
+        </div>
       </div>
   </div>
 );

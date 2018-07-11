@@ -1,1 +1,1 @@
-export { default } from "./iFrame";
+export { default } from "./Iframe";
