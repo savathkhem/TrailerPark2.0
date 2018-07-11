@@ -57,6 +57,22 @@ class TopTV extends Component {
 
   closeModal = () => this.setState({ modal: false });
 
+  submitComment = (id) => {
+    let commentObj = {
+      user: this.props.userName,
+      body: this.state.comment,
+      movie_id: id
+    }
+    API.saveComment(commentObj);
+  }
+
+  onCommentChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
     let toggleModal;
     if (this.state.modal === true){
@@ -80,7 +96,8 @@ class TopTV extends Component {
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.name)}
+              onClick={()=>this.clickPoster(movie.name)} submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
+              id={movie.id}
               
               />
             ))}

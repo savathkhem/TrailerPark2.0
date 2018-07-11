@@ -48,7 +48,11 @@ class TemporaryDrawer extends React.Component {
           <button type = "button" onClick={this.props.submitComment}>Leave a Review</button>
         </form>
         <div>
-        {this.state.comments.map((comment) => <div key={comment._id}>{comment.body}</div>)}
+        {this.state.comments.map((comment) => 
+        <div key={comment._id}>
+        <h4>{comment.user} says:</h4>
+          <p>{comment.body}</p>
+        </div>)}
         </div>
         <div>
         
