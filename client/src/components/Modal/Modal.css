@@ -19,7 +19,8 @@
 /* Modal Content/Box */
 .modal-content {
     text-align: center;
-    margin: 2% auto; /* 15% from the top and centered */
+    margin: 2% auto; 
+    margin-top: 45px;
     padding: 20px;
     width: 70%; /* Could be more or less, depending on screen size */
     z-index: 122;
@@ -27,10 +28,10 @@
 
 /* The Close Button */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    float: left;
+    position: relative;
+    left:0px;
+    top:-640px;
 }
 
 .close:hover,

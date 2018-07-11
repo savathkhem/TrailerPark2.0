@@ -11,9 +11,11 @@ const styles = theme => ({
 const Modal = (props, classes)=> (
   <div id="myModal" className= {props.modal || "modal"}>
       <div className="modal-content">
-      <span className="close" onClick={props.onClick}>
-          {/* &times; */}
-            <Button variant="fab" color="secondary" aria-label="add" className={classes.button} >
+        <div>
+        {props.children} 
+        </div>
+        <span className="close" >
+            <Button variant="fab" mini color="secondary" aria-label="add" className={classes.button} onClick={props.onClick}>
               X
             </Button>
         </span>
