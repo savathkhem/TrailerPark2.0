@@ -100,12 +100,12 @@ class Theaters extends Component {
     return (
       <div>
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
-          <iFrame src= {googleMapUrl}/>
+          <Iframe src= {googleMapUrl}/>
         </Modal>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
         <Carousel>
           {this.state.youTubes.map((video) => (
-            <iFrame src= {video.id.videoId}/>
+            <Iframe src= {video.id.videoId}/>
           ))}
         </Carousel>
         </Modal>
