@@ -24,5 +24,13 @@ export default {
     console.log(search);
 
     return axios.get("/api/movies/search/" + search);
+  },
+
+  getComments: (id) => {
+    return axios.get("api/db/comments/" + id);
+  },
+
+  saveComment: (comment) => {
+    return axios.post("api/db/save", comment);
   }
 }

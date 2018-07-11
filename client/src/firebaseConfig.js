@@ -1,4 +1,5 @@
-import firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/auth';
 console.log(process.env)
 // https://firebase.google.com/docs/web/setup?authuser=0
 
