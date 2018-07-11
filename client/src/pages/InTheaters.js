@@ -45,7 +45,7 @@ class Theaters extends Component {
   }
 
   googleMaps() {
-    this.openMapModal()
+    this.openMapModal();
   }
 
   createYouTubeUrl (arr) {

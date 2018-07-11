@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, MenuItem, Typography, Menu, IconButton, Avatar } from '@material-ui/core/';
 import Logo from "../../Logo";
 import firebase, { auth, provider } from "../../../firebaseConfig";
-import DrawerLeft from "./../../DrawerLeft"
+import DrawerLeft from "./../../DrawerLeft";
 
 const drawerWidth = 240;
 
@@ -201,7 +202,7 @@ class NavBar extends React.Component {
                   open={openlogin}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>{this.props.name}'s Profile</MenuItem>
+                  <MenuItem onClick={this.handleClose}><Link to="/">{this.props.name}'s Profile</Link></MenuItem>
                   <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                   <MenuItem onClick={this.logOut}>Logout</MenuItem>
 

@@ -90,11 +90,11 @@ class App extends Component {
             {/* <DrawerLeft /> */}
             <CssBaseline />
             <AppBar 
-            src={this.state.currentUser.photoURL}
-             alt={this.state.currentUser.displayName} 
-             name={this.state.currentUser.displayName}
-             onChange={this.handleInputChange}
-             handleSubmit={this.handleFormSubmit}
+              src={this.state.currentUser.photoURL}
+              alt={this.state.currentUser.displayName} 
+              name={this.state.currentUser.displayName}
+              onChange={this.handleInputChange}
+              handleSubmit={this.handleFormSubmit}
             />
             {this.state.searchRedirect && <Redirect push to="/search"/>}
             <Route exact path="/login" component={Login} />
