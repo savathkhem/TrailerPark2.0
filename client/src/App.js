@@ -3,7 +3,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Redirect, BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { AppBar } from "./components/Layout";
 import Login from "./components/Login";
-// import DrawerLeft from "./components/DrawerLeft";
 import { Home, TopTV, InTheaters, Upcoming, TopMovie, } from "./pages/";
 import API from "./utils/API";
 import "./App.css";
@@ -85,7 +84,6 @@ class App extends Component {
       return (
         <Router>
           <div>
-            {/* <DrawerLeft /> */}
             <CssBaseline />
             <AppBar 
               src={this.state.currentUser.photoURL}

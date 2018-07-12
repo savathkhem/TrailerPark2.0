@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
-import { Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography, Drawer, Paper } from '@material-ui/core/';
+import { CardContent, CardActions, Collapse, IconButton, Typography, Paper } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ShareIcon from '@material-ui/icons/Share'
-import ChatIcon from '@material-ui/icons/Chat'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MessageDrawer from './../MessageDrawer';
-
+import { FavContent } from './../FavBtn';
+import ModalNew from "./../ModalNew";
 
  
 const styles = theme => ({
@@ -52,7 +51,19 @@ const styles = theme => ({
 });
 
 class PosterCard extends React.Component {
-  state = { expanded: false };
+  state = { 
+    expanded: false,
+    favOpen: false,
+    modalOpen: false,
+  };
+
+  handleFavClick = () => {
+    this.setState(state => ({ favOpen: !state.favOpen }));
+  };
+
+  handleModalClick = () => {
+    this.setState(state => ({ modalOpen: !state.modalOpen }));
+  };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -67,26 +78,39 @@ class PosterCard extends React.Component {
         {/* <CardHeader className={classes.header}
           subheader={this.props.title}
         /> */}
+        <div className={classes.posterBack}>
           <img
             className={classes.media}
             src={this.props.src}
             onClick={this.props.onClick}
             title={this.props.title}   
           />
-        <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites">
-            <FavoriteIcon />
-          </IconButton>
-          <MessageDrawer title={this.props.title} submitComment={this.props.submitComment} 
-          onCommentChange={this.props.onCommentChange} id={this.props.id}
+          <FavContent 
+            open={this.state.favOpen}
+            onClose={this.handleFavClick}
           />
-          {/* <IconButton aria-label="Message/Rating">
-            <ChatIcon />
-          </IconButton> */}
-          {/* <IconButton aria-label="Share">
-            <ShareIcon />
-          </IconButton> */}
-          {/* <DrawerBtn /> */}
+        </div>
+        <CardActions className={classes.actions} disableActionSpacing>
+        <IconButton onClick={this.handleFavClick}>
+          <FavoriteIcon />
+
+        {/* </IconButton>
+        <IconButton onClick={this.handleModalClick}>
+          <FavoriteIcon />
+        
+        <ModalNew 
+          open={this.state.modalOpen}
+          onClose={this.handleModalClick}>
+          LAWDDDD PLEASE WORK!
+        </ModalNew> */}
+
+        </IconButton>
+          <MessageDrawer 
+            title={this.props.title}
+            submitComment={this.props.submitComment} 
+            onCommentChange={this.props.onCommentChange}
+            id={this.props.id}
+          />
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
@@ -120,4 +144,3 @@ PosterCard.propTypes = {
 };
  
 export default withStyles(styles)(PosterCard);
- 
