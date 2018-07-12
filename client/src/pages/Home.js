@@ -6,7 +6,7 @@ import API from "../utils/API";
 import Modal from "../components/Modal";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
-import ModalNew from "../components/ModalNew"
+import ModalNew from "./../components/ModalNew"
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
@@ -21,6 +21,7 @@ class Home extends Component {
     pageInteger: 1,
     message: "",
     comment: "",
+    modalOpen: false,
   }
 
   componentDidMount() {
@@ -49,9 +50,14 @@ class Home extends Component {
         return res;
       })
       .then((res) => this.setState({ youTubes: res.data }))
+      // .then(() => this.handleModalClick())     
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }
+
+  // handleModalClick = () => {
+  //   this.setState(state => ({ modalOpen: !state.modalOpen }));
+  // };
 
   googleMaps() {
     this.openMapModal()
@@ -128,6 +134,17 @@ class Home extends Component {
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
           <Iframe src= {googleMapUrl}/>
         </Modal>
+        
+        {/* <ModalNew 
+          open={this.state.modalOpen}
+          onClose={this.handleModalClick}>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <Iframe src= {video.id.videoId} key={video.id.videoId}/>
+            ))}
+          </Carousel>
+        </ModalNew> */}
+
         <Modal modal = {toggleModal} onClick={this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (

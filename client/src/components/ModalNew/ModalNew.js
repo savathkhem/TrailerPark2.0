@@ -20,7 +20,7 @@ const styles = theme => ({
     width: '75%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: 0,
+    padding: 'unset',
   },
 });
 
@@ -28,7 +28,7 @@ const ModalNew = (props) =>  (
 
   <Fragment>
     <Modal
-      open={props.modalOpen}
+      open={props.open}
       onClose={props.handleModalClick}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"

@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
-// import ModalNew from "./../ModalNew";
+import ModalNew from "./../ModalNew";
 
  
 const styles = theme => ({
@@ -61,6 +61,10 @@ class PosterCard extends React.Component {
     this.setState(state => ({ favOpen: !state.favOpen }));
   };
 
+  handleModalClick = () => {
+    this.setState(state => ({ modalOpen: !state.modalOpen }));
+  };
+
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
@@ -89,6 +93,17 @@ class PosterCard extends React.Component {
         <CardActions className={classes.actions} disableActionSpacing>
         <IconButton onClick={this.handleFavClick}>
           <FavoriteIcon />
+
+        {/* </IconButton>
+        <IconButton onClick={this.handleModalClick}>
+          <FavoriteIcon />
+        
+        <ModalNew 
+          open={this.state.modalOpen}
+          onClose={this.handleModalClick}>
+          LAWDDDD PLEASE WORK!
+        </ModalNew> */}
+
         </IconButton>
           <MessageDrawer 
             title={this.props.title}
