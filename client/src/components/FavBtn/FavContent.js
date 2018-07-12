@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Button, Snackbar } from '@material-ui/core/';
 
-const styles = theme => ({
+const styles = () => ({
   snackbar: {
     position: 'relative',
     width:'100%',
   },
   snackbarContent: {
+    position: "absolute",
+    top:-50,
     width: '100%',
     minWidth: 'unset',
   },
