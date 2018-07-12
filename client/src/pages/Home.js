@@ -87,30 +87,14 @@ class Home extends Component {
 
   openModal = () => this.setState({ modal: true });
 
-  closeModal = (event) => { 
-    event.stopPropagation();
-    this.setState({ modal: false })
-  }
+  closeModal = () => { 
+    this.setState({ modal: false, youTubes:[]})
+  };
 
   openMapModal = () => this.setState({ mapModal: true });
 
   closeMapModal = () => this.setState({ mapModal: false });
 
-  submitComment = (id) => {
-    let commentObj = {
-      user: this.props.userName,
-      body: this.state.comment,
-      movie_id: id
-    }
-    API.saveComment(commentObj);
-  }
-
-  onCommentChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  }
 
   render() {
     let toggleModal;
@@ -157,9 +141,8 @@ class Home extends Component {
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
-              id={movie.id}
+              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()}
+              id={movie.id} userName= {this.props.userName}
               />
             ))}
           </CardWrapper>
