@@ -6,6 +6,7 @@ import API from "../utils/API";
 import Modal from "../components/Modal";
 import iFrame from "../components/iFrame";
 import Carousel from "../components/Carousel";
+import ModalNew from "../components/ModalNew"
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
@@ -19,6 +20,7 @@ class Home extends Component {
     youTubes: [],
     pageInteger: 1,
     message: "",
+    open: "",
   }
 
   componentDidMount() {
@@ -78,6 +80,14 @@ class Home extends Component {
 
   closeMapModal = () => this.setState({ mapModal: false });
 
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     let toggleModal;
     if (this.state.modal === true){
@@ -98,10 +108,10 @@ class Home extends Component {
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
           <iFrame src= {googleMapUrl}/>
         </Modal>
-        <Modal modal = {toggleModal} onClick = {this.closeModal}>
+        <Modal modal = {toggleModal} onClick={this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (
-              <iFrame src= {video.id.videoId}/>
+              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
           </Carousel>
         </Modal>
