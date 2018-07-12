@@ -29,24 +29,10 @@ class Search extends Component {
 
   openModal = () => this.setState({ modal: true });
 
-  closeModal = () => this.setState({ modal: false });
-
-  submitComment = (id) => {
-    let commentObj = {
-      user: this.props.userName,
-      body: this.state.comment,
-      movie_id: id
-    }
-    API.saveComment(commentObj);
-  }
-
-  onCommentChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-  }
-
+  closeModal = () => { 
+    this.setState({ modal: false, youTubes:[]})
+  };
+  
   render() {
     let toggleModal;
     if (this.state.modal === true){
@@ -69,8 +55,8 @@ class Search extends Component {
               {this.props.movies.map((movie) => (
                 <Card 
                 key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.title)}submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
-                id={movie.id}
+                onClick={()=>this.clickPoster(movie.title)}
+                id={movie.id} userName= {this.props.userName}
                 />
               ))}
             </CardWrapper>

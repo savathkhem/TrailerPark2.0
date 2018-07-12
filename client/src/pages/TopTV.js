@@ -55,7 +55,9 @@ class TopTV extends Component {
 
   openModal = () => this.setState({ modal: true });
 
-  closeModal = () => this.setState({ modal: false });
+  closeModal = () => { 
+    this.setState({ modal: false, youTubes:[]})
+  };
 
   submitComment = (id) => {
     let commentObj = {
@@ -96,9 +98,8 @@ class TopTV extends Component {
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.name)} submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
-              id={movie.id}
-              
+              onClick={()=>this.clickPoster(movie.name)} 
+              id={movie.id} userName= {this.props.userName} 
               />
             ))}
           </CardWrapper>

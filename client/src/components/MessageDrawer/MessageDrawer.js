@@ -24,7 +24,26 @@ class TemporaryDrawer extends React.Component {
   componentDidMount() {
     API.getComments(this.props.id)
     .then(res => this.setState({comments: res.data}))
-  }
+  };
+
+  submitComment = (id) => {
+    let commentObj = {
+      user: this.props.userName,
+      body: this.state.comment,
+      movie_id: id
+    }
+    API.saveComment(commentObj);
+    let tempComments = this.state.comments;
+    tempComments.push(commentObj);
+    this.setState({comments: tempComments})
+  };
+
+  onCommentChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -44,8 +63,8 @@ class TemporaryDrawer extends React.Component {
         Message Board Stuff Goes Here!
         <h1>{this.props.title}</h1>
         <form >
-          <textarea onChange={this.props.onCommentChange} name="comment"></textarea>
-          <button type = "button" onClick={this.props.submitComment}>Leave a Review</button>
+          <textarea onChange={this.onCommentChange} name="comment"></textarea>
+          <button type = "button" onClick={()=>this.submitComment(this.props.id)}>Leave a Review</button>
         </form>
         <div>
         {this.state.comments.map((comment) => 
