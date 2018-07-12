@@ -110,6 +110,7 @@ class PosterCard extends React.Component {
             submitComment={this.props.submitComment} 
             onCommentChange={this.props.onCommentChange}
             id={this.props.id}
+            userName= {this.props.userName}
           />
           <IconButton
             className={classnames(classes.expand, {
