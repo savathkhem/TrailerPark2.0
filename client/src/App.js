@@ -14,8 +14,6 @@ const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
 class App extends Component {
   state = {
-    email: `test@test.com`,
-    password: `password`,
     loading: true, authenticated: false, user: null,
     searchRedirect: false,
     searchArr: []
@@ -96,18 +94,22 @@ class App extends Component {
             />
             {this.state.searchRedirect && <Redirect push to="/search"/>}
             <Route exact path="/login" component={Login} />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/in-theaters" component={InTheaters} />
-            <Route exact path="/top-tv" component={TopTV} />
-            <Route exact path="/upcoming" component={Upcoming} />
-            <Route exact path="/top-movies" component={TopMovie} />
-            <Route exact path="/search" render={()=><Search movies={this.state.searchArr}/>}/>
+            <Route exact path="/" render={()=><Home userName={this.state.currentUser.displayName}/>}/>
+            <Route exact path="/in-theaters" render={()=><InTheaters userName={this.state.currentUser.displayName}/>}/>
+            <Route exact path="/top-tv" render={()=><TopTV userName={this.state.currentUser.displayName}/>}/>
+            <Route exact path="/upcoming" render={()=><Upcoming userName={this.state.currentUser.displayName}/>}/>
+            <Route exact path="/top-movies" render={()=><TopMovie userName={this.state.currentUser.displayName}/>}/> />
+            <Route exact path="/search" render={()=><Search movies={this.state.searchArr} userName={this.state.currentUser.displayName}/>}/>
           </div>
         </Router>
       )
     }
     else {
-      return <Login />;
+      return (
+        <Router>
+          <Login />
+        </Router>
+      )
     }
   }
 }

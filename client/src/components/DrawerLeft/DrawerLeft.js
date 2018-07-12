@@ -32,7 +32,7 @@ class DrawerLeft extends React.Component {
     const sideList = (
       <div className={classes.list}>
       <IconButton onClick={this.toggleDrawer('left', false)}>
-          <ChevronLeftIcon />
+        <ChevronLeftIcon />
       </IconButton>
       <Divider />
       <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit}/></List>

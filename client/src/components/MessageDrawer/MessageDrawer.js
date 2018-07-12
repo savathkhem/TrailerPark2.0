@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, List, IconButton, Button, Divider} from '@material-ui/core/';
-import PageOptions from './../tileData';
+import { Drawer, IconButton, Divider} from '@material-ui/core/';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChatIcon from '@material-ui/icons/Chat'
-
+import API from "../../utils/API"
 
 const styles = {
   list: {
@@ -20,7 +18,13 @@ const styles = {
 class TemporaryDrawer extends React.Component {
   state = {
     left: false,
+    comments: [],
   };
+
+  componentDidMount() {
+    API.getComments(this.props.id)
+    .then(res => this.setState({comments: res.data}))
+  }
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -33,12 +37,26 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-      <IconButton onClick={this.toggleDrawer('left', false)}>
-          <ChevronLeftIcon />
-      </IconButton>
-      <Divider />
-      {/* <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit}/></List> */}
-      Message Board Stuff Goes Here!
+          <IconButton onClick={this.toggleDrawer('left', false)}>
+            <ChevronLeftIcon />
+        </IconButton>
+        <Divider/>
+        Message Board Stuff Goes Here!
+        <h1>{this.props.title}</h1>
+        <form >
+          <textarea onChange={this.props.onCommentChange} name="comment"></textarea>
+          <button type = "button" onClick={this.props.submitComment}>Leave a Review</button>
+        </form>
+        <div>
+        {this.state.comments.map((comment) => 
+        <div key={comment._id}>
+        <h4>{comment.user} says:</h4>
+          <p>{comment.body}</p>
+        </div>)}
+        </div>
+        <div>
+        
+        </div>
       </div>
     );
 

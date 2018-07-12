@@ -4,7 +4,7 @@ import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
-import iFrame from "../components/iFrame";
+import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 import ModalNew from "../components/ModalNew"
 
@@ -20,18 +20,25 @@ class Home extends Component {
     youTubes: [],
     pageInteger: 1,
     message: "",
-    open: "",
+    comment: "",
   }
 
   componentDidMount() {
     API.getMovies()
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         this.checkPosterPaths(res.data)
         return res;
       })
       .then(res => this.setState({ movies: res.data }))
+      // .then(() => this.saveMovies())
       .catch(err => console.log(err));
+  }
+
+  saveMovies() {
+    API.saveMovies(this.state.movies)
+    .then((res)=> console.log('new movies saved'))
+    .catch( (err) => console.log(err))
   }
 
   clickPoster(title) {
@@ -41,7 +48,7 @@ class Home extends Component {
         this.createYouTubeUrl(res.data)
         return res;
       })
-      .then((res) => this.setState({youTubes: res.data}))
+      .then((res) => this.setState({ youTubes: res.data }))
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }
@@ -53,7 +60,7 @@ class Home extends Component {
   createYouTubeUrl (arr) {
     let newArr = arr;
     newArr.map( (video) => {
-      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId
+      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
     })
   }
 
@@ -74,19 +81,30 @@ class Home extends Component {
 
   openModal = () => this.setState({ modal: true });
 
-  openMapModal = () => this.setState({ mapModal: true });
+  closeModal = (event) => { 
+    event.stopPropagation();
+    this.setState({ modal: false })
+  }
 
-  closeModal = () => this.setState({ modal: false });
+  openMapModal = () => this.setState({ mapModal: true });
 
   closeMapModal = () => this.setState({ mapModal: false });
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+  submitComment = (id) => {
+    let commentObj = {
+      user: this.props.userName,
+      body: this.state.comment,
+      movie_id: id
+    }
+    API.saveComment(commentObj);
+  }
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  onCommentChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
 
   render() {
     let toggleModal;
@@ -96,6 +114,7 @@ class Home extends Component {
     else {
       toggleModal = "modal";
     }
+    
     let toggleMapModal;
     if (this.state.mapModal === true){
       toggleMapModal = "show";
@@ -103,15 +122,16 @@ class Home extends Component {
     else {
       toggleMapModal = "modal";
     }
+
     return (
       <div>
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
-          <iFrame src= {googleMapUrl}/>
+          <Iframe src= {googleMapUrl}/>
         </Modal>
         <Modal modal = {toggleModal} onClick={this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (
-              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+              <Iframe src= {video.id.videoId} key={video.id.videoId}/>
             ))}
           </Carousel>
         </Modal>
@@ -120,7 +140,9 @@ class Home extends Component {
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()}
+              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
+              submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
+              id={movie.id}
               />
             ))}
           </CardWrapper>

@@ -4,7 +4,7 @@ import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
-import iFrame from "../components/iFrame";
+import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
@@ -31,6 +31,22 @@ class Search extends Component {
 
   closeModal = () => this.setState({ modal: false });
 
+  submitComment = (id) => {
+    let commentObj = {
+      user: this.props.userName,
+      body: this.state.comment,
+      movie_id: id
+    }
+    API.saveComment(commentObj);
+  }
+
+  onCommentChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
     let toggleModal;
     if (this.state.modal === true){
@@ -44,7 +60,7 @@ class Search extends Component {
           <Modal modal = {toggleModal} onClick = {this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (
-              <iFrame src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+              <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
           </Carousel>
           </Modal>
@@ -53,8 +69,8 @@ class Search extends Component {
               {this.props.movies.map((movie) => (
                 <Card 
                 key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.title)}
-                
+                onClick={()=>this.clickPoster(movie.title)}submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
+                id={movie.id}
                 />
               ))}
             </CardWrapper>

@@ -90,7 +90,9 @@ class PosterCard extends React.Component {
         <IconButton onClick={this.handleFavClick}>
           <FavoriteIcon />
         </IconButton>
-          <MessageDrawer />
+          <MessageDrawer title={this.props.title} submitComment={this.props.submitComment} 
+          onCommentChange={this.props.onCommentChange} id={this.props.id}
+          />
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
