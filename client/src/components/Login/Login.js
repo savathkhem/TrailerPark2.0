@@ -189,5 +189,4 @@ const authConfig = {
   }
 };
 
-// export default Login;
 export default withFirebaseAuth(Login, firebase, authConfig);
