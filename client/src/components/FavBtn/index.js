@@ -1,3 +1,3 @@
-import FavContent from "./FavContent"
+import FavContent from "./FavContent";
 
 export { FavContent };

@@ -37,8 +37,7 @@ class TopMovie extends Component {
       else{
         movie.poster_path = tmdbImgUrl + movie.poster_path;
       }
-    }
-    )
+    });
     arr = newArr;
     return arr;
   };
@@ -57,7 +56,7 @@ class TopMovie extends Component {
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => { 
-    this.setState({ modal: false, youTubes:[]})
+    this.setState({ modal: false, youTubes:[]});
   };
   
   render() {
@@ -72,11 +71,11 @@ class TopMovie extends Component {
     return (
       <div>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
-        <Carousel>
-          {this.state.youTubes.map((video) => (
-            <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
-          ))}
-        </Carousel>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+            ))}
+          </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>
@@ -85,7 +84,6 @@ class TopMovie extends Component {
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
               onClick={()=>this.clickPoster(movie.title)} 
               id={movie.id} userName= {this.props.userName}
-              
               />
             ))}
           </CardWrapper>

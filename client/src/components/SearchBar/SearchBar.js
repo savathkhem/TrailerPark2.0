@@ -22,19 +22,6 @@ const styles = theme => ({
 
 
 class TextFields extends React.Component {
-  // state = {
-  //   name: 'Cat in the Hat',
-  //   age: '',
-  //   multiline: 'Controlled',
-  //   currency: 'EUR',
-  // };
-
-  // handleChange = name => event => {
-  //   this.setState({
-  //     [name]: event.target.value,
-  //   });
-  // };
-
   render() {
     const { classes } = this.props;
 
@@ -49,7 +36,6 @@ class TextFields extends React.Component {
           className={classes.textField}
           margin="normal"
           onChange={this.props.onChange}
-
         />
       </form>
     );

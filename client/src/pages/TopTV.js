@@ -36,8 +36,7 @@ class TopTV extends Component {
       else{
         movie.poster_path = tmdbImgUrl + movie.poster_path;
       }
-    }
-    )
+    });
     arr = newArr;
     return arr;
   };
@@ -56,7 +55,7 @@ class TopTV extends Component {
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => { 
-    this.setState({ modal: false, youTubes:[]})
+    this.setState({ modal: false, youTubes:[]});
   };
 
   submitComment = (id) => {
@@ -64,7 +63,7 @@ class TopTV extends Component {
       user: this.props.userName,
       body: this.state.comment,
       movie_id: id
-    }
+    };
     API.saveComment(commentObj);
   }
 
@@ -87,11 +86,11 @@ class TopTV extends Component {
     return (
       <div>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
-        <Carousel>
-          {this.state.youTubes.map((video) => (
-            <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
-          ))}
-        </Carousel>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+            ))}
+          </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>
