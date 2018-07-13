@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
-import ModalNew from "./../ModalNew";
+import API from "../../utils/API";
 
  
 const styles = theme => ({
@@ -57,6 +57,21 @@ class PosterCard extends React.Component {
     modalOpen: false,
   };
 
+  saveFavorite = () => {
+    //Sends the snack
+    this.handleFavClick();
+
+    //Save movie to database here
+    let movieObj = {
+      title: this.props.title,
+      movie_id: this.props.id,
+      poster_path: this.props.src,
+      overview: this.props.overview,
+      release_date: this.props.release,
+    }
+    API.favoriteMovie(this.props.user_id, movieObj)
+  }
+
   handleFavClick = () => {
     this.setState(state => ({ favOpen: !state.favOpen }));
   };
@@ -75,49 +90,41 @@ class PosterCard extends React.Component {
     return (
       <div>
         <Paper className={classes.card}>
-          {/* <CardHeader className={classes.header}
-            subheader={this.props.title}
-          /> */}
-          <div className={classes.posterBack}>
-            <img
-              className={classes.media}
-              src={this.props.src}
-              onClick={this.props.onClick}
-              title={this.props.title}   
-            />
-            <FavContent 
-              open={this.state.favOpen}
-              onClose={this.handleFavClick}
-            />
-          </div>
-          <CardActions className={classes.actions} disableActionSpacing>
-            <IconButton onClick={this.handleFavClick}>
-              <FavoriteIcon />
-              {/* </IconButton>
-              <IconButton onClick={this.handleModalClick}>
-                <FavoriteIcon />
-              
-              <ModalNew 
-                open={this.state.modalOpen}
-                onClose={this.handleModalClick}>
-                LAWDDDD PLEASE WORK!
-              </ModalNew> */}
-            </IconButton>
-            <MessageDrawer 
-              title={this.props.title}
-              submitComment={this.props.submitComment} 
-              onCommentChange={this.props.onCommentChange}
-              id={this.props.id}
-              userName= {this.props.userName}
-            />
-            <IconButton
-              className={classnames(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="Show more"
-            >
+        {/* <CardHeader className={classes.header}
+          subheader={this.props.title}
+        /> */}
+        <div className={classes.posterBack}>
+          <img
+            className={classes.media}
+            src={this.props.src}
+            onClick={this.props.onClick}
+            title={this.props.title} 
+            alt ={this.props.title}  
+          />
+          <FavContent 
+            open={this.state.favOpen}
+            onClose={this.handleFavClick}
+          />
+        </div>
+        <CardActions className={classes.actions} disableActionSpacing>
+        <IconButton onClick={this.saveFavorite}>
+          <FavoriteIcon />
+        </IconButton>
+          <MessageDrawer 
+            title={this.props.title}
+            submitComment={this.props.submitComment} 
+            onCommentChange={this.props.onCommentChange}
+            id={this.props.id}
+            userName= {this.props.userName}
+          />
+          <IconButton
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded,
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="Show more"
+          >
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>

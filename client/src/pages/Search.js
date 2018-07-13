@@ -7,13 +7,17 @@ import Modal from "../components/Modal";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
-const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
+let user;
 
 class Search extends Component {
   state = {
     movies: [],
     modal: false,
     youTubes: [],
+  }
+
+  componentDidMount() {
+    user = this.props.user;
   }
 
   clickPoster(title) {
@@ -57,7 +61,7 @@ class Search extends Component {
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
               onClick={()=>this.clickPoster(movie.title)}
-              id={movie.id} userName= {this.props.userName}
+              id={movie.id} userName= {user.displayName} user_id={user.uid}
               />
             ))}
           </CardWrapper>

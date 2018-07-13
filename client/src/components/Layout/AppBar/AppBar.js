@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, MenuItem, Typography, Menu, IconButton, Avatar } from '@material-ui/core/';
 import Logo from "../../Logo";
-import firebase, { auth, provider } from "../../../firebaseConfig";
+import firebase from "../../../firebaseConfig";
 import DrawerLeft from "./../../DrawerLeft";
 
 const drawerWidth = 240;
@@ -144,7 +144,7 @@ class NavBar extends React.Component {
   });
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { anchor, open } = this.state;
     const { auth, anchorEl } = this.state;
     const openlogin = Boolean(anchorEl);
