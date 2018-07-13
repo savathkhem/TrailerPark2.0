@@ -2,31 +2,11 @@ import React, { Component } from "react";
 // import DrawerLeft from "./components/DrawerLeft";
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
-import firebase, { auth, provider } from "../../firebaseConfig";
+import firebase from "../../firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
 import Logo from "../Logo";
 import "./Login.css";
 import Button from '@material-ui/core/Button';
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  menu: {
-    width: 100,
-  },
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  }
-});
 
 class Login extends Component {
   state = {
@@ -35,7 +15,7 @@ class Login extends Component {
     loading: true, authenticated: false, user: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -61,17 +41,17 @@ class Login extends Component {
       signInWithFacebook,
       signInWithGithub,
       signInWithTwitter,
-      googleAccessToken,
-      facebookAccessToken,
-      githubAccessToken,
-      twitterAccessToken,
-      twitterSecret,
+      // googleAccessToken,
+      // facebookAccessToken,
+      // githubAccessToken,
+      // twitterAccessToken,
+      // twitterSecret,
       user,
-      error,
-      signOut
+      // error,
+      // signOut
     } = this.props;
     const { email, password } = this.state;
-    const { authenticated, loading } = this.state;
+    const {loading } = this.state;
 
     if (loading) {
       return <p>Loading..</p>;

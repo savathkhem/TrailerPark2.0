@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Drawer, List, IconButton, Button, Divider} from '@material-ui/core/';
+import { Drawer, List, IconButton, Divider} from '@material-ui/core/';
 import PageOptions from './../tileData';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 // import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -27,7 +27,6 @@ class DrawerLeft extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(classes)
 
     const sideList = (
       <div className={classes.list}>

@@ -57,7 +57,7 @@ class Theaters extends Component {
   createYouTubeUrl (arr) {
     let newArr = arr;
     newArr.map( (video) => {
-      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
+      return video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
     });
   }
 
@@ -65,10 +65,10 @@ class Theaters extends Component {
     let newArr = arr;
     newArr.map( (movie) => {
       if (movie.poster_path === null){
-        movie.poster_path = "../../public/images/placeholder.jpg";
+        return movie.poster_path = "../../public/images/placeholder.jpg";
       }
       else{
-        movie.poster_path = tmdbImgUrl + movie.poster_path;
+        return movie.poster_path = tmdbImgUrl + movie.poster_path;
       }
     });
     arr = newArr;
@@ -120,7 +120,7 @@ class Theaters extends Component {
               <Card 
               key={movie.id} id = {movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
               release={movie.release_date} onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              id={movie.id} userName= {user.displayName} user_id={user.uid}
+              userName= {user.displayName} user_id={user.uid}
               />
             ))}
           </CardWrapper>

@@ -5,10 +5,6 @@ module.exports = {
     let id = req.params.id
     db.Comment
       .find({movie_id: id})
-      // .then(dbModel => {
-      //   console.log(dbModel)
-      //   return dbModel;
-      // })
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log(err));
   },
@@ -23,7 +19,7 @@ module.exports = {
     console.log(req.body)
     //prevents duplicates by waiting for the index to load first, then creating our new user
     db.User.init().then(function() {
-      db.User.create(req.body);
+      db.User.create(req.body, err => console.log(err));
     })
       // .create(req.body)
       .then(dbUser => res.json(dbUser))
@@ -37,7 +33,7 @@ module.exports = {
         // Find a user with an `user_id` equal to `req.params.id`. Update the User to be associated with the new Movie
         // { new: true } tells the query that we want it to return the updated User -- 
         return db.User.findOneAndUpdate({ user_id: req.params.user }, {$push: {favorite: dbFavorite._id}}, { new: true });
-    })
+    }) 
     .then(function (dbUser) {
         // If we were able to successfully update a User, send it back to the client
         res.json(dbUser);

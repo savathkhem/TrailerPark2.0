@@ -7,7 +7,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
-import ModalNew from "./../ModalNew";
 import API from "../../utils/API";
 
  
@@ -99,7 +98,8 @@ class PosterCard extends React.Component {
             className={classes.media}
             src={this.props.src}
             onClick={this.props.onClick}
-            title={this.props.title}   
+            title={this.props.title} 
+            alt ={this.props.title}  
           />
           <FavContent 
             open={this.state.favOpen}
