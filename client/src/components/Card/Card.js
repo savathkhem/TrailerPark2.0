@@ -8,6 +8,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
 import ModalNew from "./../ModalNew";
+import API from "../../utils/API";
 
  
 const styles = theme => ({
@@ -57,6 +58,21 @@ class PosterCard extends React.Component {
     modalOpen: false,
   };
 
+  saveFavorite = () => {
+    //Sends the snack
+    this.handleFavClick();
+
+    //Save movie to database here
+    let movieObj = {
+      title: this.props.title,
+      movie_id: this.props.id,
+      poster_path: this.props.src,
+      overview: this.props.overview,
+      release_date: this.props.release,
+    }
+    API.favoriteMovie(this.props.user_id, movieObj)
+  }
+
   handleFavClick = () => {
     this.setState(state => ({ favOpen: !state.favOpen }));
   };
@@ -91,19 +107,8 @@ class PosterCard extends React.Component {
           />
         </div>
         <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton onClick={this.handleFavClick}>
+        <IconButton onClick={this.saveFavorite}>
           <FavoriteIcon />
-
-        {/* </IconButton>
-        <IconButton onClick={this.handleModalClick}>
-          <FavoriteIcon />
-        
-        <ModalNew 
-          open={this.state.modalOpen}
-          onClose={this.handleModalClick}>
-          LAWDDDD PLEASE WORK!
-        </ModalNew> */}
-
         </IconButton>
           <MessageDrawer 
             title={this.props.title}

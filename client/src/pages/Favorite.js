@@ -7,48 +7,56 @@ import Modal from "../components/Modal";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
-
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
 const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me"
 
-//will store user info when component loads (passed down from App.js)
-let user;
-
-class Theaters extends Component {
+class Favorite extends Component {
   state = {
     movies: [],
     modal: false,
+    mapModal: false,
     youTubes: [],
-    mapModal: false
+    pageInteger: 1,
+    message: "",
+    comment: "",
+    modalOpen: false,
   }
 
-
-
   componentDidMount() {
-    API.getMovies()
+    API.getFavorites(this.props.user.uid)
       .then((res) => {
         console.log(res);
-        this.checkPosterPaths(res.data);
+        // this.checkPosterPaths(res.data.favorite)
         return res;
       })
-      .then(res => this.setState({ movies: res.data }))
+      .then(res => this.setState({ movies: res.data.favorite}))
+      // .then(() => this.saveMovies())
       .catch(err => console.log(err));
-      
-      user = this.props.user;
+  }
+
+  saveMovies() {
+    API.saveMovies(this.state.movies)
+    .then((res)=> console.log('new movies saved'))
+    .catch( (err) => console.log(err))
   }
 
   clickPoster(title) {
     API.getTrailers(title)
       .then((res) => {
         console.log(res);
-        this.createYouTubeUrl(res.data);
+        this.createYouTubeUrl(res.data)
         return res;
       })
-      .then((res) => this.setState({youTubes: res.data}))
+      .then((res) => this.setState({ youTubes: res.data }))
+      // .then(() => this.handleModalClick())     
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }
+
+  // handleModalClick = () => {
+  //   this.setState(state => ({ modalOpen: !state.modalOpen }));
+  // };
 
   googleMaps() {
     this.openMapModal()
@@ -83,8 +91,9 @@ class Theaters extends Component {
   };
 
   openMapModal = () => this.setState({ mapModal: true });
-  
+
   closeMapModal = () => this.setState({ mapModal: false });
+
 
   render() {
     let toggleModal;
@@ -94,7 +103,7 @@ class Theaters extends Component {
     else {
       toggleModal = "modal";
     }
-
+    
     let toggleMapModal;
     if (this.state.mapModal === true){
       toggleMapModal = "show";
@@ -108,20 +117,21 @@ class Theaters extends Component {
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
           <Iframe src= {googleMapUrl}/>
         </Modal>
-        <Modal modal = {toggleModal} onClick = {this.closeModal}>
-        <Carousel>
-          {this.state.youTubes.map((video) => (
-            <Iframe src= {video.id.videoId}/>
-          ))}
-        </Carousel>
+
+        <Modal modal = {toggleModal} onClick={this.closeModal}>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <Iframe src= {video.id.videoId} key={video.id.videoId}/>
+            ))}
+          </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
-              key={movie.id} id = {movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              release={movie.release_date} onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              id={movie.id} userName= {user.displayName} user_id={user.uid}
+              key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()}
+              id={movie.id} userName= {this.props.userName}
               />
             ))}
           </CardWrapper>
@@ -131,4 +141,4 @@ class Theaters extends Component {
   }
 }
 
-export default Theaters;
+export default Favorite;

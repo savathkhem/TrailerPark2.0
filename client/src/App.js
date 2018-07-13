@@ -9,12 +9,13 @@ import "./App.css";
 import firebase, { auth, provider } from "./firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
 import Search from "./pages/Search";
+import Favorite from "./pages/Favorite";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
 class App extends Component {
   state = {
-    loading: true, authenticated: false, user: null,
+    loading: true, authenticated: false, 
     searchRedirect: false,
     searchArr: []
   };
@@ -27,7 +28,14 @@ class App extends Component {
           currentUser: user,
           loading: false
         });
-      } else {
+      let userObj = {
+        name: this.state.currentUser.displayName,
+        email: this.state.currentUser.email,
+        user_id: this.state.currentUser.uid,
+      }
+      API.saveUser(userObj)
+      } 
+      else {
         this.setState({
           authenticated: false,
           currentUser: null,
@@ -95,7 +103,8 @@ class App extends Component {
             {this.state.searchRedirect && <Redirect push to="/search"/>}
             <Route exact path="/login" component={Login} />
             <Route exact path="/" render={()=><Home userName={this.state.currentUser.displayName}/>}/>
-            <Route exact path="/in-theaters" render={()=><InTheaters userName={this.state.currentUser.displayName}/>}/>
+            <Route exact path="/in-theaters" render={()=><InTheaters user={this.state.currentUser} />}/>
+            <Route exact path="/favorites" render={()=><Favorite user={this.state.currentUser} />}/>
             <Route exact path="/top-tv" render={()=><TopTV userName={this.state.currentUser.displayName}/>}/>
             <Route exact path="/upcoming" render={()=><Upcoming userName={this.state.currentUser.displayName}/>}/>
             <Route exact path="/top-movies" render={()=><TopMovie userName={this.state.currentUser.displayName}/>}/> />
