@@ -10,7 +10,7 @@ import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
-const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me"
+const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
 
 //will store user info when component loads (passed down from App.js)
 let user;
@@ -51,14 +51,14 @@ class Theaters extends Component {
   }
 
   googleMaps() {
-    this.openMapModal()
+    this.openMapModal();
   }
 
   createYouTubeUrl (arr) {
     let newArr = arr;
     newArr.map( (video) => {
       video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
-    })
+    });
   }
 
   checkPosterPaths(arr) {
@@ -70,8 +70,7 @@ class Theaters extends Component {
       else{
         movie.poster_path = tmdbImgUrl + movie.poster_path;
       }
-    }
-    )
+    });
     arr = newArr;
     return arr;
   };
@@ -79,7 +78,7 @@ class Theaters extends Component {
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => { 
-    this.setState({ modal: false, youTubes:[]})
+    this.setState({ modal: false, youTubes:[]});
   };
 
   openMapModal = () => this.setState({ mapModal: true });
@@ -109,11 +108,11 @@ class Theaters extends Component {
           <Iframe src= {googleMapUrl}/>
         </Modal>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
-        <Carousel>
-          {this.state.youTubes.map((video) => (
-            <Iframe src= {video.id.videoId}/>
-          ))}
-        </Carousel>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <Iframe src= {video.id.videoId}/>
+            ))}
+          </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>

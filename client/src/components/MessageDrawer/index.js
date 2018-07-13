@@ -1,1 +1,1 @@
-export { default } from "./MessageDrawer"
+export { default } from "./MessageDrawer";
