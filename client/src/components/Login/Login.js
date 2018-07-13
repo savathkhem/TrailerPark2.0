@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 // import DrawerLeft from "./components/DrawerLeft";
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import firebase, { auth, provider } from "../../firebaseConfig";
@@ -74,7 +71,6 @@ class Login extends Component {
       signOut
     } = this.props;
     const { email, password } = this.state;
-
     const { authenticated, loading } = this.state;
 
     if (loading) {
@@ -101,8 +97,7 @@ class Login extends Component {
               onChange={e => this.setState({ password: e.target.value })}
               // margin="normal"
             />
-            <br />
-            <br />
+            <br /><br />
             {!user && (
               <Button
                 type="submit"
@@ -113,8 +108,7 @@ class Login extends Component {
               </Button>
             )}
           </form>
-          <br />
-          <br />
+          <br /><br />
           <form onSubmit={e => e.preventDefault()}>
             <h2> Sign Up! </h2>
             <TextField
@@ -135,8 +129,7 @@ class Login extends Component {
               value={password}
               // margin="normal"
             />{" "}
-            <br />
-            <br />
+            <br /><br />
             <Button
               type="submit"
               variant="contained"
@@ -145,8 +138,7 @@ class Login extends Component {
               Sign Up
             </Button>
           </form>
-          <br />
-          <br />
+          <br /><br />
           <Button variant="contained" onClick={signInWithGoogle}>Sign in with Google &nbsp;<i className="fab fa-google"></i></Button><br /><br />
           <Button variant="contained" onClick={signInWithFacebook}>Sign in with Facebook &nbsp;<i className="fab fa-facebook"></i></Button>{" "}<br /><br />
           <Button variant="contained" onClick={signInWithGithub}>Sign in with Github &nbsp;<i className="fab fa-github-square"></i></Button><br /><br />

@@ -1,4 +1,4 @@
-import AppBar from "./AppBar"
+import AppBar from "./AppBar";
 
 
 export { AppBar };

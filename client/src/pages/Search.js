@@ -30,7 +30,7 @@ class Search extends Component {
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => { 
-    this.setState({ modal: false, youTubes:[]})
+    this.setState({ modal: false, youTubes:[]});
   };
   
   render() {
@@ -41,27 +41,28 @@ class Search extends Component {
     else {
       toggleModal = "modal";
     }
+
     return (
-        <div>
-          <Modal modal = {toggleModal} onClick = {this.closeModal}>
+      <div>
+        <Modal modal = {toggleModal} onClick = {this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (
               <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
           </Carousel>
-          </Modal>
-          <Wrapper>
-            <CardWrapper>
-              {this.props.movies.map((movie) => (
-                <Card 
-                key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-                onClick={()=>this.clickPoster(movie.title)}
-                id={movie.id} userName= {this.props.userName}
-                />
-              ))}
-            </CardWrapper>
-          </Wrapper>
-        </div>
+        </Modal>
+        <Wrapper>
+          <CardWrapper>
+            {this.props.movies.map((movie) => (
+              <Card 
+              key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+              onClick={()=>this.clickPoster(movie.title)}
+              id={movie.id} userName= {this.props.userName}
+              />
+            ))}
+          </CardWrapper>
+        </Wrapper>
+      </div>
     )
   }
 }

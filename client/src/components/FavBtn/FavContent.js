@@ -18,30 +18,26 @@ const styles = () => ({
 
 
 const FavContent = (props) =>  (
-
-      <Fragment 
-      >
-        <Snackbar
-          open={props.open}
-          autoHideDuration={3000}
-          onClose={props.onClose}
-
-          ContentProps={{
-            'aria-describedby': 'snackbar-fab-message-id',
-            className: props.classes.snackbarContent,
-          }}
-          message={
-            <span id="snackbar-fab-message-id">Fav Added!</span>}
-          action={
-            <Button color="inherit" size="small" onClick={props.onClose}>
-              Undo
-            </Button>
-          }
-          className={props.classes.snackbar}
-        />
-      </Fragment>
-    );
-
+  <Fragment>
+    <Snackbar
+      open={props.open}
+      autoHideDuration={3000}
+      onClose={props.onClose}
+      ContentProps={{
+        'aria-describedby': 'snackbar-fab-message-id',
+        className: props.classes.snackbarContent,
+      }}
+      message={
+        <span id="snackbar-fab-message-id">Fav Added!</span>}
+      action={
+        <Button color="inherit" size="small" onClick={props.onClose}>
+          Undo
+        </Button>
+      }
+      className={props.classes.snackbar}
+    />
+  </Fragment>
+);
 
 FavContent.propTypes = {
   classes: PropTypes.object.isRequired,

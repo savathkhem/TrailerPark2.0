@@ -172,7 +172,7 @@ class NavBar extends React.Component {
 
 
             <Typography variant="title" color="inherit" className={classes.flex}>
-            <Logo />
+              <Logo />
             </Typography>
             {auth && (
               <div>
@@ -213,7 +213,7 @@ class NavBar extends React.Component {
       </div>
     );
   }
-}
+};
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,

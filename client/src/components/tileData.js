@@ -24,6 +24,6 @@ const PageOptions = (props) => (
       <ListItemText primary="Upcoming Movies" />
     </ListItem>
   </div>
-)
+);
 
 export default PageOptions;
