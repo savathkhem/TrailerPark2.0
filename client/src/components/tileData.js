@@ -23,9 +23,6 @@ const PageOptions = (props) => (
     <ListItem component={Link} to="/upcoming" button>
       <ListItemText primary="Upcoming Movies" />
     </ListItem>
-    <ListItem component={Link} to="/landing" button>
-      <ListItemText primary="Landing Page" />
-    </ListItem>
   </div>
 );
 
