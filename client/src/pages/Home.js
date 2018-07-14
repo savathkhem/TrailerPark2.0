@@ -71,6 +71,7 @@ class Home extends Component {
 
   closeMapModal = () => this.setState({ mapModal: false });
 
+  //This function is so the cards re-render when a user deletes a favorite.
   foolish = () => {
     console.log('foolish')
     API.getFavorites(this.props.user.uid)

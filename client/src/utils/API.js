@@ -54,4 +54,10 @@ export default {
   getFavorites: (user) => {
     return axios.get("api/db/favorites/" + user)
   },
+
+  checkStream: (name) => {
+    let title = name.replace(/\s/g, "+").toLowerCase();
+    console.log(title)
+    return axios.get("api/movies/stream/" + title)
+  },
 }

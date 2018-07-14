@@ -19,11 +19,13 @@ module.exports = {
     console.log(req.body)
     //prevents duplicates by waiting for the index to load first, then creating our new user
     db.User.init().then(function() {
-      db.User.create(req.body, err => console.log(err));
+      db.User.create(req.body)
+       .then(dbUser => res.json(dbUser))
+       .catch((err) => {
+        res.json(err)
+         console.log("This user already exists")
+        })
     })
-      // .create(req.body)
-      .then(dbUser => res.json(dbUser))
-      .catch(err => console.log("This user already exists"))
   },
 
   favoriteMovie: (req, res) => {
@@ -41,6 +43,7 @@ module.exports = {
     })
       //If a movie already exists, still update the User's favorites array.
     .catch(function (err) {
+        res.json(err)
         console.log('movie exists');
         db.Favorite.findOne({movie_id: req.body.movie_id})
         .then(function(dbFavorite){
