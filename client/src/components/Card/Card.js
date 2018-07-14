@@ -10,7 +10,6 @@ import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
 import API from "../../utils/API";
 
- 
 const styles = theme => ({
   card: {
     width: '218px',
@@ -48,6 +47,10 @@ const styles = theme => ({
   header: {
     marginBottom: '0px',
     marginTop: '8px',
+  },
+  streaming: {
+    color: "#f2f2f2",
+    textAlign: 'center'
   }
 });
 
@@ -56,6 +59,8 @@ class PosterCard extends React.Component {
     expanded: false,
     favOpen: false,
     modalOpen: false,
+    streaming: [],
+    available: '',
   };
 
   saveFavorite = () => {
@@ -74,9 +79,24 @@ class PosterCard extends React.Component {
   }
 
   deleteFavorite = () => {
-    console.log('delete fav!' + this.props.id)
     API.deleteFavorite(this.props.user_id, {movie_id: this.props.id})
     this.props.foolish()
+  }
+
+  checkStream = () => {
+    console.log('check stream')
+    let tempArray = []
+    API.checkStream(this.props.title)
+    .then((response)=> {
+      console.log(response.data)
+      for (let i = 0; i<response.data[0].locations.length; i++) {
+        console.log(response.data[0].locations[i].display_name)
+        tempArray.push(response.data[0].locations[i].display_name)
+      } 
+    })
+    .then( () => {
+      this.setState({streaming: tempArray, available: 'Available On: '})
+    })
   }
 
   handleFavClick = () => {
@@ -94,6 +114,9 @@ class PosterCard extends React.Component {
   render() {
     const { classes } = this.props;
     const icon = this.props.icon;
+    const GoogleMapsButton = () => <button onClick = {this.props.googleMaps}> Theaters Nearby </button>;
+    const CheckStreamingButton = () => <button onClick = {this.checkStream}> Can I Stream This? </button>;
+    const stream = this.props.stream;
 
     return (
       <div>
@@ -145,7 +168,9 @@ class PosterCard extends React.Component {
               <Typography paragraph variant="body2" className={classes.primaryText}>
                 {this.props.overview}
               </Typography>
-              <button onClick = {this.props.googleMaps}> Theaters Nearby </button>
+              {stream ? <CheckStreamingButton/> : <GoogleMapsButton/>}
+              <p className={classes.streaming}>{this.state.available}</p>
+              {this.state.streaming.map((service) => <p key ={service} className={classes.streaming}>{service}</p>) }
             </CardContent>
           </Collapse>
         </Paper>

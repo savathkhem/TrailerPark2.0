@@ -61,7 +61,7 @@ class Search extends Component {
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
               onClick={()=>this.clickPoster(movie.title)}
-              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true}
+              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true} stream={true}
               />
             ))}
           </CardWrapper>

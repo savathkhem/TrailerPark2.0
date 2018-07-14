@@ -3,11 +3,10 @@ import React, { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 // import MenuItem from '@material-ui/core/MenuItem';
-import { Paper, Typography, TextField, List, ListItem, ListItemText, Divider, ListItemIcon, Button, IconButton, Menu, MenuItem } from '@material-ui/core/';
-import firebase, { auth, provider } from "../../firebaseConfig";
+import { Paper, Typography, TextField, ListItem, ListItemText, ListItemIcon, Button, IconButton, Menu } from '@material-ui/core/';
+import firebase from "../../firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
 import Logo from "../Logo";
-import ModalNew from "./../ModalNew";
 import "./Login.css";
 
 const styles = theme => ({
@@ -33,9 +32,11 @@ const styles = theme => ({
   buttonRight: {
     float: 'right',
     margin:10,
+    minWidth: 90
   },
   button: {
     margin: 10,
+    minWidth: 90
   },
   menuIcon: {
     color: '#FF1177',
@@ -43,6 +44,9 @@ const styles = theme => ({
   },
   menuText: {
     color: '#fafafa',
+  },
+  logo2: {
+    textAlign: 'center',
   }
 });
 
@@ -120,9 +124,8 @@ class Login extends Component {
     const { email, password } = this.state;
     // const {loading } = this.state;
 
-    const { authenticated, loading } = this.state;
-    const { anchor, open } = this.state;
-    const { auth, anchorEl, anchorElSignUp } = this.state;
+    const { loading } = this.state;
+    const { anchorEl, anchorElSignUp } = this.state;
     const openlogin = Boolean(anchorEl);
     const openSignUp = Boolean(anchorElSignUp);
 
@@ -133,8 +136,8 @@ class Login extends Component {
     return (
       <Fragment>
         <Paper className={classes.root} elevation={24}>
-        <Typography variant="headline" component="h3">
-          <Logo />
+        <Typography variant="headline" component="h3"  className={classes.logo2}>
+          <Logo/>
         </Typography>
  
           <IconButton
