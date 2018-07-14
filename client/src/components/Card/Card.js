@@ -170,7 +170,7 @@ class PosterCard extends React.Component {
               </Typography>
               {stream ? <CheckStreamingButton/> : <GoogleMapsButton/>}
               <p className={classes.streaming}>{this.state.available}</p>
-              {this.state.streaming.map((service) => <p className={classes.streaming}>{service}</p>) }
+              {this.state.streaming.map((service) => <p key ={service} className={classes.streaming}>{service}</p>) }
             </CardContent>
           </Collapse>
         </Paper>
