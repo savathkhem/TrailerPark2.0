@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import { CardContent, CardActions, Collapse, IconButton, Typography, Paper } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteIcon from "@material-ui/icons/Delete";
 import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
 import API from "../../utils/API";
@@ -72,6 +73,12 @@ class PosterCard extends React.Component {
     API.favoriteMovie(this.props.user_id, movieObj)
   }
 
+  deleteFavorite = () => {
+    console.log('delete fav!' + this.props.id)
+    API.deleteFavorite(this.props.user_id, {movie_id: this.props.id})
+    this.props.foolish()
+  }
+
   handleFavClick = () => {
     this.setState(state => ({ favOpen: !state.favOpen }));
   };
@@ -86,6 +93,7 @@ class PosterCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const icon = this.props.icon;
 
     return (
       <div>
@@ -107,8 +115,9 @@ class PosterCard extends React.Component {
           />
         </div>
         <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton onClick={this.saveFavorite}>
-          <FavoriteIcon />
+        <IconButton onClick={icon ? this.saveFavorite : this.deleteFavorite}>
+        {icon ? <FavoriteIcon/> : <DeleteIcon/>}
+          {/* <FavoriteIcon /> */}
         </IconButton>
           <MessageDrawer 
             title={this.props.title}

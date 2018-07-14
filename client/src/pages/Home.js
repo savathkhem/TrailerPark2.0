@@ -71,6 +71,17 @@ class Home extends Component {
 
   closeMapModal = () => this.setState({ mapModal: false });
 
+  foolish = () => {
+    console.log('foolish')
+    API.getFavorites(this.props.user.uid)
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then(res => this.setState({ movies: res.data.favorite}))
+    .catch(err => console.log(err));
+  }
+
   render() {
     let toggleModal;
     if (this.state.modal === true){
@@ -100,15 +111,16 @@ class Home extends Component {
           <Iframe src= {video.id.videoId} key={video.id.videoId}/>))}
           </Carousel>
         </Modal>
-        <h2 class="favorite">My Favorites</h2>
+        <h2 className="favorite">My Favorites</h2>
                 <div>
                   <Wrapper>
                     <CardWrapper>
                       {this.state.movies.map((movie) => (
                         <Card 
-                        key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+                        key={movie.movie_id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
                         onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()}
-                        id={movie.id} userName= {user.displayName} user_id={user.uid}
+                        id={movie.movie_id} userName= {user.displayName} user_id={user.uid} icon = {false}
+                        foolish={()=>this.foolish()}
                         />
                       ))}
                     </CardWrapper>

@@ -114,7 +114,7 @@ class Upcoming extends Component {
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
               onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              id={movie.id} userName= {user.displayName} user_id={user.uid}
+              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true}
               />
             ))}
           </CardWrapper>
