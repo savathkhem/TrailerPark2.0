@@ -118,7 +118,7 @@ class Login extends Component {
       // signOut
     } = this.props;
     const { email, password } = this.state;
-    const {loading } = this.state;
+    // const {loading } = this.state;
 
     const { authenticated, loading } = this.state;
     const { anchor, open } = this.state;
@@ -348,54 +348,3 @@ Login.propTypes = {
 
 //Export using multiple function
 export default withStyles(styles)(withFirebaseAuth(Login, firebase, authConfig));
-
-
-// const styles = theme => ({
-//   root: {
-//     ...theme.mixins.gutters(),
-//     paddingTop: theme.spacing.unit * 2,
-//     paddingBottom: theme.spacing.unit * 2,
-//     textAlign: 'center',
-//   },
-// });
-
-// function Login(props) {
-//   const { classes } = props;
-
-//   return (
-//     <div>
-      // <Paper className={classes.root} elevation={24}>
-      //   <Typography variant="headline" component="h3">
-      //     <Logo />
-      //   </Typography>
-      //   {/* <Typography component="p">
-      //     Paper can be used to build surface or other elements for your application.
-      //   </Typography> */}
-      //     <List component="nav">
-      //       <ListItem button>
-      //         <ListItemText primary="Inbox" />
-      //       </ListItem>
-      //       <Divider />
-      //       <ListItem button divider>
-      //         <ListItemText primary="Drafts" />
-      //       </ListItem>
-      //       <ListItem button>
-      //         <ListItemText primary="Trash" />
-      //       </ListItem>
-      //       <Divider light />
-      //       <ListItem button>
-      //         <ListItemText primary="Spam" />
-      //       </ListItem>
-      //   </List>
-//       </Paper>
-//     </div>
-//   );
-// }
-
-// Login.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-
-// export default withStyles(styles)(Login);
-
