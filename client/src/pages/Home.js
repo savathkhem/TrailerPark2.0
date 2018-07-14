@@ -111,7 +111,7 @@ class Home extends Component {
           <Iframe src= {video.id.videoId} key={video.id.videoId}/>))}
           </Carousel>
         </Modal>
-        <h2 className="favorite">WatchList</h2>
+        <h2 className="favorite">Fave's List</h2>
                 <div>
                   <Wrapper>
                     <CardWrapper>
