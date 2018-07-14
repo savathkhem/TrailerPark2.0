@@ -16,25 +16,65 @@ class TopTV extends Component {
     movies: [],
     modal: false,
     youTubes: [],
+    pageInt: 1,
   }
 
+
   componentDidMount() {
-    API.getTopTv()
-      .then((res) => {
-        console.log(res);
-        this.checkPosterPaths(res.data)
-        return res;
-      })
-      .then(res => this.setState({ movies: res.data }))
-      .catch(err => console.log(err));
-      user = this.props.user;
+    this.getShows()
+    user = this.props.user;
+    window.addEventListener('scroll', this.onScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
+  getShows = () => {
+    //Store current array of movies to add to later. 
+    let tempMoviesArr = this.state.movies;
+    //grab pageNumber from state and cast as string
+    let pageInt = this.state.pageInt.toString();
+    
+    API.getTopTv(pageInt)
+    .then((res) => {
+      this.checkPosterPaths(res.data);
+      return res;
+    })
+    .then((res) => {
+      let newArr = tempMoviesArr.concat(res.data)
+      this.setState({ movies: newArr })
+    })
+    .then(()=>{
+      if (this.state.isLoading) {
+        this.setState({isLoading: false})
+      }
+    })
+    .catch(err => console.log(err));
+  }
+
+  onScroll = () => {
+    if (
+      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
+      !this.state.isLoading
+    ) {
+      this.nextSet()
+    }
+  }
+
+  nextSet = () => {
+    this.setState({isLoading: true})
+    let temp = this.state.pageInt;
+    temp++;
+    this.setState({pageInt:temp})
+    this.getShows();
   }
 
   checkPosterPaths(arr) {
     let newArr = arr;
     newArr.map( (movie) => {
       if (movie.poster_path === null){
-        return movie.poster_path = "../../public/images/placeholder.jpg";
+        return movie.poster_path = "./images/placeholder.jpg";
       }
       else{
        return movie.poster_path = tmdbImgUrl + movie.poster_path;

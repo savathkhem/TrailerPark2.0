@@ -1,16 +1,16 @@
 import axios from "axios";
 
 export default {
-  getMovies: () => {
-    return axios.get("/api/movies/in-theaters");
+  getMovies: (int) => {
+    return axios.get("/api/movies/in-theaters/" + int);
   },
 
-  getTopMovies: (id) => {
-    return axios.get("/api/movies/top-movies");
+  getTopMovies: (int) => {
+    return axios.get("/api/movies/top-movies/" + int);
   },
 
-  getTopTv: (id) => {
-    return axios.get("/api/movies/top-tv");
+  getTopTv: (int) => {
+    return axios.get("/api/movies/top-tv/" + int);
   },
 
   getTrailers: (query) => {
@@ -20,8 +20,8 @@ export default {
     return axios.get("/api/movies/trailers/" + search);
   },
 
-  getUpcoming: () => {
-    return axios.get("api/movies/upcoming");
+  getUpcoming: (int) => {
+    return axios.get("api/movies/upcoming/" + int);
   },
   
   getSearch: (query) => {
