@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const axios = require ("axios");
 require("dotenv").config();
-const topTvURL = "https://api.themoviedb.org/3/tv/popular?language=en-US&page=&api_key=";
-const moviesURL = "https://api.themoviedb.org/3/movie/now_playing?&language=en-US&page=&api_key=";
-const topMoviesUrl = "https://api.themoviedb.org/3/discover/movie?&language=en-US&region=us&vote_count.gte=5000&sort_by=vote_average.desc&include_adult=false&include_video=false&page=&api_key=";
-const upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=&api_key=";
+const topTvURL = "https://api.themoviedb.org/3/tv/popular?language=en-US&page=";
+const moviesURL = "https://api.themoviedb.org/3/movie/now_playing?&language=en-US&page=";
+const topMoviesUrl = "https://api.themoviedb.org/3/discover/movie?&language=en-US&region=us&vote_count.gte=5000&sort_by=vote_average.desc&include_adult=false&include_video=false&page=";
+const upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=";
 const baseYoutubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
 const youtubeParams = "+official+trailer&maxResults=3&key=";
 const searchUrl = "https://api.themoviedb.org/3/search/movie?&language=en-US&page=&include_adult=false&api_key=";
@@ -15,31 +15,32 @@ const youtubeKey = process.env.YOUTUBE_API_KEY;
 const tmdbKey = process.env.TMDB_KEY;
 const uTellyKey = process.env.UTELLY_KEY;
 
-console.log(process.env.YOUTUBE_API_KEY);
-console.log(process.env.TMDB_KEY);
 // Matches with "/api/movies"
-router.get("/in-theaters", (req, res) => {
-  console.log(moviesURL + tmdbKey);
+router.get("/in-theaters/:page", (req, res) => {
+  let pageNumber= req.params.page
+  let url = moviesURL + pageNumber + "&api_key="+ tmdbKey
   axios
-    .get(moviesURL + tmdbKey)
+    .get(url)
     .then((response) => res.json(response.data.results))
     .catch(err => res.status(422).json(err));
 });
 
 //This route gets our top movies
-router.get("/top-movies", (req, res) => {
-  console.log(topMoviesUrl);
+router.get("/top-movies/:page", (req, res) => {
+  let pageNumber= req.params.page
+  let url = topMoviesUrl + pageNumber + "&api_key="+ tmdbKey
   axios
-    .get(topMoviesUrl + tmdbKey)
+    .get(url)
     .then((response) => res.json(response.data.results))
     .catch(err => res.status(422).json(err));
 });
 
 //This route gets our tv shows
-router.get("/top-tv", (req, res) => {
-  console.log(topTvURL);
+router.get("/top-tv/:page", (req, res) => {
+  let pageNumber= req.params.page
+  let url = topTvURL + pageNumber + "&api_key="+ tmdbKey
   axios
-    .get(topTvURL + tmdbKey)
+    .get(url)
     .then((response) => res.json(response.data.results))
     .catch(err => res.status(422).json(err));
 });
@@ -51,8 +52,7 @@ router.get("/trailers/:title", (req, res) => {
   let title = req.params.title;
   //builds our url for API request
   let requestUrl = baseYoutubeUrl + title + youtubeParams + youtubeKey;
-
-  console.log(requestUrl);
+;
   axios
     .get(requestUrl)
     .then((response) => res.json(response.data.items))
@@ -60,10 +60,11 @@ router.get("/trailers/:title", (req, res) => {
 });
 
 //This route gets upcoming movies
-router.get("/upcoming", (req, res) => {
-  console.log(upcomingUrl);
+router.get("/upcoming/:page", (req, res) => {
+  let pageNumber= req.params.page
+  let url = upcomingUrl + pageNumber + "&api_key="+ tmdbKey
   axios
-    .get(upcomingUrl + tmdbKey)
+    .get(url)
     .then((response) => res.json(response.data.results))
     .catch(err => res.status(422).json(err));
 });
@@ -81,7 +82,6 @@ router.get("/search/:title", (req, res)=> {
 //Utelly
 router.get("/stream/:title", (req, res) =>{
   let title = req.params.title;
-  console.log('utelly', uTellyKey)
   axios({
     url: uTellyURL + title,
     method: "GET",
