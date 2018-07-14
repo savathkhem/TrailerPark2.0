@@ -3,7 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Redirect, BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { AppBar } from "./components/Layout";
 import Login from "./components/Login";
-import { Home, TopTV, InTheaters, Upcoming, TopMovie, } from "./pages/";
+import Landing from "./components/Landing";
+import { Home, TopTV, InTheaters, Upcoming, TopMovie } from "./pages/";
 import API from "./utils/API";
 import "./App.css";
 import firebase, { auth, provider } from "./firebaseConfig";
@@ -82,32 +83,33 @@ class App extends Component {
   render() {
     if (this.state.currentUser) {
       return (
-        <Router>
-          <div>
-            <CssBaseline />
-            <AppBar 
-            src={this.state.currentUser.photoURL}
-             alt={this.state.currentUser.displayName} 
-             name={this.state.currentUser.displayName}
-             onChange={this.handleInputChange}
-             handleSubmit={this.handleFormSubmit}
-            />
-            {this.state.searchRedirect && <Redirect push to="/search"/>}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/" render={()=><Home userName={this.state.currentUser.displayName}/>}/>
-            <Route exact path="/in-theaters" render={()=><InTheaters userName={this.state.currentUser.displayName}/>}/>
-            <Route exact path="/top-tv" render={()=><TopTV userName={this.state.currentUser.displayName}/>}/>
-            <Route exact path="/upcoming" render={()=><Upcoming userName={this.state.currentUser.displayName}/>}/>
-            <Route exact path="/top-movies" render={()=><TopMovie userName={this.state.currentUser.displayName}/>}/> />
-            <Route exact path="/search" render={()=><Search movies={this.state.searchArr} userName={this.state.currentUser.displayName}/>}/>
-          </div>
-        </Router>
+          <Router>
+            <div>
+              <CssBaseline />
+              <AppBar 
+              src={this.state.currentUser.photoURL}
+              alt={this.state.currentUser.displayName} 
+              name={this.state.currentUser.displayName}
+              onChange={this.handleInputChange}
+              handleSubmit={this.handleFormSubmit}
+              />
+              {this.state.searchRedirect && <Redirect push to="/search"/>}
+              <Route exact path="/landing" component={Landing} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/" render={()=><Home userName={this.state.currentUser.displayName}/>}/>
+              <Route exact path="/in-theaters" render={()=><InTheaters userName={this.state.currentUser.displayName}/>}/>
+              <Route exact path="/top-tv" render={()=><TopTV userName={this.state.currentUser.displayName}/>}/>
+              <Route exact path="/upcoming" render={()=><Upcoming userName={this.state.currentUser.displayName}/>}/>
+              <Route exact path="/top-movies" render={()=><TopMovie userName={this.state.currentUser.displayName}/>}/> />
+              <Route exact path="/search" render={()=><Search movies={this.state.searchArr} userName={this.state.currentUser.displayName}/>}/>
+            </div>
+          </Router>
       )
     }
     else {
       return (
         <Router>
-          <Login />
+          <Landing />
         </Router>
       )
     }
@@ -115,5 +117,4 @@ class App extends Component {
 }
 
 
-// export default App;
 export default App;

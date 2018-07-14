@@ -1,15 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 // import DrawerLeft from "./components/DrawerLeft";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
+// import MenuItem from '@material-ui/core/MenuItem';
+import { Paper, Typography, TextField, List, ListItem, ListItemText, Divider, ListItemIcon, Button, IconButton, Menu, MenuItem } from '@material-ui/core/';
 import firebase, { auth, provider } from "../../firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
 import Logo from "../Logo";
+import ModalNew from "./../ModalNew";
 import "./Login.css";
-import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   container: {
@@ -28,6 +27,22 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    width: 'inherit',
+    backgroundColor: '#424242',
+  },
+  buttonRight: {
+    float: 'right',
+    margin:10,
+  },
+  button: {
+    margin: 10,
+  },
+  menuIcon: {
+    color: '#FF1177',
+    fontSize: 'xx-large',
+  },
+  menuText: {
+    color: '#fafafa',
   }
 });
 
@@ -36,6 +51,12 @@ class Login extends Component {
     email: ``,
     password: ``,
     loading: true, authenticated: false, user: null,
+    open: false,
+    openSignUp: false,
+    anchor: 'left',
+    auth: true,
+    anchorEl: null,
+    anchorElSignUp: null,
   };
 
   componentWillMount() {
@@ -56,7 +77,30 @@ class Login extends Component {
     });
   }
 
+  handleMenu = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
+  handleChangeAnchor = event => {
+    this.setState({
+      anchor: event.target.value,
+    });
+  };
+
+  handleMenuSignUp = event => {
+    this.setState({ anchorElSignUp: event.currentTarget });
+  };
+
+  handleCloseSignUp = () => {
+    this.setState({ anchorElSignUp: null });
+  };
+
   render() {
+    const { classes } = this.props
     const {
       signInWithEmail,
       signUpWithEmail,
@@ -76,17 +120,49 @@ class Login extends Component {
     const { email, password } = this.state;
 
     const { authenticated, loading } = this.state;
+    const { anchor, open } = this.state;
+    const { auth, anchorEl, anchorElSignUp } = this.state;
+    const openlogin = Boolean(anchorEl);
+    const openSignUp = Boolean(anchorElSignUp);
 
     if (loading) {
       return <p>Loading..</p>;
     }
 
     return (
-      <div className="login">
-        <Logo />
-        <br />
-        <Paper style={{ width: 700, marginLeft: 'auto', marginRight: 'auto' }} elevation={2}>
-          <br />
+      <Fragment>
+        <Paper className={classes.root} elevation={24}>
+        <Typography variant="headline" component="h3">
+          <Logo />
+        </Typography>
+ 
+          <IconButton
+            className={
+              classes.button
+            }
+            aria-owns={openlogin ? 'menu-appbar' : null}
+            aria-haspopup="true"
+            onClick={this.handleMenu}
+            color="inherit"
+          >
+            <Button variant="contained">
+              Sign In
+            </Button>
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={openlogin}
+            onClose={this.handleClose}
+          >
           <form onSubmit={e => e.preventDefault()}>
             <h2> Sign In! </h2>
             <TextField
@@ -101,8 +177,6 @@ class Login extends Component {
               onChange={e => this.setState({ password: e.target.value })}
               // margin="normal"
             />
-            <br />
-            <br />
             {!user && (
               <Button
                 type="submit"
@@ -113,8 +187,36 @@ class Login extends Component {
               </Button>
             )}
           </form>
-          <br />
-          <br />
+          </Menu>
+
+          <IconButton
+            className={
+              classes.buttonRight
+              // classes.button
+            }
+            aria-owns={openlogin ? 'menu-appbar' : null}
+            aria-haspopup="true"
+            onClick={this.handleMenuSignUp}
+            color="inherit"
+          >
+            <Button variant="contained">
+              Sign Up
+            </Button>
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElSignUp}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={openSignUp}
+            onClose={this.handleCloseSignUp}
+          >
           <form onSubmit={e => e.preventDefault()}>
             <h2> Sign Up! </h2>
             <TextField
@@ -135,8 +237,6 @@ class Login extends Component {
               value={password}
               // margin="normal"
             />{" "}
-            <br />
-            <br />
             <Button
               type="submit"
               variant="contained"
@@ -145,15 +245,57 @@ class Login extends Component {
               Sign Up
             </Button>
           </form>
-          <br />
-          <br />
-          <Button variant="contained" onClick={signInWithGoogle}>Sign in with Google &nbsp;<i className="fab fa-google"></i></Button><br /><br />
-          <Button variant="contained" onClick={signInWithFacebook}>Sign in with Facebook &nbsp;<i className="fab fa-facebook"></i></Button>{" "}<br /><br />
-          <Button variant="contained" onClick={signInWithGithub}>Sign in with Github &nbsp;<i className="fab fa-github-square"></i></Button><br /><br />
-          <Button variant="contained" onClick={signInWithTwitter}>Sign in with Twitter &nbsp;<i className="fab fa-twitter-square"></i></Button><br /><br />
+          </Menu>
+
+          <ListItem button onClick={signInWithGoogle}>
+            <ListItemIcon className={classes.menuIcon}>
+              <i className="fab fa-google"></i>
+            </ListItemIcon>
+            <ListItemText>
+              <Typography className={classes.menuText}>
+                Sign In With Google
+              </Typography>
+            </ListItemText>
+
+          </ListItem>
+
+          <ListItem button onClick={signInWithFacebook}>
+            <ListItemIcon className={classes.menuIcon}>
+              <i className="fab fa-facebook"></i>
+            </ListItemIcon>
+            <ListItemText>
+            <Typography className={classes.menuText}>
+                Sign In With FaceBook
+              </Typography>
+            </ListItemText>
+          </ListItem>
+          
+          <ListItem button onClick={signInWithGithub}>
+            <ListItemIcon className={classes.menuIcon}>
+              <i className="fab fa-github-square"></i>
+            </ListItemIcon>
+            <ListItemText>
+            <Typography className={classes.menuText}>
+                Sign In With GitHub
+              </Typography>
+            </ListItemText>
+          </ListItem>
+
+          <ListItem button onClick={signInWithTwitter}>
+            <ListItemIcon className={classes.menuIcon}>
+              <i className="fab fa-twitter-square"></i>
+            </ListItemIcon>
+            <ListItemText >
+            <Typography className={classes.menuText}>
+                Sign In With Twitter
+              </Typography>
+            </ListItemText>
+
+          </ListItem>
+
+    
         </Paper>
-        <br />
-      </div>
+      </Fragment>
     )
   }
 }
@@ -197,5 +339,60 @@ const authConfig = {
   }
 };
 
-// export default Login;
-export default withFirebaseAuth(Login, firebase, authConfig);
+Login.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+//Export using multiple function
+export default withStyles(styles)(withFirebaseAuth(Login, firebase, authConfig));
+
+
+// const styles = theme => ({
+//   root: {
+//     ...theme.mixins.gutters(),
+//     paddingTop: theme.spacing.unit * 2,
+//     paddingBottom: theme.spacing.unit * 2,
+//     textAlign: 'center',
+//   },
+// });
+
+// function Login(props) {
+//   const { classes } = props;
+
+//   return (
+//     <div>
+      // <Paper className={classes.root} elevation={24}>
+      //   <Typography variant="headline" component="h3">
+      //     <Logo />
+      //   </Typography>
+      //   {/* <Typography component="p">
+      //     Paper can be used to build surface or other elements for your application.
+      //   </Typography> */}
+      //     <List component="nav">
+      //       <ListItem button>
+      //         <ListItemText primary="Inbox" />
+      //       </ListItem>
+      //       <Divider />
+      //       <ListItem button divider>
+      //         <ListItemText primary="Drafts" />
+      //       </ListItem>
+      //       <ListItem button>
+      //         <ListItemText primary="Trash" />
+      //       </ListItem>
+      //       <Divider light />
+      //       <ListItem button>
+      //         <ListItemText primary="Spam" />
+      //       </ListItem>
+      //   </List>
+//       </Paper>
+//     </div>
+//   );
+// }
+
+// Login.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
+
+
+// export default withStyles(styles)(Login);
+

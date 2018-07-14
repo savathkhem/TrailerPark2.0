@@ -182,11 +182,8 @@ class NavBar extends React.Component {
                   onClick={this.handleMenu}
                   color="inherit"
                 >
-                {/* <h4>{this.props.name}</h4> */}
                 <Avatar alt={this.props.name} className={(classes.avatar, classes.bigAvatar)}><img className={classes.bigAvatar} src={this.props.src} alt={this.props.alt}/></Avatar>
-                  {/* <AccountCircle/> */}
                 </IconButton>
-                {/* <Avatar><img src={this.props.src} alt={this.props.alt}/></Avatar> */}
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
@@ -204,7 +201,6 @@ class NavBar extends React.Component {
                   <MenuItem onClick={this.handleClose}>{this.props.name}'s Profile</MenuItem>
                   <MenuItem onClick={this.handleClose}>Settings</MenuItem>
                   <MenuItem onClick={this.logOut}>Logout</MenuItem>
-
                 </Menu>
             </div>)}
           </Toolbar>

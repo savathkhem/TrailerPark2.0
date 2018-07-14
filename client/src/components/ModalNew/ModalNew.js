@@ -17,7 +17,7 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: 'absolute',
-    width: '75%',
+    width: 'unset',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: 'unset',
@@ -29,7 +29,7 @@ const ModalNew = (props) =>  (
   <Fragment>
     <Modal
       open={props.open}
-      onClose={props.handleModalClick}
+      onClose={props.onClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
