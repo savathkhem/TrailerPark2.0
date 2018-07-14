@@ -111,7 +111,7 @@ class Home extends Component {
           <Iframe src= {video.id.videoId} key={video.id.videoId}/>))}
           </Carousel>
         </Modal>
-        <h2 className="favorite">My Favorites</h2>
+        <h2 className="favorite">WatchList</h2>
                 <div>
                   <Wrapper>
                     <CardWrapper>
@@ -126,8 +126,9 @@ class Home extends Component {
                     </CardWrapper>
                   </Wrapper>
                 </div>
-                <br/><br/><br/><br/><br/>
-        <Grid container spacing={24} style={{ justifyContent: "center" }}>
+
+                {/* <br/><br/><br/><br/><br/> */}
+        {/* <Grid container spacing={24} style={{ justifyContent: "center" }}>
           <Grid item md={4} className="home">
             <Paper elevation={2} rounded="false">
               <h2>List of Movies/Shows You Have Commented On</h2>
@@ -148,7 +149,7 @@ class Home extends Component {
               <br /><br /><br /><br /><br />
             </Paper>
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
     )
   }
