@@ -76,6 +76,7 @@ class PosterCard extends React.Component {
   deleteFavorite = () => {
     console.log('delete fav!' + this.props.id)
     API.deleteFavorite(this.props.user_id, {movie_id: this.props.id})
+    this.props.foolish()
   }
 
   handleFavClick = () => {

@@ -1,17 +1,17 @@
 const router = require("express").Router();
-const booksController = require("../../controllers/booksController");
+const controller = require("../../controllers/controller");
 
 // Matches with "/api/db"
-router.post("/save", booksController.saveComment);
+router.post("/save", controller.saveComment);
 
-router.post("/users",booksController.saveUser);
+router.post("/users",controller.saveUser);
 
-router.get("/comments/:id", booksController.getComments);
+router.get("/comments/:id", controller.getComments);
 
 router.route("/favorites/:user")
-    .post(booksController.favoriteMovie)
-    .put(booksController.removeFavorite)
-    .get(booksController.getFavorites);
+    .post(controller.favoriteMovie)
+    .put(controller.removeFavorite)
+    .get(controller.getFavorites);
 
 
 module.exports = router;
