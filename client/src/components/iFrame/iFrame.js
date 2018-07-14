@@ -1,10 +1,10 @@
 import React from "react";
-import "./Iframe.css"
+import "./Iframe.css";
 
-const Iframe = (props) => 
-<div>
-<iframe id="ytplayer" type="text/html" src={props.src} title={props.title}></iframe>
-</div>
-
+const Iframe = (props) => (
+    <div>
+        <iframe id="ytplayer" type="text/html" src={props.src} title={props.title}></iframe>
+    </div>
+);
 
 export default Iframe;

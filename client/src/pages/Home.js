@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
@@ -6,13 +8,14 @@ import API from "../utils/API";
 import Modal from "../components/Modal";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
-import ModalNew from "./../components/ModalNew"
-
-const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
+import "./Home.css";
 
 const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me"
 
+let user;
+
 class Home extends Component {
+
   state = {
     movies: [],
     modal: false,
@@ -25,21 +28,14 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    API.getMovies()
+    API.getFavorites(this.props.user.uid)
       .then((res) => {
-        console.log(res.data);
-        this.checkPosterPaths(res.data)
+        console.log(res);
         return res;
       })
-      .then(res => this.setState({ movies: res.data }))
-      // .then(() => this.saveMovies())
+      .then(res => this.setState({ movies: res.data.favorite}))
       .catch(err => console.log(err));
-  }
-
-  saveMovies() {
-    API.saveMovies(this.state.movies)
-    .then((res)=> console.log('new movies saved'))
-    .catch( (err) => console.log(err))
+    user = this.props.user;
   }
 
   clickPoster(title) {
@@ -50,14 +46,9 @@ class Home extends Component {
         return res;
       })
       .then((res) => this.setState({ youTubes: res.data }))
-      // .then(() => this.handleModalClick())     
       .then(() => this.openModal())
       .catch((err) => console.log (err));
   }
-
-  // handleModalClick = () => {
-  //   this.setState(state => ({ modalOpen: !state.modalOpen }));
-  // };
 
   googleMaps() {
     this.openMapModal()
@@ -66,50 +57,29 @@ class Home extends Component {
   createYouTubeUrl (arr) {
     let newArr = arr;
     newArr.map( (video) => {
-      video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
+     return video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
     })
   }
 
-  checkPosterPaths(arr) {
-    let newArr = arr;
-    newArr.map( (movie) => {
-      if (movie.poster_path === null){
-        movie.poster_path = "../../public/images/placeholder.jpg";
-      }
-      else{
-        movie.poster_path = tmdbImgUrl + movie.poster_path;
-      }
-    }
-    )
-    arr = newArr;
-    return arr;
-  };
-
   openModal = () => this.setState({ modal: true });
 
-  closeModal = (event) => { 
-    event.stopPropagation();
-    this.setState({ modal: false })
-  }
+  closeModal = () => { 
+    this.setState({ modal: false, youTubes:[]})
+  };
 
   openMapModal = () => this.setState({ mapModal: true });
 
   closeMapModal = () => this.setState({ mapModal: false });
 
-  submitComment = (id) => {
-    let commentObj = {
-      user: this.props.userName,
-      body: this.state.comment,
-      movie_id: id
-    }
-    API.saveComment(commentObj);
-  }
-
-  onCommentChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+  foolish = () => {
+    console.log('foolish')
+    API.getFavorites(this.props.user.uid)
+    .then((res) => {
+      console.log(res);
+      return res;
+    })
+    .then(res => this.setState({ movies: res.data.favorite}))
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -134,36 +104,51 @@ class Home extends Component {
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
           <Iframe src= {googleMapUrl}/>
         </Modal>
-        
-        {/* <ModalNew 
-          open={this.state.modalOpen}
-          onClose={this.handleModalClick}>
-          <Carousel>
-            {this.state.youTubes.map((video) => (
-              <Iframe src= {video.id.videoId} key={video.id.videoId}/>
-            ))}
-          </Carousel>
-        </ModalNew> */}
 
         <Modal modal = {toggleModal} onClick={this.closeModal}>
           <Carousel>
             {this.state.youTubes.map((video) => (
-              <Iframe src= {video.id.videoId} key={video.id.videoId}/>
-            ))}
+          <Iframe src= {video.id.videoId} key={video.id.videoId}/>))}
           </Carousel>
         </Modal>
-        <Wrapper>
-          <CardWrapper>
-            {this.state.movies.map((movie) => (
-              <Card 
-              key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
-              id={movie.id}
-              />
-            ))}
-          </CardWrapper>
-        </Wrapper>
+        <h2 className="favorite">My Favorites</h2>
+                <div>
+                  <Wrapper>
+                    <CardWrapper>
+                      {this.state.movies.map((movie) => (
+                        <Card 
+                        key={movie.movie_id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+                        onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()}
+                        id={movie.movie_id} userName= {user.displayName} user_id={user.uid} icon = {false}
+                        foolish={()=>this.foolish()}
+                        />
+                      ))}
+                    </CardWrapper>
+                  </Wrapper>
+                </div>
+                <br/><br/><br/><br/><br/>
+        <Grid container spacing={24} style={{ justifyContent: "center" }}>
+          <Grid item md={4} className="home">
+            <Paper elevation={2} rounded="false">
+              <h2>List of Movies/Shows You Have Commented On</h2>
+              <br /><br /><br /><br /><br />
+            </Paper>
+          </Grid>
+        </Grid>
+        <Grid container spacing={24} style={{ justifyContent: "center" }}>
+          <Grid item md={4} className="home">
+            <Paper elevation={2} rounded="false">
+              <h2>List of Movies/Shows You Have Reviewed</h2>
+              <br /><br /><br /><br /><br />
+            </Paper>
+          </Grid>
+          <Grid item md={4} className="home">
+            <Paper elevation={2} rounded="false">
+              <h2>Trailers To Watch Later</h2>
+              <br /><br /><br /><br /><br />
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     )
   }

@@ -5,9 +5,10 @@ import classnames from 'classnames';
 import { CardContent, CardActions, Collapse, IconButton, Typography, Paper } from '@material-ui/core/';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteIcon from "@material-ui/icons/Delete";
 import MessageDrawer from './../MessageDrawer';
 import { FavContent } from './../FavBtn';
-import ModalNew from "./../ModalNew";
+import API from "../../utils/API";
 
  
 const styles = theme => ({
@@ -57,6 +58,27 @@ class PosterCard extends React.Component {
     modalOpen: false,
   };
 
+  saveFavorite = () => {
+    //Sends the snack
+    this.handleFavClick();
+
+    //Save movie to database here
+    let movieObj = {
+      title: this.props.title,
+      movie_id: this.props.id,
+      poster_path: this.props.src,
+      overview: this.props.overview,
+      release_date: this.props.release,
+    }
+    API.favoriteMovie(this.props.user_id, movieObj)
+  }
+
+  deleteFavorite = () => {
+    console.log('delete fav!' + this.props.id)
+    API.deleteFavorite(this.props.user_id, {movie_id: this.props.id})
+    this.props.foolish()
+  }
+
   handleFavClick = () => {
     this.setState(state => ({ favOpen: !state.favOpen }));
   };
@@ -71,6 +93,7 @@ class PosterCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const icon = this.props.icon;
 
     return (
       <div>
@@ -83,7 +106,8 @@ class PosterCard extends React.Component {
             className={classes.media}
             src={this.props.src}
             onClick={this.props.onClick}
-            title={this.props.title}   
+            title={this.props.title} 
+            alt ={this.props.title}  
           />
           <FavContent 
             open={this.state.favOpen}
@@ -91,25 +115,16 @@ class PosterCard extends React.Component {
           />
         </div>
         <CardActions className={classes.actions} disableActionSpacing>
-        <IconButton onClick={this.handleFavClick}>
-          <FavoriteIcon />
-
-        {/* </IconButton>
-        <IconButton onClick={this.handleModalClick}>
-          <FavoriteIcon />
-        
-        <ModalNew 
-          open={this.state.modalOpen}
-          onClose={this.handleModalClick}>
-          LAWDDDD PLEASE WORK!
-        </ModalNew> */}
-
+        <IconButton onClick={icon ? this.saveFavorite : this.deleteFavorite}>
+        {icon ? <FavoriteIcon/> : <DeleteIcon/>}
+          {/* <FavoriteIcon /> */}
         </IconButton>
           <MessageDrawer 
             title={this.props.title}
             submitComment={this.props.submitComment} 
             onCommentChange={this.props.onCommentChange}
             id={this.props.id}
+            userName= {this.props.userName}
           />
           <IconButton
             className={classnames(classes.expand, {
@@ -125,7 +140,7 @@ class PosterCard extends React.Component {
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph variant="subheading" className={classes.primaryText}>
-              {this.props.title}:
+                {this.props.title}:
               </Typography>
               <Typography paragraph variant="body2" className={classes.primaryText}>
                 {this.props.overview}

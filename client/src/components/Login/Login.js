@@ -59,7 +59,7 @@ class Login extends Component {
     anchorElSignUp: null,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -108,16 +108,17 @@ class Login extends Component {
       signInWithFacebook,
       signInWithGithub,
       signInWithTwitter,
-      googleAccessToken,
-      facebookAccessToken,
-      githubAccessToken,
-      twitterAccessToken,
-      twitterSecret,
+      // googleAccessToken,
+      // facebookAccessToken,
+      // githubAccessToken,
+      // twitterAccessToken,
+      // twitterSecret,
       user,
-      error,
-      signOut
+      // error,
+      // signOut
     } = this.props;
     const { email, password } = this.state;
+    const {loading } = this.state;
 
     const { authenticated, loading } = this.state;
     const { anchor, open } = this.state;
@@ -237,6 +238,8 @@ class Login extends Component {
               value={password}
               // margin="normal"
             />{" "}
+            <br />
+            <br />
             <Button
               type="submit"
               variant="contained"

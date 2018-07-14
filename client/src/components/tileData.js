@@ -1,6 +1,6 @@
 // This file is shared across the demos.
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -10,9 +10,6 @@ const PageOptions = (props) => (
   <div>
     <ListItem>
       <SearchBar onChange={props.onChange} handleSubmit={props.handleSubmit}/>
-    </ListItem>
-    <ListItem component={Link} to="/" button>
-      <ListItemText primary="Home"/>
     </ListItem>
     <ListItem component={Link} to="/in-theaters" button>
       <ListItemText primary="In Theaters" />
@@ -30,6 +27,6 @@ const PageOptions = (props) => (
       <ListItemText primary="Landing Page" />
     </ListItem>
   </div>
-)
+);
 
 export default PageOptions;

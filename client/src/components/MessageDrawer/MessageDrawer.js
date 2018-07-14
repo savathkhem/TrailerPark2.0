@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Drawer, IconButton, Divider} from '@material-ui/core/';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChatIcon from '@material-ui/icons/Chat'
-import API from "../../utils/API"
+import ChatIcon from '@material-ui/icons/Chat';
+import API from "../../utils/API";
 
 const styles = {
   list: {
@@ -24,7 +24,26 @@ class TemporaryDrawer extends React.Component {
   componentDidMount() {
     API.getComments(this.props.id)
     .then(res => this.setState({comments: res.data}))
-  }
+  };
+
+  submitComment = (id) => {
+    let commentObj = {
+      user: this.props.userName,
+      body: this.state.comment,
+      movie_id: id
+    }
+    API.saveComment(commentObj);
+    let tempComments = this.state.comments;
+    tempComments.push(commentObj);
+    this.setState({comments: tempComments})
+  };
+
+  onCommentChange = (event) => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
 
   toggleDrawer = (side, open) => () => {
     this.setState({
@@ -37,25 +56,22 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-          <IconButton onClick={this.toggleDrawer('left', false)}>
-            <ChevronLeftIcon />
+        <IconButton onClick={this.toggleDrawer('left', false)}>
+          <ChevronLeftIcon />
         </IconButton>
         <Divider/>
-        Message Board Stuff Goes Here!
         <h1>{this.props.title}</h1>
         <form >
-          <textarea onChange={this.props.onCommentChange} name="comment"></textarea>
-          <button type = "button" onClick={this.props.submitComment}>Leave a Review</button>
+          <textarea onChange={this.onCommentChange} name="comment"></textarea>
+          <button type = "button" onClick={()=>this.submitComment(this.props.id)}>Leave a Review</button>
         </form>
         <div>
-        {this.state.comments.map((comment) => 
-        <div key={comment._id}>
-        <h4>{comment.user} says:</h4>
-          <p>{comment.body}</p>
-        </div>)}
-        </div>
-        <div>
-        
+          {this.state.comments.map((comment) => 
+            <div key={comment._id}>
+            <h4>{comment.user} says:</h4>
+              <p>{comment.body}</p>
+            </div>)
+          }
         </div>
       </div>
     );
@@ -64,12 +80,7 @@ class TemporaryDrawer extends React.Component {
       <div>
         <IconButton onClick={this.toggleDrawer('left', true)}><ChatIcon /></IconButton>
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-          <div
-            // tabIndex={0}
-            // role="button"
-            // onClick={this.toggleDrawer('left', false)}
-            // onKeyDown={this.toggleDrawer('left', false)}
-          >
+          <div>
             {sideList}
           </div>
         </Drawer>

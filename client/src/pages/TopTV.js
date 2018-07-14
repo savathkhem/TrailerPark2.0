@@ -9,6 +9,8 @@ import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
+let user;
+
 class TopTV extends Component {
   state = {
     movies: [],
@@ -25,19 +27,19 @@ class TopTV extends Component {
       })
       .then(res => this.setState({ movies: res.data }))
       .catch(err => console.log(err));
+      user = this.props.user;
   }
 
   checkPosterPaths(arr) {
     let newArr = arr;
     newArr.map( (movie) => {
       if (movie.poster_path === null){
-        movie.poster_path = "../../public/images/placeholder.jpg";
+        return movie.poster_path = "../../public/images/placeholder.jpg";
       }
       else{
-        movie.poster_path = tmdbImgUrl + movie.poster_path;
+       return movie.poster_path = tmdbImgUrl + movie.poster_path;
       }
-    }
-    )
+    });
     arr = newArr;
     return arr;
   };
@@ -55,14 +57,16 @@ class TopTV extends Component {
 
   openModal = () => this.setState({ modal: true });
 
-  closeModal = () => this.setState({ modal: false });
+  closeModal = () => { 
+    this.setState({ modal: false, youTubes:[]});
+  };
 
   submitComment = (id) => {
     let commentObj = {
       user: this.props.userName,
       body: this.state.comment,
       movie_id: id
-    }
+    };
     API.saveComment(commentObj);
   }
 
@@ -85,20 +89,19 @@ class TopTV extends Component {
     return (
       <div>
         <Modal modal = {toggleModal} onClick = {this.closeModal}>
-        <Carousel>
-          {this.state.youTubes.map((video) => (
-            <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
-          ))}
-        </Carousel>
+          <Carousel>
+            {this.state.youTubes.map((video) => (
+              <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+            ))}
+          </Carousel>
         </Modal>
         <Wrapper>
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.name)} submitComment={()=>this.submitComment(movie.id)} onCommentChange={this.onCommentChange}
-              id={movie.id}
-              
+              onClick={()=>this.clickPoster(movie.name)} 
+              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true}
               />
             ))}
           </CardWrapper>

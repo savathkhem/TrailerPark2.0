@@ -12,19 +12,19 @@ const styles = theme => ({
 
 const Modal = (props)=> (
   <div id="myModal" className= {props.modal || "modal"}>
-      <div className="modal-content">
-        <div>
+    <div className="modal-content">
+      <div>
         {props.children} 
-        </div>
-        <span className="close" >
-            <Button variant="fab" mini color="secondary" aria-label="add" className={props.classes.button} onClick={props.onClick}>
-              X
-            </Button>
-        </span>
-        <div>
-        {props.children}
-        </div>
       </div>
+      <span className="close" >
+        <Button variant="fab" mini color="secondary" aria-label="add" className={props.classes.button} onClick={props.onClick}>
+          X
+        </Button>
+      </span>
+      <div>
+        {props.children}
+      </div>
+    </div>
   </div>
 );
 
