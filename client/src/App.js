@@ -3,7 +3,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { Redirect, BrowserRouter as Router, Route} from "react-router-dom";
 import { AppBar } from "./components/Layout";
 import Login from "./components/Login";
-import { Home, TopTV, InTheaters, Upcoming, TopMovie, } from "./pages/";
+import Landing from "./components/Landing";
+import { Home, TopTV, InTheaters, Upcoming, TopMovie } from "./pages/";
 import API from "./utils/API";
 import "./App.css";
 import firebase from "./firebaseConfig";
@@ -111,7 +112,7 @@ class App extends Component {
     else {
       return (
         <Router>
-          <Login />
+          <Landing />
         </Router>
       )
     }
