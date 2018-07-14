@@ -10,6 +10,7 @@ router.get("/comments/:id", booksController.getComments);
 
 router.route("/favorites/:user")
     .post(booksController.favoriteMovie)
+    .put(booksController.removeFavorite)
     .get(booksController.getFavorites);
 
 
