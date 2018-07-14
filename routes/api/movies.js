@@ -8,10 +8,12 @@ const upcomingUrl = "https://api.themoviedb.org/3/movie/upcoming?language=en-US&
 const baseYoutubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=";
 const youtubeParams = "+official+trailer&maxResults=3&key=";
 const searchUrl = "https://api.themoviedb.org/3/search/movie?&language=en-US&page=&include_adult=false&api_key=";
+const uTellyURL = "https://utelly-tv-shows-and-movies-availability-v1.p.mashape.com/lookup?&country=us&term=";
 
 //API Keys
 const youtubeKey = process.env.YOUTUBE_API_KEY;
 const tmdbKey = process.env.TMDB_KEY;
+const uTellyKey = process.env.UTELLY_KEY;
 
 console.log(process.env.YOUTUBE_API_KEY);
 console.log(process.env.TMDB_KEY);
@@ -75,6 +77,23 @@ router.get("/search/:title", (req, res)=> {
     .then((response) => res.json(response.data.results))
     .catch(err => res.status(422).json(err));
 });
+
+//Utelly
+router.get("/stream/:title", (req, res) =>{
+  let title = req.params.title;
+  console.log('utelly', uTellyKey)
+  axios({
+    url: uTellyURL + title,
+    method: "GET",
+    headers: {
+      'X-Mashape-Key': uTellyKey,
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then((response) => res.json(response.data.results))
+  .catch((err) => res.status(422).json(err))
+})
 
 
 module.exports = router;

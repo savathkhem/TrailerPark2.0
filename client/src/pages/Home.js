@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
@@ -21,8 +19,6 @@ class Home extends Component {
     modal: false,
     mapModal: false,
     youTubes: [],
-    pageInteger: 1,
-    message: "",
     comment: "",
     modalOpen: false,
   }
@@ -71,6 +67,7 @@ class Home extends Component {
 
   closeMapModal = () => this.setState({ mapModal: false });
 
+  //This function is so the cards re-render when a user deletes a favorite.
   foolish = () => {
     console.log('foolish')
     API.getFavorites(this.props.user.uid)

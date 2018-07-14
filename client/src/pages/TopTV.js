@@ -101,7 +101,7 @@ class TopTV extends Component {
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
               onClick={()=>this.clickPoster(movie.name)} 
-              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true}
+              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true} stream={true}
               />
             ))}
           </CardWrapper>
