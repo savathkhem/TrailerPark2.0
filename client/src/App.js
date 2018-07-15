@@ -103,7 +103,7 @@ class App extends Component {
             <Route exact path="/in-theaters" render={()=><InTheaters user={this.state.currentUser} />}/>
             <Route exact path="/top-tv" render={()=><TopTV user={this.state.currentUser}/>}/>
             <Route exact path="/upcoming" render={()=><Upcoming user={this.state.currentUser}/>}/>
-            <Route exact path="/top-movies" render={()=><TopMovie user={this.state.currentUser}/>}/> />
+            <Route exact path="/top-movies" render={()=><TopMovie user={this.state.currentUser}/>}/>
             <Route exact path="/search" render={()=><Search movies={this.state.searchArr} user={this.state.currentUser}/>}/>
           </div>
         </Router>
