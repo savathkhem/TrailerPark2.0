@@ -11,7 +11,7 @@ const PageOptions = (props) => (
     <ListItem>
       <SearchBar onChange={props.onChange} handleSubmit={props.handleSubmit}/>
     </ListItem>
-    <ListItem component={Link} to="/home" button>
+    <ListItem component={Link} to="/" button>
       <ListItemText primary="Fave's List" />
     </ListItem>
     <ListItem component={Link} to="/in-theaters" button>

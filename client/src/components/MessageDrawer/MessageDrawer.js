@@ -16,16 +16,18 @@ const styles = theme => ({
     height: '100%',
     // backgroundColor: '#424242',
     marginLeft: 5,
-    marginRight: 5,
-  },
+    marginRight: 5,  },
   primaryText: {
     color: '#424242',
   },
   root: {
-    // backgroundColor: '#424242',
   },
   paper: {
-    // backgroundColor: '#424242',
+    marginBottom: 10,
+    borderRadius: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 5,
   },
   button: {
     float: 'right',
@@ -101,18 +103,12 @@ class MessageDrawer extends React.Component {
             <Button size="small" className={classes.button} onClick={()=>this.submitComment(this.props.id)}>
               Submit
             </Button>
-            
-
-            {/* <button type = "button" onClick={()=>this.submitComment(this.props.id)}>Leave a Review</button> */}
-            {/* <textarea onChange={this.onCommentChange} name="comment"></textarea>
-            <button type = "button" onClick={()=>this.submitComment(this.props.id)}>Leave a Review</button> */}
-
           </form>
 
           <div>
             {this.state.comments.map((comment) => 
               <div key={comment._id}>
-                <Paper>
+                <Paper className={classes.paper} square={false}>
                 <Typography variant="body1" gutterBottom>
                   {comment.user}:  {comment.body}
                 </Typography>
