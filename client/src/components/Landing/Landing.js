@@ -7,7 +7,7 @@ import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 import './Landing.css'
 import ModalNew from "./../ModalNew";
 import Login from "./../Login";
-
+import ProfileFrame from "./../ProfileFrame";
 
 const styles = theme => ({
   body: {
@@ -28,12 +28,9 @@ const styles = theme => ({
     width: '35rem',
     height: '10rem',
     bottom: '50vh',
-    // left: '100vh',
-    // right: '50%',
     borderRadius: '100px',
     fontFamily: 'Futura, Helvetica, sans-serif',
     fontWeight: 'bold',
-    // letterSpacing: '0.3rem',
     textAlign: 'center',
     lineHeight: '10rem',
     textTransform: 'uppercase',
@@ -45,21 +42,11 @@ const styles = theme => ({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-//   scroll: {
-//     position: 'absolute',
-//     top: '50vh',
-//     left: '50%',
-//     marginLeft: '-7rem',
-//     width: '14rem',
-//     height: 'auto',
-//     fontFamily: 'Futura, Helvetica, sans-serif',
-//     fontWeight: 'bold',
-//     letterSpacing: '0.3rem',
-//     textAlign: 'center',
-//     textTransform: 'uppercase',
-//     fontSize: '3rem',
-//     color: '#ff1177',
-// },
+  row: {
+    position: 'absolute',
+    top: '10vh',
+    height: 'auto',
+  },
 });
 
 const Gradients = (props) => (
@@ -132,6 +119,23 @@ class Landing extends Component {
     return (
     <ParallaxProvider>
         <main className={classes.body}>
+        <div className={classes.row}>
+            <ProfileFrame 
+                style={{float: "left"}}
+                alt="Savath Khem"
+                src="./images/Savath.jpg"  
+            />
+            <ProfileFrame 
+                style={{float: "right"}}
+                alt="Cezar Carvalheas"
+                src="./images/Cezar.jpg"  
+            />
+            <ProfileFrame 
+                style={{float: "left"}}
+                alt="Nathan Geckle"
+                src="./images/Nathan.jpg"  
+            />
+        </div>
             <Scroll />
             <Gradients />
             <HeroBanner
