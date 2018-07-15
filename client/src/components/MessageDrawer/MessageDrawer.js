@@ -16,6 +16,7 @@ const styles = theme => ({
     height: '100%',
     // backgroundColor: '#424242',
     marginLeft: 5,
+    marginRight: 5,
   },
   primaryText: {
     color: '#424242',
