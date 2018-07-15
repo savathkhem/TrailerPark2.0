@@ -88,14 +88,22 @@ class PosterCard extends React.Component {
     let tempArray = []
     API.checkStream(this.props.title)
     .then((response)=> {
+      console.log(response)
       console.log(response.data)
-      for (let i = 0; i<response.data[0].locations.length; i++) {
-        console.log(response.data[0].locations[i].display_name)
-        tempArray.push(response.data[0].locations[i].display_name)
-      } 
+      if (response.data.length > 0){
+        for (let i = 0; i<response.data[0].locations.length; i++) {
+          console.log(response.data[0].locations[i].display_name)
+          tempArray.push(response.data[0].locations[i].display_name)
+        } 
+    }
     })
     .then( () => {
+      if (tempArray.length > 0) {
       this.setState({streaming: tempArray, available: 'Available On: '})
+      }
+      else {
+        this.setState({available: "Bummer, this isn't currently available on any streaming platform."})
+      }
     })
   }
 
