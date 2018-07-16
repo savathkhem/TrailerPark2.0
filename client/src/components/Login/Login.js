@@ -298,7 +298,6 @@ class Login extends Component {
             </ListItemText>
 
           </ListItem>
-
     
         </Paper>
       </Fragment>
