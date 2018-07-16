@@ -109,6 +109,18 @@ class Landing extends Component {
     modalOpen: false,
   };
 
+  openUrlSavath = () => {
+    window.open("https://www.linkedin.com/in/savathkhem/","_blank")
+  }
+
+  openUrlCezar = () => {
+    window.open("https://www.linkedin.com/in/cezar-carvalhaes/","_blank")
+  }
+
+  openUrlNathan = () => {
+    window.open("https://www.linkedin.com/in/nathaniel-geckle/","_blank")
+  }
+
   handleModalClick = () => {
     this.setState(state => ({ modalOpen: !state.modalOpen }));
   };
@@ -120,21 +132,29 @@ class Landing extends Component {
     <ParallaxProvider>
         <main className={classes.body}>
         <div className={classes.row}>
+        
+        <Button onClick={this.openUrlSavath}>
             <ProfileFrame 
                 style={{float: "left"}}
                 alt="Savath Khem"
-                src="./images/Savath.jpg"  
+                src="./images/Savath.jpg"
             />
+
+        </Button>
+        <Button onClick={this.openUrlCezar}>
             <ProfileFrame 
-                style={{float: "right"}}
+                style={{float: "left"}}
                 alt="Cezar Carvalheas"
                 src="./images/Cezar.jpg"  
             />
+        </Button>
+        <Button onClick={this.openUrlNathan}>
             <ProfileFrame 
                 style={{float: "left"}}
                 alt="Nathan Geckle"
                 src="./images/Nathan.jpg"  
             />
+        </Button>
         </div>
             <Scroll />
             <Gradients />
