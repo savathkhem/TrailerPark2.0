@@ -120,21 +120,24 @@ class Landing extends Component {
     <ParallaxProvider>
         <main className={classes.body}>
         <div className={classes.row}>
+            <a href="https://www.linkedin.com/in/savathkhem/" target="blank">
             <ProfileFrame 
                 style={{float: "left"}}
                 alt="Savath Khem"
-                src="./images/Savath.jpg"  
-            />
+                src="./images/savath.jpg"  
+            /></a>
+            <a href="https://www.linkedin.com/in/cezar-carvalhaes" target="blank">
             <ProfileFrame 
                 style={{float: "right"}}
                 alt="Cezar Carvalheas"
-                src="./images/Cezar.jpg"  
-            />
+                src="./images/cezar.jpg"  
+            /></a>
+            <a href="https://www.linkedin.com/in/nathaniel-geckle/" target="blank">
             <ProfileFrame 
                 style={{float: "left"}}
                 alt="Nathan Geckle"
-                src="./images/Nathan.jpg"  
-            />
+                src="./images/nathan.jpg"  
+            /></a>
         </div>
             <Scroll />
             <Gradients />
