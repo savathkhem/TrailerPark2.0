@@ -131,15 +131,13 @@ class Landing extends Component {
     return (
     <ParallaxProvider>
         <main className={classes.body}>
-        <div className={classes.row}>
-        
+        <div className={classes.row}> 
         <Button onClick={this.openUrlSavath}>
             <ProfileFrame 
                 style={{float: "left"}}
                 alt="Savath Khem"
                 src="./images/Savath.jpg"
             />
-
         </Button>
         <Button onClick={this.openUrlCezar}>
             <ProfileFrame 
