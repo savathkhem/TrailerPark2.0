@@ -8,7 +8,7 @@ Check out the live site at: http://trailerpark.site
 
 **Functionality**
 
-**Sign In**
+- **Sign In**
 Sign in to get started! Authentication is provided through Google's Firebase Authentication, so all credential information is safe.
 
 - **Pagination**
