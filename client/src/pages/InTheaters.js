@@ -154,9 +154,17 @@ class Theaters extends Component {
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
-              key={movie.id} id = {movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              release={movie.release_date} onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              userName= {user.displayName} user_id={user.uid} icon={true}
+                key={movie.id}
+                id={movie.id}
+                src={movie.poster_path}
+                alt={movie.title}
+                title={movie.title}
+                overview={movie.overview}
+                release={movie.release_date}
+                onClick={()=>this.clickPoster(movie.title)}
+                googleMaps = {()=> this.googleMaps()} 
+                userName= {user.displayName}
+                user_id={user.uid} icon={true}
               />
             ))}
           </CardWrapper>
