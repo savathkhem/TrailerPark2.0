@@ -3,41 +3,45 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Modal } from '@material-ui/core/';
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    // width: 'unset',
-    backgroundColor: 'black',
-    boxShadow: theme.shadows[5],
-    padding: 'unset',
+  child: {
+    position: 'relative',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    '@media screen and (max-width: 900px)': {
+      width: '90vw',
+    },
   },
-  // modal: {
-  //   position: 'relavtive',
-  // }
+  modal: {
+    position: 'absolute',
+    height: 'fit-content',
+    '@media screen and (max-width: 900px)': {
+      width: '100vw',
+      left: '50%',
+      transform: 'translate(-50%)',
+    }
+  },
+  BackdropProps: {
+		height: '100vh'
+	},
 });
 
 const ModalNew = (props) =>  (
 
   <Fragment>
     <Modal
+      BackdropProps={{className: props.classes.BackdropProps}}
       className={props.classes.modal}
       open={props.open}
       onClose={props.onClose}
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <div style={getModalStyle()} className={props.classes.paper}>
+      <div 
+      className={props.classes.child}
+      >
         {props.children}
       </div>
     </Modal>
