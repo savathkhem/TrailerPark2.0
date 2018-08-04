@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
-import Modal from "../components/Modal";
+import ModalNew from "../components/ModalNew";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
@@ -14,7 +14,7 @@ let user;
 class TopTV extends Component {
   state = {
     movies: [],
-    modal: false,
+    modalNew: false,
     youTubes: [],
     pageInt: 1,
   }
@@ -91,7 +91,7 @@ class TopTV extends Component {
         return res;
       })
       .then((res) => this.setState({youTubes: res.data}))
-      .then(() => this.openModal())
+      .then(() => this.setState({modalNew: 'true'}))
       .catch((err) => console.log (err));
   }
 
@@ -117,24 +117,24 @@ class TopTV extends Component {
     });
   }
 
-  render() {
-    let toggleModal;
-    if (this.state.modal === true){
-      toggleModal = "show";
-    }
-    else {
-      toggleModal = "modal";
-    }
+  handleModalNewClick = () => {
+    this.setState(state => ({ modalNew: !state.modalNew }));
+  };
 
+  render() {
     return (
       <div>
-        <Modal modal = {toggleModal} onClick = {this.closeModal}>
+        {/* YouTube Modal */}
+        <ModalNew 
+          open={this.state.modalNew}
+          onClose={this.handleModalNewClick}>
           <Carousel>
-            {this.state.youTubes.map((video) => (
+              {this.state.youTubes.map((video) => (
               <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
           </Carousel>
-        </Modal>
+        </ModalNew>
+        {/* End YouTube Modal */}
         <Wrapper>
           <CardWrapper>
             {this.state.movies.map((movie) => (
