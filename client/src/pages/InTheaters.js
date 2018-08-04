@@ -6,6 +6,7 @@ import API from "../utils/API";
 import Modal from "../components/Modal";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
+import ModalNew from '../components/ModalNew';
 
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
@@ -21,7 +22,8 @@ class Theaters extends Component {
     modal: false,
     youTubes: [],
     mapModal: false,
-    pageInt: 1
+    pageInt: 1,
+    modalNew: false,
   }
 
 
@@ -82,7 +84,7 @@ class Theaters extends Component {
         return res;
       })
       .then((res) => this.setState({youTubes: res.data}))
-      .then(() => this.openModal())
+      .then(() => this.setState({modalNew: 'true'}))
       .catch((err) => console.log (err));
   }
 
@@ -111,8 +113,6 @@ class Theaters extends Component {
     return arr;
   };
 
-  openModal = () => this.setState({ modal: true });
-
   closeModal = () => { 
     this.setState({ modal: false, youTubes:[]});
   };
@@ -121,14 +121,11 @@ class Theaters extends Component {
   
   closeMapModal = () => this.setState({ mapModal: false });
 
+  handleModalNewClick = () => {
+    this.setState(state => ({ modalNew: !state.modalNew }));
+  };
+
   render() {
-    let toggleModal;
-    if (this.state.modal === true){
-      toggleModal = "show";
-    }
-    else {
-      toggleModal = "modal";
-    }
 
     let toggleMapModal;
     if (this.state.mapModal === true){
@@ -143,13 +140,18 @@ class Theaters extends Component {
         <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
           <Iframe src= {googleMapUrl}/>
         </Modal>
-        <Modal modal = {toggleModal} onClick = {this.closeModal}>
+        <ModalNew 
+        // modal={toggleModal}
+        // onClick={this.closeModal}
+        open={this.state.modalNew}
+        onClose={this.handleModalNewClick}
+        >
           <Carousel>
             {this.state.youTubes.map((video) => (
               <Iframe src= {video.id.videoId}/>
             ))}
           </Carousel>
-        </Modal>
+        </ModalNew>
         <Wrapper>
           <CardWrapper>
             {this.state.movies.map((movie) => (

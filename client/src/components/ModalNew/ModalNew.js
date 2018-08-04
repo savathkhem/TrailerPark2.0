@@ -17,17 +17,21 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: 'absolute',
-    width: 'unset',
-    backgroundColor: theme.palette.background.paper,
+    // width: 'unset',
+    backgroundColor: 'black',
     boxShadow: theme.shadows[5],
     padding: 'unset',
   },
+  // modal: {
+  //   position: 'relavtive',
+  // }
 });
 
 const ModalNew = (props) =>  (
 
   <Fragment>
     <Modal
+      className={props.classes.modal}
       open={props.open}
       onClose={props.onClose}
       aria-labelledby="simple-modal-title"
