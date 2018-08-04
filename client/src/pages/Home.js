@@ -6,6 +6,7 @@ import API from "../utils/API";
 import Modal from "../components/Modal";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
+import ModalNew from '../components/ModalNew';
 import "./Home.css";
 
 const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me"
@@ -20,7 +21,7 @@ class Home extends Component {
     mapModal: false,
     youTubes: [],
     comment: "",
-    modalOpen: false,
+    modalNew: false,
   }
 
   componentDidMount() {
@@ -42,7 +43,7 @@ class Home extends Component {
         return res;
       })
       .then((res) => this.setState({ youTubes: res.data }))
-      .then(() => this.openModal())
+      .then(() => this.setState({modalNew: 'true'}))
       .catch((err) => console.log (err));
   }
 
@@ -79,15 +80,11 @@ class Home extends Component {
     .catch(err => console.log(err));
   }
 
+  handleModalNewClick = () => {
+    this.setState(state => ({ modalNew: !state.modalNew }));
+  };
+
   render() {
-    let toggleModal;
-    if (this.state.modal === true){
-      toggleModal = "show";
-    }
-    else {
-      toggleModal = "modal";
-    }
-    
     let toggleMapModal;
     if (this.state.mapModal === true){
       toggleMapModal = "show";
@@ -98,16 +95,31 @@ class Home extends Component {
 
     return (
       <div>
-        <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
+
+
+        {/* Map Modal */}
+        <Modal 
+          modal={toggleMapModal}
+          onClick={this.closeMapModal}>
           <Iframe src= {googleMapUrl}/>
         </Modal>
+        {/* End Map Modal */}
 
-        <Modal modal = {toggleModal} onClick={this.closeModal}>
+
+        {/* YouTube Modal */}
+        <ModalNew 
+        open={this.state.modalNew}
+        onClose={this.handleModalNewClick}
+        >
           <Carousel>
             {this.state.youTubes.map((video) => (
-          <Iframe src= {video.id.videoId} key={video.id.videoId}/>))}
+              <Iframe src= {video.id.videoId}/>
+            ))}
           </Carousel>
-        </Modal>
+        </ModalNew>
+        {/* End YouTube Modal */}
+
+
         <h2 className="favorite">Fave's List</h2>
                 <div>
                   <Wrapper>

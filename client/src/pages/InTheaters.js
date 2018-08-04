@@ -148,8 +148,6 @@ class Theaters extends Component {
 
         {/* YouTube Modal */}
         <ModalNew 
-        // modal={toggleModal}
-        // onClick={this.closeModal}
         open={this.state.modalNew}
         onClose={this.handleModalNewClick}
         >
