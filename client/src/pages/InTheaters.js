@@ -126,7 +126,6 @@ class Theaters extends Component {
   };
 
   render() {
-
     let toggleMapModal;
     if (this.state.mapModal === true){
       toggleMapModal = "show";
@@ -137,9 +136,17 @@ class Theaters extends Component {
 
     return (
       <div>
-        <Modal modal = {toggleMapModal} onClick = {this.closeMapModal}>
+
+        {/* Map Modal */}
+        <Modal 
+          modal={toggleMapModal}
+          onClick={this.closeMapModal}>
           <Iframe src= {googleMapUrl}/>
         </Modal>
+        {/* End Map Modal */}
+
+
+        {/* YouTube Modal */}
         <ModalNew 
         // modal={toggleModal}
         // onClick={this.closeModal}
@@ -152,6 +159,9 @@ class Theaters extends Component {
             ))}
           </Carousel>
         </ModalNew>
+        {/* End YouTube Modal */}
+
+
         <Wrapper>
           <CardWrapper>
             {this.state.movies.map((movie) => (
