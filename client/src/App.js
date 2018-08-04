@@ -14,7 +14,8 @@ const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
 
 class App extends Component {
   state = {
-    loading: true, authenticated: false, 
+    loading: true, 
+    authenticated: false, 
     searchRedirect: false,
     searchArr: []
   };
