@@ -5,7 +5,7 @@ import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
 import ModalNew from "../components/ModalNew";
-import Iframe from "../components/iFrame";
+import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
 const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
