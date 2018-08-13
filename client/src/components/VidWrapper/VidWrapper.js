@@ -13,15 +13,15 @@ const styles = theme => ({
   });
   
 
-const Iframe = (props) => (
+const VidWrapper = (props) => (
     <div>
         <iframe className={props.classes.iframe} type="text/html" src={props.src} title={props.title}></iframe>
     </div>
 );
 
 
-Iframe.propTypes = {
+VidWrapper.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
-  export default withStyles(styles)(Iframe);
+  export default withStyles(styles)(VidWrapper);
