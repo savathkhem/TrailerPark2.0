@@ -8,9 +8,10 @@ import ModalNew from "../components/ModalNew";
 import Iframe from "../components/Iframe";
 import Carousel from "../components/Carousel";
 
-const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
+const tmdbImgUrl = "https://image.tmdb.org/t/p/w185";
 
-const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
+const googleMapUrl =
+  "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
 
 let user;
 
@@ -20,100 +21,100 @@ class Upcoming extends Component {
     modal: false,
     modalNew: false,
     youTubes: [],
-    pageInt: 1,
-  }
+    pageInt: 1
+  };
 
   componentDidMount() {
-    this.getMovies()
+    this.getMovies();
     user = this.props.user;
-    window.addEventListener('scroll', this.onScroll, false);
+    window.addEventListener("scroll", this.onScroll, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
+    window.removeEventListener("scroll", this.onScroll, false);
   }
 
   getMovies = () => {
-    //Store current array of movies to add to later. 
+    //Store current array of movies to add to later.
     let tempMoviesArr = this.state.movies;
     //grab pageNumber from state and cast as string
     let pageInt = this.state.pageInt.toString();
-    
+
     API.getUpcoming(pageInt)
-    .then((res) => {
-      this.checkPosterPaths(res.data);
-      return res;
-    })
-    .then((res) => {
-      let newArr = tempMoviesArr.concat(res.data)
-      this.setState({ movies: newArr })
-    })
-    .then(()=>{
-      if (this.state.isLoading) {
-        this.setState({isLoading: false})
-      }
-    })
-    .catch(err => console.log(err));
-  }
+      .then(res => {
+        this.checkPosterPaths(res.data);
+        return res;
+      })
+      .then(res => {
+        let newArr = tempMoviesArr.concat(res.data);
+        this.setState({ movies: newArr });
+      })
+      .then(() => {
+        if (this.state.isLoading) {
+          this.setState({ isLoading: false });
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   onScroll = () => {
     if (
-      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
       !this.state.isLoading
     ) {
-      this.nextSet()
+      this.nextSet();
     }
-  }
+  };
 
   nextSet = () => {
-    this.setState({isLoading: true})
+    this.setState({ isLoading: true });
     let temp = this.state.pageInt;
     temp++;
-    this.setState({pageInt:temp})
+    this.setState({ pageInt: temp });
     this.getMovies();
-  }
+  };
 
   clickPoster(title) {
     API.getTrailers(title)
-      .then((res) => {
+      .then(res => {
         console.log(res);
         this.createYouTubeUrl(res.data);
         return res;
       })
-      .then((res) => this.setState({ youTubes: res.data }))
-      .then(() => this.setState({modalNew: 'true'}))
-      .catch((err) => console.log (err));
+      .then(res => this.setState({ youTubes: res.data }))
+      .then(() => this.setState({ modalNew: "true" }))
+      .catch(err => console.log(err));
   }
 
   checkPosterPaths(arr) {
     let newArr = arr;
-    newArr.map( (movie) => {
-      if (movie.poster_path === null){
-        return movie.poster_path = "./images/placeholder.jpg";
-      }
-      else{
-        return movie.poster_path = tmdbImgUrl + movie.poster_path;
+    newArr.map(movie => {
+      if (movie.poster_path === null) {
+        return (movie.poster_path = "./images/placeholder.jpg");
+      } else {
+        return (movie.poster_path = tmdbImgUrl + movie.poster_path);
       }
     });
     arr = newArr;
     return arr;
-  };
+  }
 
   googleMaps() {
     this.openMapModal();
   }
 
-  createYouTubeUrl (arr) {
+  createYouTubeUrl(arr) {
     let newArr = arr;
-    newArr.map( (video) => {
-      return video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
+    newArr.map(video => {
+      return (video.id.videoId =
+        "https://www.youtube.com/embed/" + video.id.videoId);
     });
   }
 
   openModal = () => this.setState({ modal: true });
 
-  closeModal = () => { 
-    this.setState({ modal: false, youTubes:[]});
+  closeModal = () => {
+    this.setState({ modal: false, youTubes: [] });
   };
 
   openMapModal = () => this.setState({ mapModal: true });
@@ -126,52 +127,51 @@ class Upcoming extends Component {
 
   render() {
     let toggleMapModal;
-    if (this.state.mapModal === true){
+    if (this.state.mapModal === true) {
       toggleMapModal = "show";
-    }
-    else {
+    } else {
       toggleMapModal = "modal";
     }
 
     return (
       <div>
-
         {/* Map Modal */}
-        <Modal 
-          modal={toggleMapModal}
-          onClick={this.closeMapModal}>
-          <Iframe src= {googleMapUrl}/>
+        <Modal modal={toggleMapModal} onClick={this.closeMapModal}>
+          <Iframe src={googleMapUrl} />
         </Modal>
         {/* End Map Modal */}
 
-
         {/* YouTube Modal */}
-        <ModalNew 
-        open={this.state.modalNew}
-        onClose={this.handleModalNewClick}
-        >
+        <ModalNew open={this.state.modalNew} onClose={this.handleModalNewClick}>
           <Carousel>
-            {this.state.youTubes.map((video) => (
-              <Iframe src= {video.id.videoId}/>
+            {this.state.youTubes.map(video => (
+              <Iframe src={video.id.videoId} />
             ))}
           </Carousel>
         </ModalNew>
         {/* End YouTube Modal */}
 
-        
         <Wrapper>
           <CardWrapper>
-            {this.state.movies.map((movie) => (
-              <Card 
-              key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
-              onClick={()=>this.clickPoster(movie.title)} googleMaps = {()=> this.googleMaps()} 
-              id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true}
+            {this.state.movies.map(movie => (
+              <Card
+                key={movie.id}
+                src={movie.poster_path}
+                alt={movie.title}
+                title={movie.title}
+                overview={movie.overview}
+                onClick={() => this.clickPoster(movie.title)}
+                googleMaps={() => this.googleMaps()}
+                id={movie.id}
+                userName={user.displayName}
+                user_id={user.uid}
+                icon={true}
               />
             ))}
           </CardWrapper>
         </Wrapper>
       </div>
-    )
+    );
   }
 }
 
