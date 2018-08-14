@@ -27,7 +27,7 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    position: 'relative',
+    position: 'fixed',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -152,7 +152,6 @@ class NavBar extends React.Component {
     return (
       <div>
         <AppBar
-          position="fixed"
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open,
             [classes[`appBarShift-${anchor}`]]: open,
