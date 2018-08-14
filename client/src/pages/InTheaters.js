@@ -4,7 +4,7 @@ import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
 import Modal from "../components/Modal";
-import Iframe from "../components/Iframe";
+import Iframe from "../components/VidWrapper";
 import Carousel from "../components/Carousel";
 import ModalNew from '../components/ModalNew';
 

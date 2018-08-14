@@ -1,32 +1,37 @@
 #logo{
     color: #fff;
     font-family: Monoton;
-    -webkit-animation: none;
-    -moz-animation: none;
     font-size: inherit;
     margin: 0px;
-  }
-  
-  a {
     text-decoration: none;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     transition: all 0.5s;
-  }
-  
-  #logo a {
-    color: #fff;
-    font-family: Monoton;
-    -webkit-animation: none;
-    -moz-animation: none;
     animation: neon1 2s ease-in-out infinite alternate;
   }
+
+  #logo a{
+    color: #fff;
+    font-family: Monoton;
+    font-size: inherit;
+    text-decoration: none;
+  }
   
+  
+  #logo:hover {
+    color: #FF1177;
+    -webkit-animation: none;
+    -moz-animation: none;
+    animation: none;
+    transition: all 0.5s;
+  }
+
   #logo a:hover {
     color: #FF1177;
     -webkit-animation: none;
     -moz-animation: none;
     animation: none;
+    transition: all 0.5s;
   }
   
   
@@ -61,13 +66,3 @@
     }
   }
   
-  /*REEEEEEEEEEESPONSIVE*/
-  
-  @media (max-width: 650px) {
-    #container {
-      width: 100%;
-    }
-    p {
-      font-size: inherit;
-    }
-  }
