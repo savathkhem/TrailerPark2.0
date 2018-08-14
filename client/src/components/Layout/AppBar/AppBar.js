@@ -127,6 +127,14 @@ class NavBar extends React.Component {
     modalOpen: false
   };
 
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
+  };
+
   handleModalClick = () => {
     this.setState(state => ({ modalOpen: !state.modalOpen }));
   };
@@ -187,8 +195,12 @@ class NavBar extends React.Component {
 
     return (
       <div>
-        <ModalNew open={this.state.modalOpen} onClose={this.handleModalClick}>
-          <Login/>
+        <ModalNew
+         open={this.state.modalOpen}
+         onClose={this.handleModalClick}
+        >
+          <Login onClick={this.handleModalClick}/>
+          
         </ModalNew>
         <AppBar
           className={classNames(classes.appBar, {
