@@ -6,22 +6,20 @@ import { Modal } from '@material-ui/core/';
 
 const styles = theme => ({
   child: {
-    position: 'relative',
+    position: 'inherit',
     top: '50%',
     left: '50%',
+    width: '90vw',
     transform: 'translate(-50%, -50%)',
     '@media screen and (max-width: 900px)': {
       width: '90vw',
     },
   },
   modal: {
-    position: 'absolute',
+    position: 'fixed',
     height: 'fit-content',
-    '@media screen and (max-width: 900px)': {
-      width: '100vw',
-      left: '50%',
-      transform: 'translate(-50%)',
-    }
+    zIndex: '100', /* Sit on top */
+    overflow: 'auto',
   },
   BackdropProps: {
 		height: '100vh'
