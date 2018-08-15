@@ -52,12 +52,6 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen
     })
   },
-  "appBarShift-left": {
-    marginLeft: drawerWidth
-  },
-  "appBarShift-right": {
-    marginRight: drawerWidth
-  },
   avatar: {
     margin: 10
   },
@@ -71,52 +65,9 @@ const styles = theme => ({
     marginRight: 20,
     float: "right"
   },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 20,
-    float: "right"
-  },
   hide: {
     display: "none"
   },
-  drawerPaper: {
-    // position: 'relative',
-    width: drawerWidth
-  },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  "content-left": {
-    marginLeft: -drawerWidth
-  },
-  "content-right": {
-    marginRight: -drawerWidth
-  },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  "contentShift-left": {
-    marginLeft: 0
-  },
-  "contentShift-right": {
-    marginRight: 0
-  }
 });
 
 class NavBar extends React.Component {
@@ -247,13 +198,8 @@ class NavBar extends React.Component {
           style={{ backgroundColor: "#424242" }}
         >
           <Toolbar disableGutters={!open}>
-            {/* <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classNames(classes.menuButton, open && classes.hide)}>
-              <MenuIcon />
-            </IconButton> */}
+
+            {/* Drawer For Menu Items */}
             <DrawerLeft
               onChange={this.props.onChange}
               handleSubmit={this.props.handleSubmit}
@@ -265,6 +211,9 @@ class NavBar extends React.Component {
               className={classes.flex}
             >
               <Logo />
+            </Typography>
+            <Typography align="center" variant="title">
+              ""Page Title Goes Here""
             </Typography>
             {auth && (
               // <div>
