@@ -242,7 +242,7 @@ class NavBar extends React.Component {
                     alt={this.props.name}
                     className={(classes.avatar, classes.bigAvatar)}
                   >
-                    <img className={classes.bigAvatar} src={this.props.src} />
+                    <img className={classes.bigAvatar} src={this.props.src} alt={this.props.name} />
                   </Avatar>
                 </IconButton>
                 <Menu
