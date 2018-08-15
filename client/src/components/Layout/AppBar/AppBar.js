@@ -172,6 +172,29 @@ class NavBar extends React.Component {
     const { anchor, open } = this.state;
     const { auth, anchorEl } = this.state;
     const openlogin = Boolean(anchorEl);
+    
+    //saves currentPage for App Bar title
+    const currentPage = ()=> {
+      let current = window.location.pathname;
+      if (current === "/in-theaters") {
+        return "In Theaters"
+      }
+      else if (current === "/search") {
+        return "Results"
+      }
+      else if (current === "/top-movies") {
+        return "Top Movies"
+      }
+      else if (current === "/top-tv") {
+        return "Top TV Shows"
+      }
+      else if (current === "/upcoming") {
+        return "Upcoming Movies"
+      }
+      else if (current === "/favorites") {
+        return "Favorites"
+      }
+    };
 
     //Saves user for conditional rendering of login/logout functions
     const user = this.props.name;
@@ -265,6 +288,7 @@ class NavBar extends React.Component {
               className={classes.flex}
             >
               <Logo />
+              {currentPage()}
             </Typography>
             {auth && (
               // <div>
