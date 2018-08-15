@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Redirect, BrowserRouter as Router, Route } from "react-router-dom";
 import { AppBar } from "./components/Layout";
-import Login from "./components/Login";
-import Landing from "./components/Landing";
 import { Home, TopTV, InTheaters, Upcoming, TopMovie } from "./pages/";
 import API from "./utils/API";
 import "./App.css";

@@ -1,7 +1,7 @@
 import React from "react";
 
 const Wrapper = (props) => (
-  <div className="container">
+  <div style={{ marginTop: "65px" }}>
     {props.children}
   </div>
 );
