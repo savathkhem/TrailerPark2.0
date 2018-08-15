@@ -11,6 +11,7 @@ const styles = theme => ({
     fontSize: 'xx-large',
   },
   buttonIcon: {
+    fontFamily: 'Monoton',
     color: '#FF1177',
     fontSize: 'large',
   },
