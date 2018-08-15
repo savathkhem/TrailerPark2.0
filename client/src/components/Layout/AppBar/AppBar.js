@@ -236,9 +236,6 @@ class NavBar extends React.Component {
               <Logo />
               {currentPage()}
             </Typography>
-            <Typography align="center" variant="title">
-              ""Page Title Goes Here""
-            </Typography>
             {auth && (
               // <div>
               //   <IconButton
