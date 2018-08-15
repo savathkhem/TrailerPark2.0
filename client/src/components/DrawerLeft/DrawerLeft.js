@@ -34,7 +34,7 @@ class DrawerLeft extends React.Component {
         <ChevronLeftIcon />
       </IconButton>
       <Divider />
-      <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit}/></List>
+      <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit} onClick={this.toggleDrawer('left', false)}/></List>
       </div>
     );
 

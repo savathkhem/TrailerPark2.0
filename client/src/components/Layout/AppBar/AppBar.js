@@ -124,7 +124,6 @@ class NavBar extends React.Component {
     anchor: "left",
     auth: true,
     anchorEl: null,
-    modalOpen: false
   };
 
   handleClick = event => {
@@ -135,9 +134,6 @@ class NavBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  handleModalClick = () => {
-    this.setState(state => ({ modalOpen: !state.modalOpen }));
-  };
 
   handleChange = (event, checked) => {
     this.setState({ auth: checked });
@@ -200,7 +196,7 @@ class NavBar extends React.Component {
          onClose={this.handleModalClick}
         >
           <Login onClick={this.handleModalClick}/>
-          
+
         </ModalNew>
         <AppBar
           className={classNames(classes.appBar, {

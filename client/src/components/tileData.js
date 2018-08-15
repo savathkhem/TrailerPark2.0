@@ -11,8 +11,9 @@ const PageOptions = (props) => (
     <ListItem>
       <SearchBar onChange={props.onChange} handleSubmit={props.handleSubmit}/>
     </ListItem>
-    <ListItem component={Link} to="/" button>
-      <ListItemText primary="Fave's List" />
+    <div onClick={props.onClick}>
+    <ListItem component={Link} to="/favorites" button>
+      <ListItemText primary="Favorites" />
     </ListItem>
     <ListItem component={Link} to="/in-theaters" button>
       <ListItemText primary="In Theaters" />
@@ -26,6 +27,7 @@ const PageOptions = (props) => (
     <ListItem component={Link} to="/upcoming" button>
       <ListItemText primary="Upcoming Movies" />
     </ListItem>
+    </div>
   </div>
 );
 
