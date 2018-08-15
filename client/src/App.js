@@ -112,6 +112,11 @@ class App extends Component {
           <Route
             exact
             path="/"
+            render={() => <InTheaters user={this.state.currentUser} />}
+          />
+          <Route
+            exact
+            path="/favorites"
             render={() => <Home user={this.state.currentUser} />}
           />
           <Route
