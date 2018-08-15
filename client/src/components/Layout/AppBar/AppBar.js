@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -17,6 +17,7 @@ import firebase from "../../../firebaseConfig";
 import DrawerLeft from "./../../DrawerLeft";
 import ModalNew from "../../ModalNew";
 import Login from "../../Login";
+import LoginMenu from '../../LoginMenu'
 
 
 const drawerWidth = 240;
@@ -182,15 +183,55 @@ class NavBar extends React.Component {
 
     if (user === "Not Logged In") {
       loginToggle = (
-          <MenuItem
-            onClick={this.handleModalClick}
-            onClose={this.handleModalClick}
-          >
-            Log In
-          </MenuItem>
+          // <MenuItem
+          //   onClick={this.handleModalClick}
+          //   onClose={this.handleModalClick}
+          // >
+          //   Log In
+          // </MenuItem>
+          <LoginMenu />
       );
     } else {
-      loginToggle = <MenuItem onClick={this.logOut}>Log Out</MenuItem>;
+      // loginToggle = <MenuItem onClick={this.logOut}>Log Out</MenuItem>;
+      loginToggle= <Fragment>
+      <IconButton
+        className={classes.avatarButton}
+        aria-owns={openlogin ? "menu-appbar" : null}
+        aria-haspopup="true"
+        onClick={this.handleMenu}
+        color="inherit"
+      >
+        <Avatar
+          alt={this.props.name}
+          className={(classes.avatar, classes.bigAvatar)}
+        >
+          <img className={classes.bigAvatar} src={this.props.src} alt={this.props.name} />
+        </Avatar>
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right"
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right"
+        }}
+        open={openlogin}
+        onClose={this.handleClose}
+      >
+        <MenuItem onClick={this.handleClose}>
+          <Link to="/">
+            {this.props.name}
+            's Profile
+          </Link>
+        </MenuItem>
+        <MenuItem onClick={this.handleClose}>Settings</MenuItem>
+        <MenuItem onClick={this.logOut}>Log Out</MenuItem>;
+      </Menu>
+    </Fragment>
     }
 
     return (
@@ -230,45 +271,48 @@ class NavBar extends React.Component {
               <Logo />
             </Typography>
             {auth && (
-              <div>
-                <IconButton
-                  className={classes.avatarButton}
-                  aria-owns={openlogin ? "menu-appbar" : null}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <Avatar
-                    alt={this.props.name}
-                    className={(classes.avatar, classes.bigAvatar)}
-                  >
-                    <img className={classes.bigAvatar} src={this.props.src} alt={this.props.name} />
-                  </Avatar>
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                  }}
-                  open={openlogin}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>
-                    <Link to="/">
-                      {this.props.name}
-                      's Profile
-                    </Link>
-                  </MenuItem>
-                  <MenuItem onClick={this.handleClose}>Settings</MenuItem>
-                  {loginToggle}
-                </Menu>
-              </div>
+              // <div>
+              //   <IconButton
+              //     className={classes.avatarButton}
+              //     aria-owns={openlogin ? "menu-appbar" : null}
+              //     aria-haspopup="true"
+              //     onClick={this.handleMenu}
+              //     color="inherit"
+              //   >
+              //     <Avatar
+              //       alt={this.props.name}
+              //       className={(classes.avatar, classes.bigAvatar)}
+              //     >
+              //       <img className={classes.bigAvatar} src={this.props.src} alt={this.props.name} />
+              //     </Avatar>
+              //   </IconButton>
+              //   <Menu
+              //     id="menu-appbar"
+              //     anchorEl={anchorEl}
+              //     anchorOrigin={{
+              //       vertical: "top",
+              //       horizontal: "right"
+              //     }}
+              //     transformOrigin={{
+              //       vertical: "top",
+              //       horizontal: "right"
+              //     }}
+              //     open={openlogin}
+              //     onClose={this.handleClose}
+              //   >
+              //     <MenuItem onClick={this.handleClose}>
+              //       <Link to="/">
+              //         {this.props.name}
+              //         's Profile
+              //       </Link>
+              //     </MenuItem>
+              //     <MenuItem onClick={this.handleClose}>Settings</MenuItem>
+              //     {loginToggle}
+              //   </Menu>
+              // </div>
+              <Fragment>
+              {loginToggle}
+              </Fragment>
             )}
           </Toolbar>
         </AppBar>

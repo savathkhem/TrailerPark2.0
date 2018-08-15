@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from "react";
-// import DrawerLeft from "./components/DrawerLeft";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-// import MenuItem from '@material-ui/core/MenuItem';
 import { Paper, Typography, TextField, ListItem, ListItemText, ListItemIcon, Button, IconButton, Menu } from '@material-ui/core/';
 import firebase from "../../firebaseConfig";
 import withFirebaseAuth from "react-auth-firebase";
@@ -192,6 +190,7 @@ class Login extends Component {
             )}
           </form>
           </Menu>
+          
 
           <IconButton
             className={
@@ -262,7 +261,6 @@ class Login extends Component {
                 Sign In With Google
               </Typography>
             </ListItemText>
-
           </ListItem>
 
           <ListItem button onClick={signInWithFacebook}>
@@ -296,7 +294,6 @@ class Login extends Component {
                 Sign In With Twitter
               </Typography>
             </ListItemText>
-
           </ListItem>
     
         </Paper>
