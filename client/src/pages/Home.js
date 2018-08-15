@@ -118,9 +118,6 @@ class Home extends Component {
           </Carousel>
         </ModalNew>
         {/* End YouTube Modal */}
-
-
-        <h2 className="favorite">Fave's List</h2>
                 <div>
                   <Wrapper>
                     <CardWrapper>
