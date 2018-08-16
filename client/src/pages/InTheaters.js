@@ -153,7 +153,7 @@ class Theaters extends Component {
         >
           <Carousel>
             {this.state.youTubes.map((video) => (
-              <Iframe src= {video.id.videoId}/>
+              <Iframe key={video.id.videoId} src= {video.id.videoId}/>
             ))}
           </Carousel>
         </ModalNew>
