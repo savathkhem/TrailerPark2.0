@@ -63,6 +63,8 @@ class Search extends Component {
             {this.props.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+              vote_avg={movie.vote_average}
+              vote_count={movie.vote_count}
               onClick={()=>this.clickPoster(movie.title)}
               id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true} stream={true}
               />

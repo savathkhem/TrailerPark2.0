@@ -30,6 +30,7 @@ class TopTV extends Component {
     window.removeEventListener('scroll', this.onScroll, false);
   }
 
+  // unique to this page
   getShows = () => {
     //Store current array of movies to add to later. 
     let tempMoviesArr = this.state.movies;
@@ -140,6 +141,8 @@ class TopTV extends Component {
             {this.state.movies.map((movie) => (
               <Card 
               key={movie.id} src={movie.poster_path} alt={movie.name} title= {movie.name} overview={movie.overview}
+              vote_avg={movie.vote_average}
+              vote_count={movie.vote_count}
               onClick={()=>this.clickPoster(movie.name)} 
               id={movie.id} userName= {user.displayName} user_id={user.uid} icon={true} stream={true}
               />

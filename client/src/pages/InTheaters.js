@@ -37,6 +37,8 @@ class Theaters extends Component {
     window.removeEventListener('scroll', this.onScroll, false);
   }
 
+
+  // unique to this page
   getMovies = () => {
     //Store current array of movies to add to later. 
     let tempMoviesArr = this.state.movies;
@@ -88,6 +90,7 @@ class Theaters extends Component {
       .catch((err) => console.log (err));
   }
 
+  // unique to this page
   googleMaps() {
     this.openMapModal();
   }
@@ -169,6 +172,8 @@ class Theaters extends Component {
                 src={movie.poster_path}
                 alt={movie.title}
                 title={movie.title}
+                vote_avg={movie.vote_average}
+                vote_count={movie.vote_count}
                 overview={movie.overview}
                 release={movie.release_date}
                 onClick={()=>this.clickPoster(movie.title)}

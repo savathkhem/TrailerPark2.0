@@ -159,6 +159,8 @@ class Upcoming extends Component {
                 src={movie.poster_path}
                 alt={movie.title}
                 title={movie.title}
+                vote_avg={movie.vote_average}
+                vote_count={movie.vote_count}
                 overview={movie.overview}
                 onClick={() => this.clickPoster(movie.title)}
                 googleMaps={() => this.googleMaps()}

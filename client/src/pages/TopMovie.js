@@ -128,9 +128,18 @@ class TopMovie extends Component {
           <CardWrapper>
             {this.state.movies.map((movie) => (
               <Card 
-              key={movie.id} src={movie.poster_path} alt={movie.title} title= {movie.title} overview={movie.overview}
+              key={movie.id}
+              id={movie.id}
+              src={movie.poster_path}
+              alt={movie.title}
+              title= {movie.title}
+              vote_avg={movie.vote_average}
+              vote_count={movie.vote_count}
+              overview={movie.overview}
               onClick={()=>this.clickPoster(movie.title)} 
-              id={movie.id}userName= {user.displayName} user_id={user.uid} icon={true} stream= {true}
+              userName={user.displayName}
+              user_id={user.uid}
+              icon={true} stream= {true}
               />
             ))}
           </CardWrapper>

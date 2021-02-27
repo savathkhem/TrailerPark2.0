@@ -86,16 +86,17 @@ class PosterCard extends React.Component {
   checkStream = () => {
     console.log('check stream')
     let tempArray = []
-    API.checkStream(this.props.title)
+    API.checkStream(this.props.id)
     .then((response)=> {
-      console.log(response)
-      console.log(response.data)
-      if (response.data.length > 0){
-        for (let i = 0; i<response.data[0].locations.length; i++) {
-          console.log(response.data[0].locations[i].display_name)
-          tempArray.push(response.data[0].locations[i].display_name)
-        } 
-    }
+
+      // var path = response.data.US.flatrate
+        if (response.data.US && response.data.US.flatrate && response.data.US.flatrate.length > 0){
+          for (let i = 0; i<1; i++) {
+            tempArray.push(response.data.US.flatrate[i].provider_name)
+          } 
+          console.log("array :"+tempArray) 
+      }
+      
     })
     .then( () => {
       if (tempArray.length > 0) {
@@ -122,7 +123,7 @@ class PosterCard extends React.Component {
   render() {
     const { classes } = this.props;
     const icon = this.props.icon;
-    const GoogleMapsButton = () => <button onClick = {this.props.googleMaps}> Theaters Nearby </button>;
+    // const GoogleMapsButton = () => <button onClick = {this.props.googleMaps}> Theaters Nearby </button>;
     const CheckStreamingButton = () => <button onClick = {this.checkStream}> Can I Stream This? </button>;
     const stream = this.props.stream;
 
@@ -144,6 +145,7 @@ class PosterCard extends React.Component {
             open={this.state.favOpen}
             onClose={this.handleFavClick}
           />
+          {this.props.vote_avg}
         </div>
         <CardActions className={classes.actions} disableActionSpacing>
         <IconButton onClick={icon ? this.saveFavorite : this.deleteFavorite}>
@@ -176,7 +178,8 @@ class PosterCard extends React.Component {
               <Typography paragraph variant="body2" className={classes.primaryText}>
                 {this.props.overview}
               </Typography>
-              {stream ? <CheckStreamingButton/> : <GoogleMapsButton/>}
+              {/* {stream ? <CheckStreamingButton/> : <GoogleMapsButton/>} */}
+              <CheckStreamingButton/>
               <p className={classes.streaming}>{this.state.available}</p>
               {this.state.streaming.map((service) => <p key ={service} className={classes.streaming}>{service}</p>) }
             </CardContent>

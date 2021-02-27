@@ -2,33 +2,33 @@ import axios from "axios";
 
 export default {
   getMovies: (int) => {
-    return axios.get("/api/movies/in-theaters/" + int);
+    return axios.get("/api/trailers/in-theaters/" + int);
   },
 
   getTopMovies: (int) => {
-    return axios.get("/api/movies/top-movies/" + int);
+    return axios.get("/api/trailers/top-movies/" + int);
   },
 
   getTopTv: (int) => {
-    return axios.get("/api/movies/top-tv/" + int);
+    return axios.get("/api/trailers/top-tv/" + int);
   },
 
   getTrailers: (query) => {
     let search = query.replace(/\s/g, "+").toLowerCase();
     console.log(search);
 
-    return axios.get("/api/movies/trailers/" + search);
+    return axios.get("/api/trailers/trailers/" + search);
   },
 
   getUpcoming: (int) => {
-    return axios.get("api/movies/upcoming/" + int);
+    return axios.get("api/trailers/upcoming/" + int);
   },
   
   getSearch: (query) => {
     let search = query.replace(/\s/g, "+").toLowerCase();
     console.log(search);
 
-    return axios.get("/api/movies/search/" + search);
+    return axios.get("/api/trailers/search/" + search);
   },
 
   getComments: (id) => {
@@ -55,9 +55,21 @@ export default {
     return axios.get("api/db/favorites/" + user)
   },
 
-  checkStream: (name) => {
-    let title = name.replace(/\s/g, "+").toLowerCase();
-    console.log(title)
-    return axios.get("api/movies/stream/" + title)
+  // checkStream: (name) => {
+  //   let title = name.replace(/\s/g, "+").toLowerCase();
+  //   console.log(title)
+  //   return axios.get("api/trailers/stream/" + title)
+  // },
+
+  checkStream: (id) => {
+    console.log(id)
+    return axios.get("api/trailers/stream/" + id)
   },
+
+  // getMovieProvider
+  // getTvProvider
+
+
+
+
 }

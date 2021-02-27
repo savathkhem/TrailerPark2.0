@@ -9,6 +9,7 @@ const baseYoutubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippe
 const youtubeParams = "+official+trailer&maxResults=3&key=";
 const searchUrl = "https://api.themoviedb.org/3/search/movie?&language=en-US&page=&include_adult=false&api_key=";
 const uTellyURL = "https://utelly-tv-shows-and-movies-availability-v1.p.mashape.com/lookup?&country=us&term=";
+const providerUrl = 'https://api.themoviedb.org/3/movie/';
 
 //API Keys
 const youtubeKey = process.env.YOUTUBE_API_KEY;
@@ -80,20 +81,33 @@ router.get("/search/:title", (req, res)=> {
 });
 
 //Utelly
-router.get("/stream/:title", (req, res) =>{
-  let title = req.params.title;
-  axios({
-    url: uTellyURL + title,
-    method: "GET",
-    headers: {
-      'X-Mashape-Key': uTellyKey,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
+// router.get("/stream/:title", (req, res) =>{
+//   let title = req.params.title;
+//   axios({
+//     url: uTellyURL + title,
+//     method: "GET",
+//     headers: {
+//       'X-Mashape-Key': uTellyKey,
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     }
+//   })
+//   .then((response) => res.json(response.data.results))
+//   .catch((err) => res.status(422).json(err))
+// })
+
+// Get Provider
+// https://api.themoviedb.org/3/movie/597/watch/providers?api_key=0c9ebd7d6e76fc10f179166f9acd0665
+router.get("/stream/:id", (req, res) =>{
+  let id = req.params.id;
+  let requestUrl = providerUrl + id + "/watch/providers?api_key=" + tmdbKey
+  axios
+  .get(requestUrl)
   .then((response) => res.json(response.data.results))
-  .catch((err) => res.status(422).json(err))
-})
+  .catch(err => res.status(422).json(err));
+});
 
 
 module.exports = router;
+
+
