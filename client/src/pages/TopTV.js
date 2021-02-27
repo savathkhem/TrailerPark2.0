@@ -130,7 +130,7 @@ class TopTV extends Component {
           onClose={this.handleModalNewClick}>
           <Carousel>
               {this.state.youTubes.map((video) => (
-              <Iframe key={video.id.videoId} src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
+              <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
           </Carousel>
         </ModalNew>

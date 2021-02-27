@@ -145,7 +145,7 @@ class Upcoming extends Component {
         <ModalNew open={this.state.modalNew} onClose={this.handleModalNewClick}>
           <Carousel>
             {this.state.youTubes.map(video => (
-              <Iframe key={video.id.videoId} src={video.id.videoId} />
+              <Iframe src={video.id.videoId} />
             ))}
           </Carousel>
         </ModalNew>
