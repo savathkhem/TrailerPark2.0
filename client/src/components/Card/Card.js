@@ -48,9 +48,15 @@ const styles = theme => ({
     marginBottom: '0px',
     marginTop: '8px',
   },
-  streaming: {
+  providerHeader: {
     color: "#f2f2f2",
-    textAlign: 'center'
+    textAlign: 'left',
+    marginBottom: 0,
+  },
+  providers: {
+    color: "#f2f2f2",
+    textAlign: 'left',
+    marginTop: 0,
   }
 });
 
@@ -60,7 +66,12 @@ class PosterCard extends React.Component {
     favOpen: false,
     modalOpen: false,
     streaming: [],
-    available: '',
+    buy: [],
+    rent: [],
+    streamable: '',
+    buyable: '',
+    rentable: '',
+    status: '',
   };
 
   saveFavorite = () => {
@@ -83,30 +94,156 @@ class PosterCard extends React.Component {
     this.props.foolish()
   }
 
-  checkStream = () => {
-    console.log('check stream')
-    let tempArray = []
-    API.checkStream(this.props.id)
-    .then((response)=> {
+  getProviders = () => {
+    this.getStreamable()
+    this.getBuy()
+    this.getRent()
+  }
 
-      // var path = response.data.US.flatrate
-        if (response.data.US && response.data.US.flatrate && response.data.US.flatrate.length > 0){
+  getStreamable = () => {
+    let streamArray = []
+    if (this.props.type === 'Movie') {
+      // Movie
+    API.getProviders(this.props.id)
+    .then((response)=> {
+        if (response.data.US.flatrate.length > 0){
           for (let i = 0; i<1; i++) {
-            tempArray.push(response.data.US.flatrate[i].provider_name)
+            streamArray.push(response.data.US.flatrate[i].provider_name)
           } 
-          console.log("array :"+tempArray) 
-      }
-      
+          console.log("array :"+streamArray) 
+      } 
     })
     .then( () => {
-      if (tempArray.length > 0) {
-      this.setState({streaming: tempArray, available: 'Available On: '})
-      }
-      else {
-        this.setState({available: "Bummer, this isn't currently available on any streaming platform."})
+      if (streamArray.length > 0) {
+      this.setState({streaming: streamArray, streamable: 'Streamable On: '})
       }
     })
+    .catch(err => {
+      this.setState({streamable: "No Streamable Providers..."})
+      console.log(err);
+      return null;
+    });
+  } else {
+    // TV
+    API.getTvProviders(this.props.id)
+    .then((response)=> {
+        if (response.data.US.flatrate.length > 0){
+          for (let i = 0; i<1; i++) {
+            streamArray.push(response.data.US.flatrate[i].provider_name)
+          } 
+          console.log("array :"+streamArray) 
+      } 
+    })
+    .then( () => {
+      if (streamArray.length > 0) {
+      this.setState({streaming: streamArray, streamable: 'Streamable On: '})
+      }
+    })
+    .catch(err => {
+      this.setState({streamable: "No Streamable Providers..."})
+      console.log(err);
+      return null;
+    });
   }
+  }
+
+  getBuy = () => {
+    let buyArray = []
+
+    if (this.props.type === 'Movie') {
+      // Movie
+    API.getProviders(this.props.id)
+    .then((response)=> {
+        if (response.data.US.buy.length > 0){
+          for (let i = 0; i<1; i++) {
+            buyArray.push(response.data.US.buy[i].provider_name)
+          } 
+          console.log("array :"+buyArray) 
+      } 
+    })
+    .then( () => {
+      if (buyArray.length > 0) {
+      this.setState({buy: buyArray, buyable: 'Purchase On: '})
+      }
+    })
+    .catch(err => {
+      this.setState({buyable: "Not Currently Available For Purchase"})
+      console.log(err);
+      return null;
+    });
+  } else {
+    // tv
+    API.getTvProviders(this.props.id)
+    .then((response)=> {
+        if (response.data.US.buy.length > 0){
+          for (let i = 0; i<1; i++) {
+            buyArray.push(response.data.US.buy[i].provider_name)
+          } 
+          console.log("array :"+buyArray) 
+      } 
+    })
+    .then( () => {
+      if (buyArray.length > 0) {
+      this.setState({buy: buyArray, buyable: 'Purchase On: '})
+      }
+    })
+    .catch(err => {
+      this.setState({buyable: "Not Currently Available For Purchase"})
+      console.log(err);
+      return null;
+    });
+  }
+  }
+
+  getRent = () => {
+    let rentArray = []
+
+    if (this.props.type === 'Movie') {
+      // Movie
+    API.getProviders(this.props.id)
+    .then((response)=> {
+        if (response.data.US.rent.length > 0){
+          for (let i = 0; i<1; i++) {
+            rentArray.push(response.data.US.rent[i].provider_name)
+          } 
+          console.log("array :"+rentArray) 
+      } 
+    })
+    .then( () => {
+      if (rentArray.length > 0) {
+      this.setState({rent: rentArray, rentable: 'Rentable On: '})
+      }
+    })
+    .catch(err => {
+      this.setState({rentable: "Not Currently Available For Rent..."})
+      console.log(err);
+      return null;
+    });
+  } else {
+          // TV
+          API.getTvProviders(this.props.id)
+          .then((response)=> {
+              if (response.data.US.rent.length > 0){
+                for (let i = 0; i<1; i++) {
+                  rentArray.push(response.data.US.rent[i].provider_name)
+                } 
+                console.log("array :"+rentArray) 
+            } 
+          })
+          .then( () => {
+            if (rentArray.length > 0) {
+            this.setState({rent: rentArray, rentable: 'Rentable On: '})
+            }
+          })
+          .catch(err => {
+            this.setState({rentable: "Not Currently Available For Rent..."})
+            console.log(err);
+            return null;
+          });
+  }
+  }
+  
+
 
   handleFavClick = () => {
     this.setState(state => ({ favOpen: !state.favOpen }));
@@ -124,15 +261,11 @@ class PosterCard extends React.Component {
     const { classes } = this.props;
     const icon = this.props.icon;
     // const GoogleMapsButton = () => <button onClick = {this.props.googleMaps}> Theaters Nearby </button>;
-    const CheckStreamingButton = () => <button onClick = {this.checkStream}> Can I Stream This? </button>;
-    const stream = this.props.stream;
+    const GetProvidersButton = () => <button onClick = {this.getProviders}> How can I watch this? </button>;
 
     return (
       <div>
         <Paper className={classes.card}>
-        {/* <CardHeader className={classes.header}
-          subheader={this.props.title}
-        /> */}
         <div className={classes.posterBack}>
           <img
             className={classes.media}
@@ -145,7 +278,6 @@ class PosterCard extends React.Component {
             open={this.state.favOpen}
             onClose={this.handleFavClick}
           />
-          {this.props.vote_avg}
         </div>
         <CardActions className={classes.actions} disableActionSpacing>
         <IconButton onClick={icon ? this.saveFavorite : this.deleteFavorite}>
@@ -159,6 +291,7 @@ class PosterCard extends React.Component {
             id={this.props.id}
             userName= {this.props.userName}
           />
+          {this.props.vote_avg}
           <IconButton
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded,
@@ -167,6 +300,7 @@ class PosterCard extends React.Component {
             aria-expanded={this.state.expanded}
             aria-label="Show more"
           >
+            {/* THIS WILL BECOME KNOWLEDGE PANEL */}
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>
@@ -178,10 +312,18 @@ class PosterCard extends React.Component {
               <Typography paragraph variant="body2" className={classes.primaryText}>
                 {this.props.overview}
               </Typography>
-              {/* {stream ? <CheckStreamingButton/> : <GoogleMapsButton/>} */}
-              <CheckStreamingButton/>
-              <p className={classes.streaming}>{this.state.available}</p>
-              {this.state.streaming.map((service) => <p key ={service} className={classes.streaming}>{service}</p>) }
+              <GetProvidersButton/>
+              <div>
+                <p className={classes.providerHeader}>{this.state.streamable}</p>
+                {this.state.streaming.map((service) => <p key={service} className={classes.providers}>{service}</p>) }
+
+                <p className={classes.providerHeader}>{this.state.buyable}</p>
+                {this.state.buy.map((service) => <p key={service} className={classes.providers}>{service}</p>) }
+
+                <p className={classes.providerHeader}>{this.state.rentable}</p>
+                {this.state.rent.map((service) => <p key={service} className={classes.providers}>{service}</p>) }
+              </div>
+              
             </CardContent>
           </Collapse>
         </Paper>

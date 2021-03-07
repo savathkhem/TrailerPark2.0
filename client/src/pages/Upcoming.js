@@ -1,27 +1,24 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
-import Modal from "../components/Modal";
 import ModalNew from "../components/ModalNew";
 import Iframe from "../components/VidWrapper";
 import Carousel from "../components/Carousel";
+import Spinner from "../components/Spinner"
 
 const tmdbImgUrl = "https://image.tmdb.org/t/p/w185";
-
-const googleMapUrl =
-  "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
 
 let user;
 
 class Upcoming extends Component {
   state = {
     movies: [],
-    modal: false,
-    modalNew: false,
+    isLoading: true,
+    pageInt: 1,
     youTubes: [],
-    pageInt: 1
+    modalNew: false,
   };
 
   componentDidMount() {
@@ -34,57 +31,65 @@ class Upcoming extends Component {
     window.removeEventListener("scroll", this.onScroll, false);
   }
 
-  getMovies = () => {
+  onScroll = () => {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.state.isLoading) {
+        this.nextSet()
+    }
+}
+
+nextSet = () => {
+    this.setState({isLoading: false})
+    let temp = this.state.pageInt;
+    temp++;
+    this.setState({pageInt: temp})
+    this.getMovies();
+}
+
+getMovies = () => {
     //Store current array of movies to add to later.
     let tempMoviesArr = this.state.movies;
     //grab pageNumber from state and cast as string
-    let pageInt = this.state.pageInt.toString();
+    let pageInt = this
+        .state
+        .pageInt
+        .toString();
 
-    API.getUpcoming(pageInt)
-      .then(res => {
-        this.checkPosterPaths(res.data);
-        return res;
-      })
-      .then(res => {
-        let newArr = tempMoviesArr.concat(res.data);
-        this.setState({ movies: newArr });
-      })
-      .then(() => {
-        if (this.state.isLoading) {
-          this.setState({ isLoading: false });
-        }
-      })
-      .catch(err => console.log(err));
-  };
+        API.getUpcoming(pageInt)
+        .then((res) => {
+            this.checkPosterPaths(res.data);
+            return res;
+        })
+        .then((res) => {
+            let newArr = tempMoviesArr.concat(res.data)
+            this.setState({movies: newArr})
+        })
+        .then(() => {
+            if (!this.state.isLoading) {
+                this.setState({isLoading: true})
+            }
+        })
+        .catch(err => console.log(err));
+}
 
-  onScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
-      !this.state.isLoading
-    ) {
-      this.nextSet();
-    }
-  };
-
-  nextSet = () => {
-    this.setState({ isLoading: true });
-    let temp = this.state.pageInt;
-    temp++;
-    this.setState({ pageInt: temp });
-    this.getMovies();
-  };
-
-  clickPoster(title) {
-    API.getTrailers(title)
-      .then(res => {
-        console.log(res);
-        this.createYouTubeUrl(res.data);
-        return res;
+clickPoster(title) {
+  this.setState({isLoading: false})
+  API
+      .getTrailers(title)
+      .then((res) => {
+          // this.createYouTubeUrl(res.data);
+          return res;
       })
-      .then(res => this.setState({ youTubes: res.data }))
-      .then(() => this.setState({ modalNew: "true" }))
-      .catch(err => console.log(err));
-  }
+      .then((res) => {
+          this.setState({youTubes: res.data})
+          this.setState({isLoading: true})
+          this.setState({modalNew: true})
+      })
+      .then(() => this.setState({modalNew: 'true'}))
+      .catch((err) => {
+          console.log(err)
+          this.setState({isLoading: true})
+      });
+}
 
   checkPosterPaths(arr) {
     let newArr = arr;
@@ -111,41 +116,30 @@ class Upcoming extends Component {
     });
   }
 
-  openModal = () => this.setState({ modal: true });
-
-  closeModal = () => {
-    this.setState({ modal: false, youTubes: [] });
-  };
-
-  openMapModal = () => this.setState({ mapModal: true });
-
-  closeMapModal = () => this.setState({ mapModal: false });
 
   handleModalNewClick = () => {
     this.setState(state => ({ modalNew: !state.modalNew }));
   };
 
   render() {
-    let toggleMapModal;
-    if (this.state.mapModal === true) {
-      toggleMapModal = "show";
-    } else {
-      toggleMapModal = "modal";
-    }
-
+    const loader = {
+      position: 'sticky',
+      bottom: '50vh',
+      left: '50vw',
+      marginLeft: '50vw',
+      marginRight: '42vw',
+      fontSize: 'xxx-large'
+  };
     return (
-      <div>
-        {/* Map Modal */}
-        <Modal modal={toggleMapModal} onClick={this.closeMapModal}>
-          <Iframe src={googleMapUrl} />
-        </Modal>
-        {/* End Map Modal */}
+      <Fragment>
 
         {/* YouTube Modal */}
-        <ModalNew open={this.state.modalNew} onClose={this.handleModalNewClick}>
+        <ModalNew 
+          open={this.state.modalNew}
+          onClose={this.handleModalNewClick}>
           <Carousel>
-            {this.state.youTubes.map(video => (
-              <Iframe src={video.id.videoId} />
+              {this.state.youTubes.map((video) => (
+              <Iframe src= {"https://www.youtube.com/embed/"+ video.id.videoId}/>
             ))}
           </Carousel>
         </ModalNew>
@@ -155,6 +149,7 @@ class Upcoming extends Component {
           <CardWrapper>
             {this.state.movies.map(movie => (
               <Card
+              type='Movie'
                 key={movie.id}
                 src={movie.poster_path}
                 alt={movie.title}
@@ -172,7 +167,16 @@ class Upcoming extends Component {
             ))}
           </CardWrapper>
         </Wrapper>
-      </div>
+
+        {this.state.isLoading === false
+            ? <Fragment>
+                    <div style={loader}>
+                        <Spinner/>
+                    </div>
+                </Fragment>
+            : <Fragment></Fragment>}
+
+      </Fragment>
     );
   }
 }

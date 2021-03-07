@@ -1,192 +1,181 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Card from "../components/Card";
 import Wrapper from "../components/Wrapper";
 import CardWrapper from "../components/CardWrapper";
 import API from "../utils/API";
-import Modal from "../components/Modal";
 import Iframe from "../components/VidWrapper";
 import Carousel from "../components/Carousel";
 import ModalNew from '../components/ModalNew';
+import Spinner from "../components/Spinner"
 
-
-const tmdbImgUrl = 'https://image.tmdb.org/t/p/w185';
-
-const googleMapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBCEE2nzor1sZUz0mC6-wKUXjQEEdEORbU&q=Movie+theaters+near+me";
-
+const tmdbImgUrl = "https://image.tmdb.org/t/p/w185";
 //will store user info when component loads (passed down from App.js)
 let user;
 
 class Theaters extends Component {
-  state = {
-    movies: [],
-    modal: false,
-    youTubes: [],
-    mapModal: false,
-    pageInt: 1,
-    modalNew: false,
-  }
-
-
-  componentDidMount() {
-    this.getMovies()
-    user = this.props.user;
-    window.addEventListener('scroll', this.onScroll, false);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
-  }
-
-
-  // unique to this page
-  getMovies = () => {
-    //Store current array of movies to add to later. 
-    let tempMoviesArr = this.state.movies;
-    //grab pageNumber from state and cast as string
-    let pageInt = this.state.pageInt.toString();
+    state = {
+        movies: [],
+        isLoading: true,
+        pageInt: 1,
+        youTubes: [],
+        modalNew: false,
+    }
     
-    API.getMovies(pageInt)
-    .then((res) => {
-      this.checkPosterPaths(res.data);
-      return res;
-    })
-    .then((res) => {
-      let newArr = tempMoviesArr.concat(res.data)
-      this.setState({ movies: newArr })
-    })
-    .then(()=>{
-      if (this.state.isLoading) {
-        this.setState({isLoading: false})
-      }
-    })
-    .catch(err => console.log(err));
-  }
-
-  onScroll = () => {
-    if (
-      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
-      !this.state.isLoading
-    ) {
-      this.nextSet()
+    componentDidMount() {
+        this.getMovies()
+        user = this.props.user;
+        window.addEventListener('scroll', this.onScroll, false);
     }
-  }
-
-  nextSet = () => {
-    this.setState({isLoading: true})
-    let temp = this.state.pageInt;
-    temp++;
-    this.setState({pageInt:temp})
-    this.getMovies();
-  }
-
-  clickPoster(title) {
-    API.getTrailers(title)
-      .then((res) => {
-        this.createYouTubeUrl(res.data);
-        return res;
-      })
-      .then((res) => this.setState({youTubes: res.data}))
-      .then(() => this.setState({modalNew: 'true'}))
-      .catch((err) => console.log (err));
-  }
-
-  // unique to this page
-  googleMaps() {
-    this.openMapModal();
-  }
-
-  createYouTubeUrl (arr) {
-    let newArr = arr;
-    newArr.map( (video) => {
-      return video.id.videoId = "https://www.youtube.com/embed/"+ video.id.videoId;
-    });
-  }
-
-  checkPosterPaths(arr) {
-    let newArr = arr;
-    newArr.map( (movie) => {
-      if (movie.poster_path === null){
-        return movie.poster_path = "./images/placeholder.jpg";
-      }
-      else{
-        return movie.poster_path = tmdbImgUrl + movie.poster_path;
-      }
-    });
-    arr = newArr;
-    return arr;
-  };
-
-  closeModal = () => { 
-    this.setState({ modal: false, youTubes:[]});
-  };
-
-  openMapModal = () => this.setState({ mapModal: true });
+    
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.onScroll, false);
+    }
+    
+    onScroll = () => {
+        if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.state.isLoading) {
+            this.nextSet()
+        }
+    }
   
-  closeMapModal = () => this.setState({ mapModal: false });
-
-  handleModalNewClick = () => {
-    this.setState(state => ({ modalNew: !state.modalNew }));
-  };
-
-  render() {
-    let toggleMapModal;
-    if (this.state.mapModal === true){
-      toggleMapModal = "show";
-    }
-    else {
-      toggleMapModal = "modal";
+    nextSet = () => {
+        this.setState({isLoading: false})
+        let temp = this.state.pageInt;
+        temp++;
+        this.setState({pageInt: temp})
+        this.getMovies();
     }
 
-    return (
-      <div>
+    getMovies = () => {
+        //Store current array of movies to add to later.
+        let tempMoviesArr = this.state.movies;
+        //grab pageNumber from state and cast as string
+        let pageInt = this
+            .state
+            .pageInt
+            .toString();
+  
+        API
+            .getMovies(pageInt)
+            .then((res) => {
+                this.checkPosterPaths(res.data);
+                return res;
+            })
+            .then((res) => {
+                let newArr = tempMoviesArr.concat(res.data)
+                this.setState({movies: newArr})
+            })
+            .then(() => {
+                if (!this.state.isLoading) {
+                    this.setState({isLoading: true})
+                }
+            })
+            .catch(err => console.log(err));
+    }
 
-        {/* Map Modal */}
-        <Modal 
-          modal={toggleMapModal}
-          onClick={this.closeMapModal}>
-          <Iframe src= {googleMapUrl}/>
-        </Modal>
-        {/* End Map Modal */}
+    checkPosterPaths(arr) {
+        let newArr = arr;
+        newArr.map(movie => {
+          if (movie.poster_path === null) {
+            return (movie.poster_path = "./images/placeholder.jpg");
+          } else {
+            return (movie.poster_path = tmdbImgUrl + movie.poster_path);
+          }
+        });
+        arr = newArr;
+        return arr;
+      }
+  
+  
+    clickPoster(title) {
+        this.setState({isLoading: false})
+        API
+            .getTrailers(title)
+            .then((res) => {
+                this.createYouTubeUrl(res.data);
+                return res;
+            })
+            .then((res) => {
+                this.setState({youTubes: res.data})
+                this.setState({isLoading: true})
+                this.setState({modalNew: true})
+            })
+            .then(() => this.setState({modalNew: 'true'}))
+            .catch((err) => {
+                console.log(err)
+                this.setState({isLoading: true})
+            });
+    }
+    createYouTubeUrl(arr) {
+        let newArr = arr;
+        newArr.map((video) => {
+            return video.id.videoId = "https://www.youtube.com/embed/" + video.id.videoId;
+        });
+    }
 
+    handleModalNewClick = () => {
+        this.setState(state => ({
+            modalNew: !state.modalNew
+        }));
+    };
+  
+    
 
-        {/* YouTube Modal */}
-        <ModalNew 
-        open={this.state.modalNew}
-        onClose={this.handleModalNewClick}
-        >
-          <Carousel>
-            {this.state.youTubes.map((video) => (
-              <Iframe src= {video.id.videoId}/>
-            ))}
-          </Carousel>
-        </ModalNew>
-        {/* End YouTube Modal */}
+    render() {
+        const loader = {
+            position: 'sticky',
+            bottom: '50vh',
+            left: '50vw',
+            marginLeft: '50vw',
+            marginRight: '42vw',
+            fontSize: 'xxx-large'
+        };
+        return (
+            <Fragment>
+                
+                <ModalNew open={this.state.modalNew} onClose={this.handleModalNewClick}>
+                    <Carousel>
+                        {this.state
+                            .youTubes
+                            .map((video) => (<Iframe key={video.id.videoId} src={video.id.videoId}/>))}
+                    </Carousel>
+                </ModalNew>
 
+                <Wrapper>
+                    <CardWrapper>
+                        {this.state
+                            .movies
+                            .map((movie) => (<Card
+                            type='Movie'
+                                key={movie.id}
+                                id={movie.id}
+                                src={movie.poster_path}
+                                alt={movie.title}
+                                title={movie.title}
+                                vote_avg={movie.vote_average}
+                                vote_count={movie.vote_count}
+                                overview={movie.overview}
+                                release={movie.release_date}
+                                onClick={() => this.clickPoster(movie.title)
+                                }
+                                // googleMaps=
+                                // {()=> this.googleMaps()}
+                                userName={user.displayName}
+                                user_id={user.uid}
+                                icon={true}/>))}
+                    </CardWrapper>
+                </Wrapper>
 
-        <Wrapper>
-          <CardWrapper>
-            {this.state.movies.map((movie) => (
-              <Card 
-                key={movie.id}
-                id={movie.id}
-                src={movie.poster_path}
-                alt={movie.title}
-                title={movie.title}
-                vote_avg={movie.vote_average}
-                vote_count={movie.vote_count}
-                overview={movie.overview}
-                release={movie.release_date}
-                onClick={()=>this.clickPoster(movie.title)}
-                googleMaps = {()=> this.googleMaps()} 
-                userName= {user.displayName}
-                user_id={user.uid} icon={true}
-              />
-            ))}
-          </CardWrapper>
-        </Wrapper>
-      </div>
-    )
-  }
+                {this.state.isLoading === false
+            ? <Fragment>
+                    <div style={loader}>
+                        <Spinner/>
+                    </div>
+                </Fragment>
+            : <Fragment></Fragment>}
+
+            </Fragment>
+        )
+    }
 }
 
 export default Theaters;

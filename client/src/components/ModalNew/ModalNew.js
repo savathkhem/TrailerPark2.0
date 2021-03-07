@@ -18,8 +18,6 @@ const styles = theme => ({
   modal: {
     position: 'fixed',
     height: 'fit-content',
-    // zIndex: '100', /* Sit on top */
-    // overflow: 'auto',
   },
   BackdropProps: {
 		height: '100vh'

@@ -12,12 +12,12 @@ import {
   IconButton,
   Avatar
 } from "@material-ui/core/";
-import Logo from "../../Logo";
-import firebase from "../../../firebaseConfig";
-import DrawerLeft from "./../../DrawerLeft";
-import ModalNew from "../../ModalNew";
-import Login from "../../Login";
-import LoginMenu from '../../LoginMenu'
+import Logo from "../Logo";
+import firebase from "../../firebaseConfig";
+import DrawerLeft from "../DrawerLeft";
+import ModalNew from "../ModalNew";
+import Login from "../Login";
+import LoginMenu from '../LoginMenu'
 
 
 const drawerWidth = 240;
@@ -237,45 +237,6 @@ class NavBar extends React.Component {
               {currentPage()}
             </Typography>
             {auth && (
-              // <div>
-              //   <IconButton
-              //     className={classes.avatarButton}
-              //     aria-owns={openlogin ? "menu-appbar" : null}
-              //     aria-haspopup="true"
-              //     onClick={this.handleMenu}
-              //     color="inherit"
-              //   >
-              //     <Avatar
-              //       alt={this.props.name}
-              //       className={(classes.avatar, classes.bigAvatar)}
-              //     >
-              //       <img className={classes.bigAvatar} src={this.props.src} alt={this.props.name} />
-              //     </Avatar>
-              //   </IconButton>
-              //   <Menu
-              //     id="menu-appbar"
-              //     anchorEl={anchorEl}
-              //     anchorOrigin={{
-              //       vertical: "top",
-              //       horizontal: "right"
-              //     }}
-              //     transformOrigin={{
-              //       vertical: "top",
-              //       horizontal: "right"
-              //     }}
-              //     open={openlogin}
-              //     onClose={this.handleClose}
-              //   >
-              //     <MenuItem onClick={this.handleClose}>
-              //       <Link to="/">
-              //         {this.props.name}
-              //         's Profile
-              //       </Link>
-              //     </MenuItem>
-              //     <MenuItem onClick={this.handleClose}>Settings</MenuItem>
-              //     {loginToggle}
-              //   </Menu>
-              // </div>
               <Fragment>
               {loginToggle}
               </Fragment>

@@ -15,7 +15,7 @@ const PageOptions = (props) => (
     <ListItem component={Link} to="/favorites" button>
       <ListItemText primary="Favorites" />
     </ListItem>
-    <ListItem component={Link} to="/in-theaters" button>
+    <ListItem getMovies={props.getMovies} youTubes={props.youTubes} component={Link} to="/in-theaters" button>
       <ListItemText primary="In Theaters" />
     </ListItem>
     <ListItem component={Link} to="/top-movies" button>

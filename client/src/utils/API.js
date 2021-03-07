@@ -61,15 +61,18 @@ export default {
   //   return axios.get("api/trailers/stream/" + title)
   // },
 
-  checkStream: (id) => {
-    console.log(id)
+  getProviders: (id) => {
+    // console.log(id)
     return axios.get("api/trailers/stream/" + id)
   },
 
   // getMovieProvider
   // getTvProvider
 
-
+  getTvProviders: (id) => {
+    // console.log(id)
+    return axios.get("api/trailers/tv-provider/" + id)
+  },
 
 
 }

@@ -1,17 +1,27 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Redirect, BrowserRouter as Router, Route } from "react-router-dom";
-import { AppBar } from "./components/Layout";
+import AppBar from "./components/AppBar";
 import { Home, TopTV, InTheaters, Upcoming, TopMovie } from "./pages/";
 import API from "./utils/API";
 import "./App.css";
 import firebase from "./firebaseConfig";
 import Search from "./pages/Search";
+// import Spinner from "./components/Spinner"
+// import Iframe from "./components/VidWrapper";
+// import Carousel from "./components/Carousel";
+// import ModalNew from './components/ModalNew';
 
 const tmdbImgUrl = "https://image.tmdb.org/t/p/w185";
 
 class App extends Component {
   state = {
+    movies: [],
+    isLoading: true,
+    pageInt: 1,
+    youTubes: [],
+    modalNew: false,
+
     loading: true,
     authenticated: false,
     searchRedirect: false,
@@ -22,6 +32,98 @@ class App extends Component {
       email: "none"
     }
   };
+
+// ---------- passing in functions to inTheater
+
+  //   getMovies = () => {
+  //     //Store current array of movies to add to later.
+  //     let tempMoviesArr = this.state.movies;
+  //     //grab pageNumber from state and cast as string
+  //     let pageInt = this
+  //         .state
+  //         .pageInt
+  //         .toString();
+
+  //     API
+  //         .getMovies(pageInt)
+  //         .then((res) => {
+  //             this.checkPosterPaths(res.data);
+  //             return res;
+  //         })
+  //         .then((res) => {
+  //             let newArr = tempMoviesArr.concat(res.data)
+  //             this.setState({movies: newArr})
+  //         })
+  //         .then(() => {
+  //             if (!this.state.isLoading) {
+  //                 this.setState({isLoading: true})
+  //             }
+  //         })
+  //         .catch(err => console.log(err));
+  // }
+
+  // onScroll = () => {
+  //     if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) && this.state.isLoading) {
+  //         this.nextSet()
+  //     }
+  // }
+
+  // nextSet = () => {
+  //     this.setState({isLoading: false})
+  //     let temp = this.state.pageInt;
+  //     temp++;
+  //     this.setState({pageInt: temp})
+  //     this.getMovies();
+  // }
+
+  // clickPoster(title) {
+  //     this.setState({isLoading: false})
+  //     API
+  //         .getTrailers(title)
+  //         .then((res) => {
+  //             this.createYouTubeUrl(res.data);
+  //             return res;
+  //         })
+  //         .then((res) => {
+  //             this.setState({youTubes: res.data})
+  //             this.setState({isLoading: true})
+  //             this.setState({modalNew: true})
+  //         })
+  //         // .then(() => this.setState({modalNew: 'true'}))
+  //         .catch((err) => {
+  //             console.log(err)
+  //             this.setState({isLoading: true})
+  //         });
+  // }
+
+  
+  // createYouTubeUrl(arr) {
+  //     let newArr = arr;
+  //     newArr.map((video) => {
+  //         return video.id.videoId = "https://www.youtube.com/embed/" + video.id.videoId;
+  //     });
+  // }
+
+//   handleModalNewClick = () => {
+//     this.setState(state => ({
+//         modalNew: !state.modalNew
+//     }));
+// };
+  
+  // checkPosterPaths(arr) {
+  //     let newArr = arr;
+  //     newArr.map((movie) => {
+  //         if (movie.poster_path === null) {
+  //             return movie.poster_path = "./images/placeholder.jpg";
+  //         } else {
+  //             return movie.poster_path = tmdbImgUrl + movie.poster_path;
+  //         }
+  //     });
+  //     arr = newArr;
+  //     return arr;
+  // };
+
+  // ---------
 
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
@@ -91,11 +193,31 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+
+
   render() {
+  //   const loader = {
+  //     position: 'sticky',
+  //     bottom: '50vh',
+  //     left: '50vw',
+  //     marginLeft: '50vw',
+  //     marginRight: '42vw',
+  //     fontSize: 'xxx-large'
+  // };
     return (
+      <Fragment>
       <Router>
         <div>
           <CssBaseline />
+          {/* <ModalNew open={this.state.modalNew} onClose={this.handleModalNewClick}>
+            <Carousel>
+                {this
+                    .state
+                    .youTubes
+                    .map((video) => (<Iframe key={video.id.videoId} src={video.id.videoId}/>))}
+              </Carousel>
+          </ModalNew> */}
+
           <AppBar
             src={this.state.currentUser.photoURL}
             alt={this.state.currentUser.displayName}
@@ -112,7 +234,9 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => <InTheaters user={this.state.currentUser} />}
+            render={() => <InTheaters 
+              user={this.state.currentUser}
+               />}
           />
           <Route
             exact
@@ -149,8 +273,17 @@ class App extends Component {
               />
             )}
           />
+          {/* <div style={loader}>hello</div> */}
+          {/* {this.state.isLoading === false
+            ? <Fragment>
+                    <div style={loader}>
+                        <Spinner/>
+                    </div>
+                </Fragment>
+            : <Fragment></Fragment>} */}
         </div>
       </Router>
+      </Fragment>
     );
   }
 }

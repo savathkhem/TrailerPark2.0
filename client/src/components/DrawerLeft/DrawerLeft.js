@@ -36,18 +36,14 @@ class DrawerLeft extends React.Component {
       <Divider />
       <List><PageOptions onChange={this.props.onChange} handleSubmit={this.props.handleSubmit} onClick={this.toggleDrawer('left', false)}/></List>
       </div>
+      
     );
 
     return (
       <div>
         <IconButton onClick={this.toggleDrawer('left', true)}><MenuIcon /></IconButton>
         <Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
-          <div
-            // tabIndex={0}
-            // role="button"
-            // onClick={this.toggleDrawer('left', false)}
-            // onKeyDown={this.toggleDrawer('left', false)}
-          >
+          <div          >
             {sideList}
           </div>
         </Drawer>
