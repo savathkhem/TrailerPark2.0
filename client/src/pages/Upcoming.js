@@ -126,9 +126,8 @@ clickPoster(title) {
       position: 'sticky',
       bottom: '50vh',
       left: '50vw',
-      marginLeft: '50vw',
+      marginLeft: '47.5vw',
       marginRight: '42vw',
-      fontSize: 'xxx-large'
   };
     return (
       <Fragment>
